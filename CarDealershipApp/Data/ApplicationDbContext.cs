@@ -67,7 +67,7 @@ namespace CarDealershipApp.Data
 
         private List<T> LoadJsonData<T>(string filePath)
         {
-            var json = File.ReadAllText(filePath);
+            string json = File.ReadAllText(filePath);
             return JsonConvert.DeserializeObject<List<T>>(json);
         }
     }
