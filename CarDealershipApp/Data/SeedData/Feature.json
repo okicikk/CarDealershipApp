@@ -1,0 +1,126 @@
+﻿[
+  {
+    "Id": 1,
+    "Name": "Sunroof"
+  },
+  {
+    "Id": 2,
+    "Name": "Leather Seats"
+  },
+  {
+    "Id": 3,
+    "Name": "Backup Camera"
+  },
+  {
+    "Id": 4,
+    "Name": "Bluetooth Connectivity"
+  },
+  {
+    "Id": 5,
+    "Name": "Navigation System"
+  },
+  {
+    "Id": 6,
+    "Name": "Blind Spot Monitoring"
+  },
+  {
+    "Id": 7,
+    "Name": "Heated Seats"
+  },
+  {
+    "Id": 8,
+    "Name": "Remote Start"
+  },
+  {
+    "Id": 9,
+    "Name": "Parking Sensors"
+  },
+  {
+    "Id": 10,
+    "Name": "Apple CarPlay"
+  },
+  {
+    "Id": 11,
+    "Name": "Alloy Wheels"
+  },
+  {
+    "Id": 12,
+    "Name": "Adaptive Cruise Control"
+  },
+  {
+    "Id": 13,
+    "Name": "Power Liftgate"
+  },
+  {
+    "Id": 14,
+    "Name": "Third-Row Seating"
+  },
+  {
+    "Id": 15,
+    "Name": "Tow Package"
+  },
+  {
+    "Id": 16,
+    "Name": "Keyless Entry"
+  },
+  {
+    "Id": 17,
+    "Name": "Rain-Sensing Wipers"
+  },
+  {
+    "Id": 18,
+    "Name": "USB Charging Ports"
+  },
+  {
+    "Id": 19,
+    "Name": "Smart Key Technology"
+  },
+  {
+    "Id": 20,
+    "Name": "Rear Cross-Traffic Alert"
+  },
+  {
+    "Id": 21,
+    "Name": "Wireless Phone Charging"
+  },
+  {
+    "Id": 22,
+    "Name": "Surround Sound System"
+  },
+  {
+    "Id": 23,
+    "Name": "Dynamic Traction Control"
+  },
+  {
+    "Id": 24,
+    "Name": "Active Lane Keeping Assist"
+  },
+  {
+    "Id": 25,
+    "Name": "Performance Exhaust System"
+  },
+  {
+    "Id": 26,
+    "Name": "Adaptive Headlights"
+  },
+  {
+    "Id": 27,
+    "Name": "Privacy Glass"
+  },
+  {
+    "Id": 28,
+    "Name": "Dual-Zone Climate Control"
+  },
+  {
+    "Id": 29,
+    "Name": "Fog Lights"
+  },
+  {
+    "Id": 30,
+    "Name": "Ventilated Seats"
+  },
+  {
+    "Id": 31,
+    "Name": "Android Auto"
+  }
+]
