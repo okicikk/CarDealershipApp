@@ -37,7 +37,7 @@ namespace CarDealershipApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands", (string)null);
                 });
 
             modelBuilder.Entity("CarDealershipApp.Data.Models.Car", b =>
@@ -97,7 +97,7 @@ namespace CarDealershipApp.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("Cars");
+                    b.ToTable("Cars", (string)null);
                 });
 
             modelBuilder.Entity("CarDealershipApp.Data.Models.CarFeature", b =>
@@ -112,7 +112,7 @@ namespace CarDealershipApp.Migrations
 
                     b.HasIndex("FeatureId");
 
-                    b.ToTable("CarsFeatures");
+                    b.ToTable("CarsFeatures", (string)null);
                 });
 
             modelBuilder.Entity("CarDealershipApp.Data.Models.Category", b =>
@@ -130,7 +130,7 @@ namespace CarDealershipApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -190,7 +190,7 @@ namespace CarDealershipApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Features");
+                    b.ToTable("Features", (string)null);
 
                     b.HasData(
                         new
@@ -370,7 +370,7 @@ namespace CarDealershipApp.Migrations
 
                     b.HasIndex("BrandId");
 
-                    b.ToTable("Models");
+                    b.ToTable("Models", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
