@@ -13,6 +13,8 @@ namespace CarDealershipApp.Data
         {
         }
 
+        
+
         public DbSet<Car> Cars { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Model> Models { get; set; }
@@ -55,11 +57,11 @@ namespace CarDealershipApp.Data
                 .Property(c => c.Price)
                 .HasColumnType("decimal(18, 2)");
 
-            var categories = LoadJsonData<Category>("Data/SeedData/Category.json");
-            builder.Entity<Category>().HasData(categories);
+            //var categories = LoadJsonData<Category>("CarDealershipApp/CarDealershipApp.Data/SeedData/Category.json");
+            //builder.Entity<Category>().HasData(categories);
 
-            var features = LoadJsonData<Feature>("Data/SeedData/Feature.json");
-            builder.Entity<Feature>().HasData(features);
+            //var features = LoadJsonData<Feature>("CarDealershipApp/CarDealershipApp.Data/SeedData/Feature.json");
+            //builder.Entity<Feature>().HasData(features);
 
 
         }

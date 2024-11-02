@@ -1,6 +1,4 @@
-﻿using CarDealershipApp.Data.Models;
-
-namespace CarDealershipApp.Constants
+﻿namespace CarDealershipApp.Constants
 {
     public static class Constants
     {

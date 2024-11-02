@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using static CarDealershipApp.Constants.Constants;
 
 namespace CarDealershipApp.Data.Models

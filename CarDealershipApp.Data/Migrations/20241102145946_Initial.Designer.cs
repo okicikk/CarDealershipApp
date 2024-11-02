@@ -4,16 +4,19 @@ using CarDealershipApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CarDealershipApp.Migrations
+namespace CarDealershipApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241102145946_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +40,7 @@ namespace CarDealershipApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands", (string)null);
+                    b.ToTable("Brands");
                 });
 
             modelBuilder.Entity("CarDealershipApp.Data.Models.Car", b =>
@@ -97,7 +100,7 @@ namespace CarDealershipApp.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("Cars", (string)null);
+                    b.ToTable("Cars");
                 });
 
             modelBuilder.Entity("CarDealershipApp.Data.Models.CarFeature", b =>
@@ -112,7 +115,7 @@ namespace CarDealershipApp.Migrations
 
                     b.HasIndex("FeatureId");
 
-                    b.ToTable("CarsFeatures", (string)null);
+                    b.ToTable("CarsFeatures");
                 });
 
             modelBuilder.Entity("CarDealershipApp.Data.Models.Category", b =>
@@ -130,49 +133,7 @@ namespace CarDealershipApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Sedan"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "SUV"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Pickup Truck"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Wagon"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Mini-Van"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Hatchback"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Convertible"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Coupé"
-                        });
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("CarDealershipApp.Data.Models.Feature", b =>
@@ -190,164 +151,7 @@ namespace CarDealershipApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Features", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Sunroof"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Leather Seats"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Backup Camera"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Bluetooth Connectivity"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Navigation System"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Blind Spot Monitoring"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Heated Seats"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Remote Start"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Parking Sensors"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "Apple CarPlay"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Name = "Alloy Wheels"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Name = "Adaptive Cruise Control"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Name = "Power Liftgate"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Name = "Third-Row Seating"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Name = "Tow Package"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Name = "Keyless Entry"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Name = "Rain-Sensing Wipers"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Name = "USB Charging Ports"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Name = "Smart Key Technology"
-                        },
-                        new
-                        {
-                            Id = 20,
-                            Name = "Rear Cross-Traffic Alert"
-                        },
-                        new
-                        {
-                            Id = 21,
-                            Name = "Wireless Phone Charging"
-                        },
-                        new
-                        {
-                            Id = 22,
-                            Name = "Surround Sound System"
-                        },
-                        new
-                        {
-                            Id = 23,
-                            Name = "Dynamic Traction Control"
-                        },
-                        new
-                        {
-                            Id = 24,
-                            Name = "Active Lane Keeping Assist"
-                        },
-                        new
-                        {
-                            Id = 25,
-                            Name = "Performance Exhaust System"
-                        },
-                        new
-                        {
-                            Id = 26,
-                            Name = "Adaptive Headlights"
-                        },
-                        new
-                        {
-                            Id = 27,
-                            Name = "Privacy Glass"
-                        },
-                        new
-                        {
-                            Id = 28,
-                            Name = "Dual-Zone Climate Control"
-                        },
-                        new
-                        {
-                            Id = 29,
-                            Name = "Fog Lights"
-                        },
-                        new
-                        {
-                            Id = 30,
-                            Name = "Ventilated Seats"
-                        },
-                        new
-                        {
-                            Id = 31,
-                            Name = "Android Auto"
-                        });
+                    b.ToTable("Features");
                 });
 
             modelBuilder.Entity("CarDealershipApp.Data.Models.Model", b =>
@@ -370,7 +174,7 @@ namespace CarDealershipApp.Migrations
 
                     b.HasIndex("BrandId");
 
-                    b.ToTable("Models", (string)null);
+                    b.ToTable("Models");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
