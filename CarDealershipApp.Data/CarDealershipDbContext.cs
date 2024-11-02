@@ -6,9 +6,9 @@ using System.Reflection.Emit;
 
 namespace CarDealershipApp.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class CarDealershipDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions options)
+        public CarDealershipDbContext(DbContextOptions options)
             : base(options)
         {
         }
