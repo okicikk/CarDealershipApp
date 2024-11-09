@@ -28,7 +28,7 @@ namespace CarDealershipApp.Infrastructure.Repositories
 
 		public bool DeleteById(string id)
 		{
-			T item = dbSet.Find(id);
+			T? item = dbSet.Find(id);
 			if (item is null)
 			{
 				return false;
@@ -52,32 +52,38 @@ namespace CarDealershipApp.Infrastructure.Repositories
 
 		public IEnumerable<T> GetAll()
 		{
-			return dbSet.AsQueryable();
+			return dbSet.ToList();
 		}
 
-		public async IEnumerable<T> GetAllAsync()
+		public async Task<IEnumerable<T>> GetAllAsync()
 		{
-			throw new NotImplementedException();
+			return await dbSet.ToListAsync();
 		}
 
 		public IEnumerable<T> GetAllAttached()
 		{
-			throw new NotImplementedException();
-		}
-
-		public IEnumerable<T> GetAllAttachedAsync()
-		{
-			throw new NotImplementedException();
+			return dbSet.AsQueryable();
 		}
 
 		public T GetById(string id)
 		{
-			throw new NotImplementedException();
+			T? item = dbSet.Find(id);
+			if (item is null)
+			{
+				return null;
+			}
+			return item;
 		}
 
-		public Task<T> GetByIdAsync(string id)
+		public async Task<T> GetByIdAsync(string id)
 		{
-			throw new NotImplementedException();
+			T? item = await dbSet.FindAsync(id);
+
+			if (item is null)
+			{
+				return null;
+			}
+			return item;
 		}
 
 		public bool Update(T item)
