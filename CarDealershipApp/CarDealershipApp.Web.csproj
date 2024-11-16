@@ -22,6 +22,8 @@
   <ItemGroup>
     <ProjectReference Include="..\CarDealershipApp.Data.Models\CarDealershipApp.Data.Models.csproj" />
     <ProjectReference Include="..\CarDealershipApp.Data\CarDealershipApp.Data.csproj" />
+    <ProjectReference Include="..\CarDealershipApp.Infrastructure\CarDealershipApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\CarDealershipApp.Services\CarDealershipApp.Services.csproj" />
   </ItemGroup>
 
 </Project>

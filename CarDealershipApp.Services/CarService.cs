@@ -19,12 +19,13 @@ namespace CarDealershipApp.Services
 
         public Task AddCarAsync(CarAddViewModel model)
         {
-            Car carToAdd = new Car()
-            {
-                Brand = model.Brand,
+            //Car carToAdd = new Car()
+            //{
+            //    Brand = model.Brand,
 
-            };
-            await carRepository.AddAsync
+            //};
+            //await carRepository.AddAsync
+            return Task.CompletedTask;
         }
     }
 }

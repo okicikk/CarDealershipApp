@@ -1,6 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using CarDealershipApp.Data;
+using CarDealershipApp.Services.Interfaces;
+using CarDealershipApp.Services;
+using CarDealershipApp.Data.Models;
+using CarDealershipApp.Infrastructure.Repositories.Interfaces;
+using CarDealershipApp.Infrastructure.Repositories;
 namespace CarDealershipApp
 {
     public class Program
@@ -12,6 +17,7 @@ namespace CarDealershipApp
 
             builder.Services.AddDbContext<CarDealershipDbContext>(options => options.UseSqlServer(connectionString));
 
+
             builder.Services.AddDefaultIdentity<IdentityUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
@@ -22,6 +28,10 @@ namespace CarDealershipApp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            builder.Services.AddScoped<IBrandService, BrandService>();
 
             var app = builder.Build();
 

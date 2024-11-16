@@ -10,7 +10,7 @@ namespace CarDealershipApp.Models.CarViewModels
     public class CarAddViewModel
     {
         [Required]
-        public List<string> Brand { get; set; } = new List<string>();
+        public string Brand { get; set; }
 
         [Required]
         public List<string> ModelName { get; set; } = new List<string>();

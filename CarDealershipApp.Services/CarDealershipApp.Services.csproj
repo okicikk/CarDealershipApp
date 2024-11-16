@@ -19,10 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CarDealership.Web.ViewModels\CarDealership.Web.ViewModels.csproj" />
     <ProjectReference Include="..\CarDealershipApp.Data.Models\CarDealershipApp.Data.Models.csproj" />
     <ProjectReference Include="..\CarDealershipApp.Data\CarDealershipApp.Data.csproj" />
     <ProjectReference Include="..\CarDealershipApp.Infrastructure\CarDealershipApp.Infrastructure.csproj" />
-    <ProjectReference Include="..\CarDealershipApp\CarDealershipApp.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,28 +8,36 @@ html {
     }
 }
 
+
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
     position: relative;
-    min-height: 100%;
+    height: 100%;
 }
 
-/*body {
-    background-image: url(https://cdn.gamedevmarket.net/wp-content/uploads/20191203194912/e107d64cd980fa41ff9b852ad6c6a7f897f83fcb.gif);
-    background-size: 30%;
-    background-position: center;
-    background-repeat: no-repeat;
-    animation: moveBackground 5s linear infinite;
+body {
+   -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 80px;
 }
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+}
+/*
 @keyframes moveBackground {
     from {
-        background-position: -50% center;*/ /* left */
-    /*}
+        background-position: -50% center;  left 
+    }
 
     to {
-        background-position: 140% center;*/ /* right */
-    /*}
+        background-position: 140% center;  right 
+    }
 }*/

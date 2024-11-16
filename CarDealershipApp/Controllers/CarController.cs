@@ -7,8 +7,7 @@ namespace CarDealershipApp.Controllers
 {
     [Authorize]
     public class CarController : Controller
-    {
-        private readonly 
+    { 
         public IActionResult Index()
         {
             return View();
