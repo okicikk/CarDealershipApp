@@ -18,4 +18,11 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CarDealershipApp.Data.Models\CarDealershipApp.Data.Models.csproj" />
+    <ProjectReference Include="..\CarDealershipApp.Data\CarDealershipApp.Data.csproj" />
+    <ProjectReference Include="..\CarDealershipApp.Infrastructure\CarDealershipApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\CarDealershipApp\CarDealershipApp.csproj" />
+  </ItemGroup>
+
 </Project>
