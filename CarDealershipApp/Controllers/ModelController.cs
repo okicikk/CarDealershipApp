@@ -20,10 +20,19 @@ namespace CarDealershipApp.Web.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        public IActionResult Add(ModelAddViewModel viewModel)
+        public async Task<IActionResult> Add(ModelAddViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
+                return View(viewModel);
+            }
+            try
+            {
+                await modelService.AddModelAsync(viewModel);
+            }
+            catch (ArgumentException e)
+            {
+                ModelState.AddModelError(nameof(viewModel.Name),e.Message);
                 return View(viewModel);
             }
             

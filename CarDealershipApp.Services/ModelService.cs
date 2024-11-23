@@ -22,7 +22,7 @@ namespace CarDealershipApp.Services
 
         public async Task AddModelAsync(ModelAddViewModel viewModel)
         {
-            
+            viewModel.Brands = await brandRepository.GetAllAsync();
             Model modelToBeAdded = new Model()
             {
                 Name = viewModel.Name,

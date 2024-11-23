@@ -14,7 +14,7 @@ namespace CarDealership.ViewModels.Models.Model
         [MaxLength(ModelNameMaxLength)]
         public string Name { get; set; } = null!;
 
-        public IList<Brand> Brands { get; set; } = new List<Brand>();
+        public IEnumerable<Brand> Brands { get; set; } = new List<Brand>();
         [Required(ErrorMessage = "You need to select one of the available brands!")]
         public int BrandId { get; set; }
 

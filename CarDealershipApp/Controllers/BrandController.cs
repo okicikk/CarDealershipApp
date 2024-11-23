@@ -26,6 +26,24 @@ namespace CarDealershipApp.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> Add(BrandAddViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+            try
+            {
+                await brandService.AddBrandAsync(viewModel);
+            }
+            catch (ArgumentException e)
+            {
+                ModelState.AddModelError(nameof(viewModel.Name),e.Message);
+                return View(viewModel);
+            }
+            return RedirectToAction(nameof(Index));
+        }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
