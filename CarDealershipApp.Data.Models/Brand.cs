@@ -10,6 +10,9 @@ namespace CarDealershipApp.Data.Models
         [Required]
         [MaxLength(BrandNameMaxLength)]
         public string Name { get; set; }
+        public string? ImageUrl { get; set; }
+        [Required]
+        public bool IsDeleted { get; set; } = false;  
         public IList<Model> Models { get; set; } = new List<Model>();
 
     }

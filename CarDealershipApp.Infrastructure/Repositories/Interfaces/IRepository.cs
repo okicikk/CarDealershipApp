@@ -9,11 +9,14 @@ namespace CarDealershipApp.Infrastructure.Repositories.Interfaces
 	public interface IRepository<T>
 	{
 		T GetById(string id);
-		Task<T> GetByIdAsync(string id);
+        T GetById(int id);
+        Task<T> GetByIdAsync(int id);
+
+        Task<T> GetByIdAsync(string id);
 
 		IEnumerable<T> GetAll();
 		Task<IEnumerable<T>> GetAllAsync();
-		IEnumerable<T> GetAllAttached();
+		IQueryable<T> GetAllQueryable();
 
 		void Add(T item);
 

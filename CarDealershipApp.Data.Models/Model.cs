@@ -15,5 +15,7 @@ namespace CarDealershipApp.Data.Models
         public Brand Brand { get; set; }
         [ForeignKey(nameof(Brand))]
         public int BrandId { get; set; }
+        [Required]
+        public bool IsDeleted { get; set; } = false;
     }
 }

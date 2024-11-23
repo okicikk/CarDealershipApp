@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
 using static CarDealershipApp.Constants.Constants;
 
-namespace CarDealershipApp.Models.Brand
-{
+namespace CarDealership.Web.ViewModels.Models.Brand
+{ 
     public class BrandAddViewModel
     {
         [Required]
@@ -13,5 +12,7 @@ namespace CarDealershipApp.Models.Brand
         [MinLength(ModelNameMinLength)]
         [MaxLength(ModelNameMaxLength)]
         public string? Model { get; set; }
+
+        public string? ImageUrl { get; set; }
     }
 }

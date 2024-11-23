@@ -37,10 +37,21 @@ namespace CarDealershipApp.Infrastructure.Repositories
 			context.SaveChanges();
 			return true;
 		}
+        public bool DeleteById(int id)
+        {
+            T? item = dbSet.Find(id);
+            if (item is null)
+            {
+                return false;
+            }
+            dbSet.Remove(item);
+            context.SaveChanges();
+            return true;
+        }
 
-		public async Task<bool> DeleteByIdAsync(string id)
+        public async Task<bool> DeleteByIdAsync(string id)
 		{
-			T item = await dbSet.FindAsync(id);
+			T? item = await dbSet.FindAsync(id);
 			if (item is null)
 			{
 				return false;
@@ -60,7 +71,7 @@ namespace CarDealershipApp.Infrastructure.Repositories
 			return await dbSet.ToListAsync();
 		}
 
-		public IEnumerable<T> GetAllAttached()
+		public IQueryable<T> GetAllQueryable()
 		{
 			return dbSet.AsQueryable();
 		}
@@ -74,8 +85,17 @@ namespace CarDealershipApp.Infrastructure.Repositories
 			}
 			return item;
 		}
+        public T GetById(int id)
+        {
+            T? item = dbSet.Find(id);
+            if (item is null)
+            {
+                return null;
+            }
+            return item;
+        }
 
-		public async Task<T> GetByIdAsync(string id)
+        public async Task<T> GetByIdAsync(string id)
 		{
 			T? item = await dbSet.FindAsync(id);
 
@@ -85,8 +105,17 @@ namespace CarDealershipApp.Infrastructure.Repositories
 			}
 			return item;
 		}
+        public async Task<T> GetByIdAsync(int id)
+        {
+            T? item = await dbSet.FindAsync(id);
 
-		public bool Update(T item)
+            if (item is null)
+            {
+                return null;
+            }
+            return item;
+        }
+        public bool Update(T item)
 		{
 			try
 			{

@@ -32,8 +32,10 @@ namespace CarDealershipApp
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             builder.Services.AddScoped<IBrandService, BrandService>();
+			builder.Services.AddScoped<IModelService, ModelService>();
 
-            var app = builder.Build();
+
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
