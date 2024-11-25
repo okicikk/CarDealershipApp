@@ -28,12 +28,17 @@ namespace CarDealershipApp.Services
                 Name = viewModel.Name,
                 BrandId = viewModel.BrandId,
             };
-            await modelRepository.AddAsync(modelToBeAdded);
 
-            if (modelRepository.GetAllQueryable().Any(x => x.Name.ToLower() == modelToBeAdded.Name.ToLower()))
+            Model? existingModel = await modelRepository
+                .GetAllQueryable()
+                .FirstOrDefaultAsync(x=>x.Name.ToLower() == modelToBeAdded.Name.ToLower() && x.BrandId == modelToBeAdded.BrandId);
+
+            if (existingModel is not null)
             {
                 throw new ArgumentException("Model with that name already exists!");
             }
+
+            await modelRepository.AddAsync(modelToBeAdded);
         }
 
         public async Task<IList<Brand>> GetAllBrandsAsync()

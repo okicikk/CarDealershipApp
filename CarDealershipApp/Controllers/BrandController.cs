@@ -68,10 +68,11 @@ namespace CarDealershipApp.Controllers
             
             if (!ModelState.IsValid)
             {
+                TempData["ErrorMessage"] = "Brand could not be updated! Try again with a different name or url.";
                 return View(viewModel);
             }
             await brandService.EditAsync(viewModel);
-            TempData["SuccesMessage"] = "Brand updated successfully!";
+            TempData["SuccessMessage"] = "Brand updated successfully!";
             return View(viewModel);
         }
         [HttpPost]
