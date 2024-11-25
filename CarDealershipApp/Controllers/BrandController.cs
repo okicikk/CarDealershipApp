@@ -15,6 +15,7 @@ namespace CarDealershipApp.Controllers
             brandService = _brandService;
         }
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var brands = await brandService

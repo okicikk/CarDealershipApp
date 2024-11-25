@@ -1,10 +1,12 @@
 ﻿using CarDealership.ViewModels.Models.Model;
 using CarDealershipApp.Services;
 using CarDealershipApp.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarDealershipApp.Web.Controllers
 {
+    [Authorize]
     public class ModelController : Controller
     {
         private readonly IModelService modelService;
@@ -12,7 +14,13 @@ namespace CarDealershipApp.Web.Controllers
         {
             this.modelService = modelServ;
         }
-        [HttpGet]
+
+		public IActionResult Index()
+		{
+			return View();
+		}
+
+		[HttpGet]
         public async Task<IActionResult> Add()
         {
             ModelAddViewModel viewModel = new ModelAddViewModel();
@@ -38,9 +46,7 @@ namespace CarDealershipApp.Web.Controllers
             
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+        //public async Task<bool> Delete(Model);
+        
     }
 }
