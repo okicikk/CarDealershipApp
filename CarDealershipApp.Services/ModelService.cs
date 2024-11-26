@@ -31,7 +31,9 @@ namespace CarDealershipApp.Services
 
             Model? existingModel = await modelRepository
                 .GetAllQueryable()
-                .FirstOrDefaultAsync(x=>x.Name.ToLower() == modelToBeAdded.Name.ToLower() && x.BrandId == modelToBeAdded.BrandId);
+                .FirstOrDefaultAsync
+                (x=>x.Name.ToLower() == modelToBeAdded.Name.ToLower()
+                        && x.BrandId == modelToBeAdded.BrandId);
 
             if (existingModel is not null)
             {
