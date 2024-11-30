@@ -1,0 +1,14 @@
+﻿@using CarDealership.ViewModels.Models.Car
+@model CarAddBrandSelectionViewModel
+
+<h2>Select a Brand</h2>
+<form asp-action="SelectBrand" method="post">
+    <div class="form-group">
+        <label for="brandSelect">Brand</label>
+        <select asp-for="SelectedBrandId" asp-items="@(new SelectList(Model.Brands, "Id", "Name"))" class="form-control" id="brandSelect">
+            <option value="0">Select a brand</option> <!-- Default value for no selection -->
+        </select>
+        <span asp-validation-for="SelectedBrandId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Next</button>
+</form>

@@ -1,0 +1,47 @@
+﻿@model List<CarDealership.ViewModels.Models.Car.CarPreview>
+
+@{
+    ViewData["Title"] = "All Cars";
+}
+
+<h1>All Cars</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Image</th>
+            <th>Year</th>
+            <th>Price</th>
+            <th>Mileage (km)</th>
+            <th>Actions</th> <!-- New column for the Details button -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+        {
+            <tr>
+                <td>@car.BrandName</td>
+                <td>@car.ModelName</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(car.MainImage))
+                    {
+                        <img src="@car.MainImage" alt="@car.BrandName @car.ModelName" style="max-width: 150px; max-height: 100px;" />
+                    }
+                    else
+                    {
+                        <span>No image available</span>
+                    }
+                </td>
+                <td>@car.Year</td>
+                <td>@car.Price BGN</td>
+                <td>@car.MileageInKm KM</td>
+                <td>
+                    <!-- Details button -->
+                    <a asp-action="Details" asp-route-id="@car.CarId" class="btn btn-primary">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -22,7 +22,7 @@ namespace CarDealershipApp.Infrastructure.Repositories
 
 		public async Task AddAsync(T item)
 		{
-			await context.AddAsync(item);
+			await dbSet.AddAsync(item);
 			await context.SaveChangesAsync();
 		}
 

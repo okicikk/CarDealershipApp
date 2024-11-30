@@ -1,5 +1,89 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model CarDealershipApp.ViewModels.CarViewModels.CarAddViewModel
+
 @{
+    ViewData["Title"] = "Add a New Car";
+}
+
+<h1>Add a New Car</h1>
+<form asp-action="AddCar" method="post">
+    <!-- Hidden field to pass brandId -->
+    <input type="hidden" name="BrandId" value="@Model.BrandId" />
+    <input type="hidden" asp-for="SellerId" />
+
+    <div class="form-group">
+        <label asp-for="ModelId">Model</label>
+        <select asp-for="ModelId" asp-items="@(new SelectList(Model.Models, "Id", "Name"))" class="form-control">
+            <option value="">-- Select a Model --</option>
+        </select>
+        <span asp-validation-for="ModelId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CategoryId">Category</label>
+        <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-control">
+            <option value="">-- Select a Category --</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price">Price</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Weight">Weight</label>
+        <input asp-for="Weight" class="form-control" />
+        <span asp-validation-for="Weight" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Mileage">Mileage</label>
+        <input asp-for="Mileage" class="form-control" />
+        <span asp-validation-for="Mileage" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReleaseYear">Release Year</label>
+        <input asp-for="ReleaseYear" type="number" class="form-control" />
+        <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ImageUrls">Image URLs (up to 4)</label>
+        @for (int i = 0; i < 4; i++)
+        {
+            <input type="text" name="ImageUrls[@i]" class="form-control mb-2" placeholder="Image URL @(i + 1)"
+                   value="@(Model.ImageUrls != null && Model.ImageUrls.Count > i ? Model.ImageUrls[i] : string.Empty)" />
+        }
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AvailableFeatures">Features</label>
+        @foreach (var feature in Model.AvailableFeatures)
+        {
+            <div class="form-check">
+                <input type="checkbox"
+                       class="form-check-input"
+                       id="Feature_@feature.Id"
+                       name="SelectedFeaturesIds"
+                       value="@feature.Id"
+                @(Model.SelectedFeaturesIds.Contains(feature.Id) ? "checked" : "") />
+                <label class="form-check-label" for="Feature_@feature.Id">@feature.Name</label>
+            </div>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Car</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }

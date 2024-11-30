@@ -4,23 +4,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
 using static CarDealershipApp.Constants.Constants;
+using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace CarDealershipApp.Models.CarViewModels
+namespace CarDealershipApp.ViewModels.CarViewModels
 {
 	public class CarAddViewModel
 	{
 		[Required]
-		public List<Brand> Brands { get; set; } = new();
-		[Required]
+		public string SellerId { get; set; } = null!;
+        [Required]
 		public int BrandId { get; set; }
 
-		[Required]
-		public List<Model> Models { get; set; } = new List<Model>();
+		//[Required]
+		public IList<Model> Models { get; set; } = new List<Model>();
 
 		[Required]
 		public int ModelId { get; set; }
 
-		[Required]
+		//[Required]
 		public IEnumerable<Category> Categories { get; set; } = new List<Category>();
 
 		[Required]
@@ -34,16 +35,17 @@ namespace CarDealershipApp.Models.CarViewModels
 		public double Weight { get; set; }
 		[Required]
 		[MaxLength(CarDescriptionMaxLenght)]
-		public string Description { get; set; }
+		public string Description { get; set; } = "No Description.";
 		[Required]
 		[Range(CarMileageMinValue, CarMileageMaxValue)]
 		public int Mileage { get; set; }
-		public List<string>? ImageUrls { get; set; } = new List<string>();
+		public List<string>? ImageUrls { get; set; } = new List<string>(4);
 		[Required]
 		public int ReleaseYear { get; set; }
-		[Required]
+		//[Required]
 		public DateTime ListedOn { get; set; } = DateTime.Today;
 
-		public IList<CarFeature> CarsFeatures { get; set; } = new List<CarFeature>();
-	}
+		public IEnumerable<Feature> AvailableFeatures { get; set; } = new List<Feature>();
+        public IList<int> SelectedFeaturesIds { get; set; } = new List<int>();
+    }
 }

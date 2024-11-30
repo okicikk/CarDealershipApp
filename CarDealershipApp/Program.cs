@@ -6,6 +6,7 @@ using CarDealershipApp.Services;
 using CarDealershipApp.Data.Models;
 using CarDealershipApp.Infrastructure.Repositories.Interfaces;
 using CarDealershipApp.Infrastructure.Repositories;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 namespace CarDealershipApp
 {
     public class Program
@@ -33,9 +34,11 @@ namespace CarDealershipApp
 
             builder.Services.AddScoped<IBrandService, BrandService>();
 			builder.Services.AddScoped<IModelService, ModelService>();
+            builder.Services.AddScoped<ICarService, CarService>();
 
 
-			var app = builder.Build();
+
+            var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

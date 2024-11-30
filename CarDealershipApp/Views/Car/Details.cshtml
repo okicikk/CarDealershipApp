@@ -1,0 +1,93 @@
+﻿@model CarDealership.ViewModels.Models.Car.CarDetailsViewModel
+
+@{
+    ViewData["Title"] = "Car Details";
+}
+
+<h1>Car Details</h1>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h2>@Model.BrandName - @Model.ModelName</h2>
+    </div>
+    <div class="card-body">
+        <!-- Images Section -->
+        <div class="mb-4">
+            <h4>Images</h4>
+            @if (Model.ImageUrls.Any() && !Model.ImageUrls.Contains("No Image"))
+            {
+                <div class="row">
+                    @foreach (var imageUrl in Model.ImageUrls)
+                    {
+                        <div class="col-md-3">
+                            <img src="@imageUrl" class="img-fluid img-thumbnail" alt="Car Image" />
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>No images available.</p>
+            }
+        </div>
+
+        <!-- General Details Section -->
+        <h4>General Details</h4>
+        <table class="table table-bordered">
+            <tr>
+                <th>Category</th>
+                <td>@Model.CategoryName</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>$@Model.Price</td>
+            </tr>
+            <tr>
+                <th>Weight</th>
+                <td>@Model.Weight kg</td>
+            </tr>
+            <tr>
+                <th>Mileage</th>
+                <td>@Model.Mileage km</td>
+            </tr>
+            <tr>
+                <th>Release Year</th>
+                <td>@Model.ReleaseYear</td>
+            </tr>
+            <tr>
+                <th>Listed On</th>
+                <td>@Model.ListedOn</td>
+            </tr>
+            <tr>
+                <th>Seller Email</th>
+                <td>@Model.SellerEmail</td>
+            </tr>
+        </table>
+
+        <!-- Description Section -->
+        <div class="mb-4">
+            <h4>Description</h4>
+            <p>@Model.Description</p>
+        </div>
+
+        <!-- Features Section -->
+        <div class="mb-4">
+            <h4>Features</h4>
+            @if (Model.CarFeatures.Any())
+            {
+                <ul>
+                    @foreach (var feature in Model.CarFeatures)
+                    {
+                        <li>@feature</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>No features listed.</p>
+            }
+        </div>
+    </div>
+</div>
+
+<a asp-action="AllCars" class="btn btn-secondary">Back to Listings</a>

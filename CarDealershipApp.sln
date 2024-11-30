@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{04
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealershipApp.Infrastructure", "CarDealershipApp.Infrastructure\CarDealershipApp.Infrastructure.csproj", "{94AB0A14-CF51-49C4-BB59-BD0F7CE746AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDealership.Web.ViewModels", "CarDealership.Web.ViewModels\CarDealership.Web.ViewModels.csproj", "{C679DA2D-28AC-4DAC-8EBC-E3953BFA14A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealership.ViewModels", "CarDealership.Web.ViewModels\CarDealership.ViewModels.csproj", "{C679DA2D-28AC-4DAC-8EBC-E3953BFA14A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

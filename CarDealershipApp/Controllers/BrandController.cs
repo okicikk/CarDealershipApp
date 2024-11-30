@@ -73,7 +73,7 @@ namespace CarDealershipApp.Controllers
             }
             await brandService.EditAsync(viewModel);
             TempData["SuccessMessage"] = "Brand updated successfully!";
-            return View(viewModel);
+            return RedirectToAction(nameof(Index));
         }
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
