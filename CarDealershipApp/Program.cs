@@ -11,7 +11,7 @@ namespace CarDealershipApp
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
@@ -25,6 +25,7 @@ namespace CarDealershipApp
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;
             })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<CarDealershipDbContext>();
 
             // Add services to the container.
@@ -64,7 +65,22 @@ namespace CarDealershipApp
 
             app.MapRazorPages();
 
-            app.Run();
+            using (var scope = app.Services.CreateScope())
+            {
+                RoleManager<IdentityRole> rolesManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                var roles = new[] { "Admin" };
+
+                foreach (var role in roles)
+                {
+                    if (!await rolesManager.RoleExistsAsync(role))
+                    {
+                        await rolesManager.CreateAsync(new IdentityRole(role));
+                    }
+                }
+            }
+
+                app.Run();
         }
     }
 }
