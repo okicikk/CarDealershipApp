@@ -4,17 +4,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarDealershipApp.Infrastructure.Repositories
 {
-	public class Repository<T> : IRepository<T> where T 
+	public class Repository<T> : IRepository<T> where T
 		: class
 	{
 		private readonly CarDealershipDbContext context;
 		private readonly DbSet<T> dbSet;
-        public Repository(CarDealershipDbContext context)
-        {
-            this.context = context;
+		public Repository(CarDealershipDbContext context)
+		{
+			this.context = context;
 			this.dbSet = this.context.Set<T>();
-        }
-        public void Add(T item)
+		}
+		public void Add(T item)
 		{
 			context.Add(item);
 			context.SaveChanges();
@@ -37,19 +37,31 @@ namespace CarDealershipApp.Infrastructure.Repositories
 			context.SaveChanges();
 			return true;
 		}
-        public bool DeleteById(int id)
-        {
-            T? item = dbSet.Find(id);
-            if (item is null)
-            {
-                return false;
-            }
-            dbSet.Remove(item);
-            context.SaveChanges();
-            return true;
-        }
+		public bool DeleteById(int id)
+		{
+			T? item = dbSet.Find(id);
+			if (item is null)
+			{
+				return false;
+			}
+			dbSet.Remove(item);
+			context.SaveChanges();
+			return true;
+		}
 
-        public async Task<bool> DeleteByIdAsync(string id)
+		public async Task<bool> DeleteByIdAsync(string id)
+		{
+			T? item = await dbSet.FindAsync(id);
+			if (item is null)
+			{
+				return false;
+			}
+			dbSet.Remove(item);
+			await context.SaveChangesAsync();
+			return true;
+		}
+
+		public async Task<bool> DeleteByIdAsync(int id)
 		{
 			T? item = await dbSet.FindAsync(id);
 			if (item is null)
@@ -85,17 +97,17 @@ namespace CarDealershipApp.Infrastructure.Repositories
 			}
 			return item;
 		}
-        public T GetById(int id)
-        {
-            T? item = dbSet.Find(id);
-            if (item is null)
-            {
-                return null;
-            }
-            return item;
-        }
+		public T GetById(int id)
+		{
+			T? item = dbSet.Find(id);
+			if (item is null)
+			{
+				return null;
+			}
+			return item;
+		}
 
-        public async Task<T> GetByIdAsync(string id)
+		public async Task<T> GetByIdAsync(string id)
 		{
 			T? item = await dbSet.FindAsync(id);
 
@@ -105,17 +117,17 @@ namespace CarDealershipApp.Infrastructure.Repositories
 			}
 			return item;
 		}
-        public async Task<T> GetByIdAsync(int id)
-        {
-            T? item = await dbSet.FindAsync(id);
+		public async Task<T> GetByIdAsync(int id)
+		{
+			T? item = await dbSet.FindAsync(id);
 
-            if (item is null)
-            {
-                return null;
-            }
-            return item;
-        }
-        public bool Update(T item)
+			if (item is null)
+			{
+				return null;
+			}
+			return item;
+		}
+		public bool Update(T item)
 		{
 			try
 			{
@@ -128,7 +140,7 @@ namespace CarDealershipApp.Infrastructure.Repositories
 			{
 				return false;
 			}
-			
+
 		}
 
 		public async Task<bool> UpdateAsync(T item)

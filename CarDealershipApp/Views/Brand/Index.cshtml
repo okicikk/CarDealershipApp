@@ -5,87 +5,95 @@
 <!-- Success and Error Messages -->
 @if (TempData["SuccessMessage"] != null)
 {
-    <div class="alert alert-success">
-        @TempData["SuccessMessage"]
-    </div>
+	<div class="alert alert-success">
+		@TempData["SuccessMessage"]
+	</div>
 }
 @if (TempData["ErrorMessage"] != null)
 {
-    <div class="alert alert-danger">
-        @TempData["ErrorMessage"]
-    </div>
+	<div class="alert alert-danger">
+		@TempData["ErrorMessage"]
+	</div>
 }
 
-<div class="mb-3">
-    <!-- Button to redirect to Add page -->
-    <a asp-action="Add" class="btn btn-primary">Add a new brand</a>
-</div>
+@if (User.IsInRole("Admin"))
+{
+	<div class="mb-3">
+		<!-- Button to redirect to Add page -->
+		<a asp-action="Add" class="btn btn-primary">Add a new brand</a>
+	</div>
+}
 
 <table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Logo</th>
-            <th>Actions</th> <!-- Added actions column for the Delete button -->
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var brand in Model)
-        {
-            <tr>
-                <td>@brand.Name</td>
-                <td>
-                    <img src="@brand.ImageUrl" alt="Brand Image" style="max-width: 100px; max-height: 100px;" />
-                </td>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Logo</th>
+			@if (User.IsInRole("Admin"))
+			{
+				<th>Actions</th> <!-- Added actions column for the Delete button -->
+			}
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var brand in Model)
+		{
+			<tr>
+				<td>@brand.Name</td>
+				<td>
+					<img src="@brand.ImageUrl" alt="Brand Image" style="max-width: 100px; max-height: 100px;" />
+				</td>
 
-                <td>
-                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@brand.Id">Edit</a>
-                    <!-- Delete button wrapped inside a form -->
-                    <button class="btn btn-danger delete-btn" data-id="@brand.Id" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-                </td>
-            </tr>
-        }
-    </tbody>
+				<td>
+					@if (User.IsInRole("Admin"))
+					{
+						<a class="btn btn-warning" asp-action="Edit" asp-route-id="@brand.Id">Edit</a>
+						<button class="btn btn-danger delete-btn" data-id="@brand.Id" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+					}
+				</td>
+			</tr>
+		}
+	</tbody>
 </table>
 
 <!-- Modal for confirmation (appears when clicking delete) -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p class="text-danger"><strong>Warning:</strong> Deleting this brand will also delete all associated models and cars. This action cannot be undone. Are you sure you want to proceed?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
-            </div>
-        </div>
-    </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p class="text-danger"><strong>Warning:</strong> Deleting this brand will also delete all associated models and cars. This action cannot be undone. Are you sure you want to proceed?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+			</div>
+		</div>
+	</div>
 </div>
 
- <!-- Hidden form to trigger the delete action -->
+<!-- Hidden form to trigger the delete action -->
 <form id="deleteForm" method="post" asp-action="Delete" style="display:none;">
-    <input type="hidden" name="id" value="" />
+	<input type="hidden" name="id" value="" />
 </form>
 
- <script>
-    const deleteBtns = document.querySelectorAll('.delete-btn');
-    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-    const deleteForm = document.getElementById('deleteForm');
+<script>
+	const deleteBtns = document.querySelectorAll('.delete-btn');
+	const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+	const deleteForm = document.getElementById('deleteForm');
 
-    deleteBtns.forEach(btn => {
-        btn.addEventListener('click', function (e) {
-            const brandId = e.target.getAttribute('data-id');
-            // Set the id for the delete form
-            deleteForm.querySelector('input[name="id"]').value = brandId;
-        });
-    });
+	deleteBtns.forEach(btn => {
+		btn.addEventListener('click', function (e) {
+			const brandId = e.target.getAttribute('data-id');
+			// Set the id for the delete form
+			deleteForm.querySelector('input[name="id"]').value = brandId;
+		});
+	});
 
-    confirmDeleteBtn.addEventListener('click', function () {
-        deleteForm.submit(); // Submit the form when confirmed
-    });
-</script> 
+	confirmDeleteBtn.addEventListener('click', function () {
+		deleteForm.submit(); // Submit the form when confirmed
+	});
+</script>

@@ -24,6 +24,8 @@ namespace CarDealershipApp.Infrastructure.Repositories.Interfaces
 
 		bool DeleteById(string id);
 		Task<bool> DeleteByIdAsync(string id);
+		Task<bool> DeleteByIdAsync(int id);
+
 
 		bool Update(T item);
 		Task<bool> UpdateAsync(T item);

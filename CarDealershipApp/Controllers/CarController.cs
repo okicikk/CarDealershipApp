@@ -8,6 +8,7 @@ using CarDealership.ViewModels.Models.Car;
 using CarDealershipApp.Data.Models;
 using Microsoft.Extensions.FileProviders.Physical;
 using System.Security.Claims;
+using Nest;
 
 namespace CarDealershipApp.Controllers
 {
@@ -24,12 +25,13 @@ namespace CarDealershipApp.Controllers
         {
             return View();
         }
-		public async Task<IActionResult> Details(int id)
-		{
-			return View(await carService.LoadDetailsAsync(id));
-		}
-		[AllowAnonymous]
-        public async Task<IActionResult> AllCars()
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            return View(await carService.LoadDetailsAsync(id));
+        }
+        [AllowAnonymous]
+        public async Task<IActionResult> Cars()
         {
             return View(await carService.CheckAllCarsAsync());
         }
@@ -60,6 +62,23 @@ namespace CarDealershipApp.Controllers
             return RedirectToAction(nameof(Add), new { brandId = viewModel.SelectedBrandId });
         }
         [HttpGet]
+		public async Task<IActionResult> Edit(int id)
+        {
+            CarEditViewModel viewModel = await carService.InitializeCarEditViewModel(id);
+            return View(viewModel);
+		}
+        [HttpPost]
+        public async Task<IActionResult> Edit(CarEditViewModel viewModel)
+        {
+            await carService.InitializeCarEditViewModel(viewModel.Id);
+            if (viewModel is null)
+            {
+                return View(viewModel);
+            }
+            await carService.EditCarAsync(viewModel);
+            return RedirectToAction(nameof(Details), new{viewModel.Id});
+        }
+		[HttpGet]
         public async Task<IActionResult> Add(int brandId)
         {
             if (brandId <= 0 )
@@ -81,11 +100,15 @@ namespace CarDealershipApp.Controllers
                 return View(viewModel);
             }
             await carService.AddCarAsync(viewModel);
-            return View(viewModel);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Cars));
+            //return View(viewModel);
         }
-
-        private string? GetCurrentUserId()
+		public async Task<IActionResult> Delete(int id)
+		{
+            await carService.SoftDeleteAsync(id);
+            return View(nameof(Cars));
+		}
+		private string? GetCurrentUserId()
         {
             return User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         }

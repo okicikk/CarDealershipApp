@@ -4,16 +4,21 @@ using CarDealershipApp.ViewModels.CarViewModels;
 
 namespace CarDealershipApp.Services.Interfaces
 {
-    public interface ICarService
-    {
-        Task AddCarAsync(CarAddViewModel model);
-        void AddCar(CarAddViewModel model);
-        Task<List<Brand>> GetAllBrandsAsync();
+	public interface ICarService
+	{
+		Task AddCarAsync(CarAddViewModel model);
+		Task<bool> SoftDeleteAsync(int carId);
 
-        Task<CarAddViewModel> InitializeCarAddViewModelAsync(int brandId,string userId);
-        Task<List<CarPreview>> CheckAllCarsAsync();
+		void AddCar(CarAddViewModel model);
+		Task<List<Brand>> GetAllBrandsAsync();
 
-        Task<CarDetailsViewModel> LoadDetailsAsync(int carId);
+		Task<CarAddViewModel> InitializeCarAddViewModelAsync(int brandId, string userId);
+		Task<List<CarPreview>> CheckAllCarsAsync();
+
+		Task<CarDetailsViewModel> LoadDetailsAsync(int carId);
+		Task EditCarAsync(CarEditViewModel viewModel);
+		Task<CarEditViewModel> InitializeCarEditViewModel(int carId);
+
 
     }
 }
