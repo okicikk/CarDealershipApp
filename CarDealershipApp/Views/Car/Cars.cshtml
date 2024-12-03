@@ -1,5 +1,5 @@
-﻿@model List<CarDealership.ViewModels.Models.Car.CarPreview>
-
+﻿@using System.Security.Claims
+@model List<CarDealership.ViewModels.Models.Car.CarPreview>
 @{
     ViewData["Title"] = "Cars";
 }
@@ -45,6 +45,19 @@
                            class="btn btn-primary btn-sm">
                             <i class="bi bi-info-circle"></i> Details
                         </a>
+                        @if (User.IsInRole("Admin") || User.FindFirst(ClaimTypes.NameIdentifier)?.Value == car.SellerId)
+                        {
+                            <a asp-action="Edit" asp-route-id="@car.CarId"
+                               class="btn btn-warning btn-sm mx-2">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                            <form asp-action="Delete" asp-route-id="@car.CarId"
+                                  method="post" class="d-inline">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </form>
+                        }
                     </td>
                 </tr>
             }

@@ -67,13 +67,3 @@ footer {
 .carousel-control-prev:hover, .carousel-control-next:hover {
     background-color: rgba(0, 0, 0, 0.7); /* Darker background on hover */
 }
-/*
-@keyframes moveBackground {
-    from {
-        background-position: -50% center;  left 
-    }
-
-    to {
-        background-position: 140% center;  right 
-    }
-}*/

@@ -1,0 +1,73 @@
+﻿@using System.Security.Claims
+@model List<CarDealership.ViewModels.Models.Car.CarPreview>
+@{
+    ViewData["Title"] = "Cars";
+}
+
+<h1 class="text-center my-4">Your cars - @User.Identity.Name.Split('@')[0]</h1>
+
+@if(Model.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered text-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Image</th>
+                    <th>Year</th>
+                    <th>Price</th>
+                    <th>Mileage (km)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var car in Model)
+                {
+                    <tr>
+                        <td class="fw-bold">@car.BrandName</td>
+                        <td>@car.ModelName</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(car.MainImage))
+                            {
+                                <img src="@car.MainImage" alt="@car.BrandName @car.ModelName"
+                                     class="img-fluid rounded shadow-sm"
+                                     style="max-width: 150px; max-height: 100px;" />
+                            }
+                            else
+                            {
+                                <span class="text-muted fst-italic">No image available</span>
+                            }
+                        </td>
+                        <td>@car.Year</td>
+                        <td>@car.Price BGN</td>
+                        <td>@car.MileageInKm KM</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@car.CarId"
+                               class="btn btn-primary btn-sm">
+                                <i class="bi bi-info-circle"></i> Details
+                            </a>
+                            @if (User.IsInRole("Admin") || User.FindFirst(ClaimTypes.NameIdentifier)?.Value == car.SellerId)
+                            {
+                                <a asp-action="Edit" asp-route-id="@car.CarId"
+                                   class="btn btn-warning btn-sm mx-2">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                                <form asp-action="Delete" asp-route-id="@car.CarId"
+                                      method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <h4 class="text-center my-4">You do not have any cars for sale.</h4>
+}

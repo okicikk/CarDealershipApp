@@ -5,7 +5,7 @@
 }
 
 <h1>Add a New Car</h1>
-<form asp-action="AddCar" method="post">
+<form asp-action="Add" method="post">
     <!-- Hidden field to pass brandId -->
     <input type="hidden" name="BrandId" value="@Model.BrandId" />
     <input type="hidden" asp-for="SellerId" />

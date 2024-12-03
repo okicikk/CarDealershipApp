@@ -8,6 +8,7 @@ namespace CarDealership.ViewModels.Models.Car
 {
     public class CarPreview
     {
+        public string SellerId { get; set; }
         public int CarId { get; set; }
         public string BrandName { get; set; } = null!;
         public string ModelName { get; set; } = null!;

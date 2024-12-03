@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using CarDealership.ViewModels.Models.Car;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 
 
 
@@ -38,6 +39,13 @@ namespace CarDealershipApp.Services
 			this.modelsRepository = modelsRepository;
 		}
 
+		public async Task<string> GetCarOwnerIdAsync(int carId)
+		{
+			Car car = await carRepository.GetByIdAsync(carId);
+
+			return car.SellerId;
+		}
+
 		public async Task<List<CarPreview>> CheckAllCarsAsync()
 		{
 			List<CarPreview> carPreviews = new List<CarPreview>();
@@ -45,10 +53,12 @@ namespace CarDealershipApp.Services
 				.GetAllQueryable()
 				.Include(x => x.Brand)
 				.Include(x => x.Model)
+				.Where(x=>x.IsDeleted == false)
 				.ToListAsync())
 			{
 				CarPreview carPreview = new CarPreview()
 				{
+					SellerId = car.SellerId,
 					CarId = car.Id,
 					BrandName = car.Brand.Name,
 					ModelName = car.Model.Name,
@@ -65,6 +75,35 @@ namespace CarDealershipApp.Services
 				.ThenByDescending(x => x.Price)
 				.ToList();
 		}
+		public async Task<List<CarPreview>> CheckYourCars(string userId)
+		{
+            List<CarPreview> carPreviews = new List<CarPreview>();
+            foreach (var car in await carRepository
+                .GetAllQueryable()
+                .Include(x => x.Brand)
+                .Include(x => x.Model)
+                .Where(x => x.IsDeleted == false && x.SellerId == userId)
+                .ToListAsync())
+            {
+                CarPreview carPreview = new CarPreview()
+                {
+                    SellerId = car.SellerId,
+                    CarId = car.Id,
+                    BrandName = car.Brand.Name,
+                    ModelName = car.Model.Name,
+                    Price = car.Price,
+                    MainImage = car.ImageUrls?[0],
+                    Year = car.ReleaseYear,
+                    MileageInKm = car.Mileage
+                };
+                carPreviews.Add(carPreview);
+            }
+            return carPreviews
+                .OrderBy(x => x.BrandName)
+                .ThenBy(x => x.ModelName)
+                .ThenByDescending(x => x.Price)
+                .ToList();
+        }
 		public async Task<CarDetailsViewModel> LoadDetailsAsync(int carId)
 		{
 			CarDetailsViewModel? carDetails = await carRepository
@@ -272,6 +311,7 @@ namespace CarDealershipApp.Services
 			if (car.IsDeleted == false)
 			{
 				car.IsDeleted = true;
+				carRepository.Update(car);
 				return true;
 			}
 			return false;

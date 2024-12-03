@@ -1,0 +1,36 @@
+﻿@model IEnumerable<CarDealership.ViewModels.Models.Model.ModelIndexViewModel>
+
+@{
+    ViewData["Title"] = "Models";
+}
+
+<h1>Models</h1>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m.Id</td>
+                <td>@m.Name</td>
+                <td>@m.BrandName</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@m.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <form asp-action="Delete" asp-route-id="@m.Id" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Create New Model</a>
