@@ -6,6 +6,16 @@
 
 <h1 class="text-center my-4">All Cars</h1>
 
+<!-- Add Car Button -->
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="text-end my-3">
+        <a asp-action="Add" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Add a Car
+        </a>
+    </div>    
+}
+
 <div class="table-responsive">
     <table class="table table-hover table-bordered text-center align-middle">
         <thead class="table-dark">
@@ -22,44 +32,44 @@
         <tbody>
             @foreach (var car in Model)
             {
-                <tr>
-                    <td class="fw-bold">@car.BrandName</td>
-                    <td>@car.ModelName</td>
-                    <td>
+                    <tr>
+                        <td class="fw-bold">@car.BrandName</td>
+                        <td>@car.ModelName</td>
+                        <td>
                         @if (!string.IsNullOrEmpty(car.MainImage))
                         {
-                            <img src="@car.MainImage" alt="@car.BrandName @car.ModelName"
-                                 class="img-fluid rounded shadow-sm"
-                                 style="max-width: 150px; max-height: 100px;" />
+                                    <img src="@car.MainImage" alt="@car.BrandName @car.ModelName"
+                                         class="img-fluid rounded shadow-sm"
+                                         style="max-width: 150px; max-height: 100px;" />
                         }
                         else
                         {
-                            <span class="text-muted fst-italic">No image available</span>
+                                    <span class="text-muted fst-italic">No image available</span>
                         }
-                    </td>
-                    <td>@car.Year</td>
-                    <td>@car.Price BGN</td>
-                    <td>@car.MileageInKm KM</td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@car.CarId"
-                           class="btn btn-primary btn-sm">
-                            <i class="bi bi-info-circle"></i> Details
-                        </a>
+                        </td>
+                        <td>@car.Year</td>
+                        <td>@car.Price BGN</td>
+                        <td>@car.MileageInKm KM</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@car.CarId"
+                               class="btn btn-primary btn-sm">
+                                <i class="bi bi-info-circle"></i> Details
+                            </a>
                         @if (User.IsInRole("Admin") || User.FindFirst(ClaimTypes.NameIdentifier)?.Value == car.SellerId)
                         {
-                            <a asp-action="Edit" asp-route-id="@car.CarId"
-                               class="btn btn-warning btn-sm mx-2">
-                                <i class="bi bi-pencil-square"></i> Edit
-                            </a>
-                            <form asp-action="Delete" asp-route-id="@car.CarId"
-                                  method="post" class="d-inline">
-                                <button type="submit" class="btn btn-danger btn-sm">
-                                    <i class="bi bi-trash"></i> Delete
-                                </button>
-                            </form>
+                                    <a asp-action="Edit" asp-route-id="@car.CarId"
+                                       class="btn btn-warning btn-sm mx-2">
+                                        <i class="bi bi-pencil-square"></i> Edit
+                                    </a>
+                                    <form asp-action="Delete" asp-route-id="@car.CarId"
+                                          method="post" class="d-inline">
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="bi bi-trash"></i> Delete
+                                        </button>
+                                    </form>
                         }
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
             }
         </tbody>
     </table>

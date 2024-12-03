@@ -3,8 +3,16 @@
 @{
     ViewData["Title"] = "Cars";
 }
-
+<!-- Add Car Button -->
 <h1 class="text-center my-4">Your cars - @User.Identity.Name.Split('@')[0]</h1>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="text-end my-3">
+        <a asp-action="Add" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Add a Car
+        </a>
+    </div>    
+}
 
 @if(Model.Count > 0)
 {

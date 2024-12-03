@@ -6,14 +6,16 @@ namespace CarDealershipApp.Services.Interfaces
 {
 	public interface ICarService
 	{
+		Task<int> GetCarsCountWithModelId(int modelId);
 		Task<List<CarPreview>> CheckYourCars(string userId);
 
         Task<string> GetCarOwnerIdAsync(int carId);
 
         Task AddCarAsync(CarAddViewModel model);
+		Task SoftDeleteCarsByModelId(int modelId);
 		Task<bool> SoftDeleteAsync(int carId);
 
-		void AddCar(CarAddViewModel model);
+		//void AddCar(CarAddViewModel model);
 		Task<List<Brand>> GetAllBrandsAsync();
 
 		Task<CarAddViewModel> InitializeCarAddViewModelAsync(int brandId, string userId);

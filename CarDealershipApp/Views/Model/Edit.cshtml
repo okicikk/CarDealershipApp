@@ -1,0 +1,21 @@
+﻿@model CarDealership.ViewModels.Models.Model.ModelEditViewModel
+
+@{
+    ViewData["Title"] = "Edit Model";
+}
+
+<h1>Edit Model</h1>
+
+<form asp-action="Edit" method="post" class="mt-4">
+    <div class="form-group">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <!-- Hidden field to preserve the ID -->
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-primary mt-3">Save</button>
+    <a asp-action="Index" class="btn btn-secondary mt-3">Cancel</a>
+</form>

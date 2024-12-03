@@ -1,8 +1,11 @@
-﻿using CarDealership.ViewModels.Models.Model;
+﻿using CarDealership.ViewModels.Models.Car;
+using CarDealership.ViewModels.Models.Model;
 using CarDealershipApp.Services;
 using CarDealershipApp.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace CarDealershipApp.Web.Controllers
 {
@@ -15,12 +18,28 @@ namespace CarDealershipApp.Web.Controllers
             this.modelService = modelServ;
         }
 
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
-			return View();
+			return View(await modelService.GetAllModelsAsync());
 		}
-
-		[HttpGet]
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            return View(await modelService.InitializeModelByIdAsync(id));
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(ModelEditViewModel viewModel)
+        {
+            await modelService.EditModel(viewModel);
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await modelService.SoftDeleteByIdAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
         public async Task<IActionResult> Add()
         {
             ModelAddViewModel viewModel = new ModelAddViewModel();
