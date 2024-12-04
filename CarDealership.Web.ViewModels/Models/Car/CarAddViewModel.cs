@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 using static CarDealershipApp.Constants.Constants;
 using Microsoft.EntityFrameworkCore.Metadata;
+using System.Runtime.CompilerServices;
 
 namespace CarDealershipApp.ViewModels.CarViewModels
 {
@@ -18,13 +19,13 @@ namespace CarDealershipApp.ViewModels.CarViewModels
 		//[Required]
 		public IList<Model> Models { get; set; } = new List<Model>();
 
-		[Required]
+		[Required(ErrorMessage = "Select an available model.")]
 		public int ModelId { get; set; }
 
 		//[Required]
 		public IEnumerable<Category> Categories { get; set; } = new List<Category>();
 
-		[Required]
+		[Required(ErrorMessage ="Select an available category.")]
 		public int CategoryId { get; set; }
 
 		[Required]
@@ -41,6 +42,7 @@ namespace CarDealershipApp.ViewModels.CarViewModels
 		public int Mileage { get; set; }
 		public List<string>? ImageUrls { get; set; } = new List<string>(4);
 		[Required]
+		[Range(CarMinYear, CarMaxYear,ErrorMessage = "Enter a year between 1930 and 2025")]
 		public int ReleaseYear { get; set; }
 		//[Required]
 		public DateTime ListedOn { get; set; } = DateTime.Today;

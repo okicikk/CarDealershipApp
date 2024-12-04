@@ -108,7 +108,7 @@ namespace CarDealershipApp.Services
         {
             CarDetailsViewModel? carDetails = await carRepository
                 .GetAllQueryable()
-                .Where(x => x.Id == carId)
+                .Where(x => x.Id == carId && x.IsDeleted == false)
                 .Select(x => new CarDetailsViewModel
                 {
                     BrandName = x.Brand.Name,
@@ -227,7 +227,7 @@ namespace CarDealershipApp.Services
 
             viewModel.Models = await modelsRepository
                 .GetAllQueryable()
-                .Where(x => x.BrandId == brandId)
+                .Where(x => x.BrandId == brandId && x.IsDeleted == false)
                 .ToListAsync();
             // Load categories (categories don't depend on the brand)
             viewModel.Categories = await categoryRepository.GetAllAsync() ?? new List<Category>();

@@ -55,7 +55,7 @@ namespace CarDealershipApp.Controllers
 			Brand brand = await brandService.GetByIdAsync(id);
 			if (brand is null)
 			{
-				RedirectToAction(nameof(Index));
+				return RedirectToAction(nameof(Index)); 
 			}
 			BrandIndexViewModel viewModel = new BrandIndexViewModel
 			{

@@ -28,5 +28,8 @@
 
         public const string DefaultBrandImage = "https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg";
 
+        public const int CarMinYear = 1930;
+        public const int CarMaxYear = 2025;
+
     }
 }
