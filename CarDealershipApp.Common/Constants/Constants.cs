@@ -25,11 +25,14 @@
 
         public const int FeatureNameMinLength = 2;
         public const int FeatureNameMaxLength = 50;
+        public const string FeatureDeletionSuccessMessage = "Feature deleted succesfully!";
 
         public const string DefaultBrandImage = "https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg";
 
         public const int CarMinYear = 1930;
         public const int CarMaxYear = 2025;
+
+
 
     }
 }

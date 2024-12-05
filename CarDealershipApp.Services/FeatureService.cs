@@ -3,6 +3,7 @@ using CarDealershipApp.Data.Models;
 using CarDealershipApp.Infrastructure.Repositories.Interfaces;
 using CarDealershipApp.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace CarDealershipApp.Services
 {
@@ -13,6 +14,11 @@ namespace CarDealershipApp.Services
         {
             this.featureRepository = featureRepo;
         }
+
+		public async Task<bool> DeleteByIdAsync(int id)
+		{
+			return await featureRepository.DeleteByIdAsync(id);
+		}
         public async Task<IEnumerable<FeatureIndexViewModel>> GetAllFeaturesAsync()
 		{
 			return await featureRepository
@@ -22,6 +28,7 @@ namespace CarDealershipApp.Services
 					Id = x.Id,
 					Name = x.Name,
 				})
+				.OrderBy(x => x.Name)
 				.ToListAsync();
 		}
 		public async Task EditFeatureAsync(FeatureEditViewModel viewModel)
@@ -42,5 +49,19 @@ namespace CarDealershipApp.Services
 				.FirstOrDefaultAsync(x=>x.Id == id);
 		}
 
+		public async Task AddAsync(FeatureAddViewModel viewModel)
+		{
+			if (await featureRepository
+				.GetAllQueryable()
+				.AnyAsync(x=>x.Name == viewModel.Name))
+			{
+				throw new ArgumentException("Feature already exists.");
+			}
+			Feature featureToAdd = new Feature()
+			{
+				Name = viewModel.Name,
+			};
+			await featureRepository.AddAsync(featureToAdd);
+		}
 	}
 }

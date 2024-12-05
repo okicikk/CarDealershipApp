@@ -1,0 +1,29 @@
+﻿@model CarDealership.ViewModels.Models.CategoryViewModels.CategoryAddViewModel
+
+@{
+    ViewData["Title"] = "Add New Category";
+}
+
+<h2>Add New Category</h2>
+
+<!-- Display TempData Error Message -->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<form asp-action="Add" method="post">
+    <div class="form-group">
+        <label for="Name">Category Name</label>
+        <input asp-for="Name" class="form-control" id="Name" placeholder="Enter category name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Create Category</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+<!-- Validation Summary -->
+<div asp-validation-summary="All" class="text-danger"></div>

@@ -1,14 +1,14 @@
 ﻿using CarDealership.ViewModels.Models.FeatureViewModels;
 using CarDealershipApp.Data.Models;
 using CarDealershipApp.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.Extensions.Options;
-using NuGet.Protocol;
+using static CarDealershipApp.Constants.Constants;
 
 namespace CarDealershipApp.Web.Controllers
 {
+	[Authorize(Roles ="Admin")]
 	public class FeatureController : Controller
 	{
 		private readonly IFeatureService featureService;
@@ -24,7 +24,7 @@ namespace CarDealershipApp.Web.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Edit(int id)
 		{
-			Feature feature = await featureService.GetFeatureByIdAsync(id);
+			Feature? feature = await featureService.GetFeatureByIdAsync(id);
 
 			if (feature is null)
 			{
@@ -52,6 +52,23 @@ namespace CarDealershipApp.Web.Controllers
 
 			return RedirectToAction(nameof(Index));
 		}
-
+		[HttpPost]
+		public async Task<IActionResult> Delete(int id)
+		{
+			await featureService.DeleteByIdAsync(id);
+			return RedirectToAction(nameof(Index));
+		}
+		[HttpGet]
+		public async Task<IActionResult> Add()
+		{
+			return View();
+		}
+		[HttpPost]
+		public async Task<IActionResult> Add(FeatureAddViewModel viewModel)
+		{
+			await featureService.AddAsync(viewModel);
+            TempData["SuccessMessage"] = FeatureDeletionSuccessMessage;
+            return RedirectToAction(nameof(Index));
+		}
 	}
 }

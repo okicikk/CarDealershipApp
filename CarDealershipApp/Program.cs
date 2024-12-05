@@ -37,6 +37,7 @@ namespace CarDealershipApp
 			builder.Services.AddScoped<IModelService, ModelService>();
 			builder.Services.AddScoped<ICarService, CarService>();
             builder.Services.AddScoped<IFeatureService, FeatureService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 
 

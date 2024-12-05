@@ -1,7 +1,7 @@
 ﻿@using System.Security.Claims
 @model List<CarDealership.ViewModels.Models.Car.CarPreview>
 @{
-    ViewData["Title"] = "Cars";
+	ViewData["Title"] = "Cars";
 }
 
 <h1 class="text-center my-4">All Cars</h1>
@@ -9,68 +9,97 @@
 <!-- Add Car Button -->
 @if (User.Identity.IsAuthenticated)
 {
-    <div class="text-end my-3">
-        <a asp-action="Add" class="btn btn-success">
-            <i class="bi bi-plus-circle"></i> Add a Car
-        </a>
-    </div>    
+	<div class="text-end my-3">
+		<a asp-action="Add" class="btn btn-success">
+			<i class="bi bi-plus-circle"></i> Add a Car
+		</a>
+	</div>
 }
 
 <div class="table-responsive">
-    <table class="table table-hover table-bordered text-center align-middle">
-        <thead class="table-dark">
-            <tr>
-                <th>Brand</th>
-                <th>Model</th>
-                <th>Image</th>
-                <th>Year</th>
-                <th>Price</th>
-                <th>Mileage (km)</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+	<table class="table table-hover table-bordered text-center align-middle">
+		<thead class="table-dark">
+			<tr>
+				<th>Brand</th>
+				<th>Model</th>
+				<th>Image</th>
+				<th>Year</th>
+				<th>Price</th>
+				<th>Mileage (km)</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
             @foreach (var car in Model)
             {
-                    <tr>
-                        <td class="fw-bold">@car.BrandName</td>
-                        <td>@car.ModelName</td>
-                        <td>
+                <tr>
+                    <td class="fw-bold">@car.BrandName</td>
+                    <td>@car.ModelName</td>
+                    <td>
                         @if (!string.IsNullOrEmpty(car.MainImage))
                         {
-                                    <img src="@car.MainImage" alt="@car.BrandName @car.ModelName"
-                                         class="img-fluid rounded shadow-sm"
-                                         style="max-width: 150px; max-height: 100px;" />
+                            <img src="@car.MainImage" alt="@car.BrandName @car.ModelName"
+                                 class="img-fluid rounded shadow-sm"
+                                 style="max-width: 150px; max-height: 100px;" />
                         }
                         else
                         {
-                                    <span class="text-muted fst-italic">No image available</span>
+                            <span class="text-muted fst-italic">No image available</span>
                         }
-                        </td>
-                        <td>@car.Year</td>
-                        <td>@car.Price BGN</td>
-                        <td>@car.MileageInKm KM</td>
-                        <td>
-                            <a asp-action="Details" asp-route-id="@car.CarId"
-                               class="btn btn-primary btn-sm">
-                                <i class="bi bi-info-circle"></i> Details
-                            </a>
+                    </td>
+                    <td>@car.Year</td>
+                    <td>@car.Price BGN</td>
+                    <td>@car.MileageInKm KM</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@car.CarId"
+                           class="btn btn-primary btn-sm">
+                            <i class="bi bi-info-circle"></i> Details
+                        </a>
                         @if (User.IsInRole("Admin") || User.FindFirst(ClaimTypes.NameIdentifier)?.Value == car.SellerId)
                         {
-                                    <a asp-action="Edit" asp-route-id="@car.CarId"
-                                       class="btn btn-warning btn-sm mx-2">
-                                        <i class="bi bi-pencil-square"></i> Edit
-                                    </a>
-                                    <form asp-action="Delete" asp-route-id="@car.CarId"
-                                          method="post" class="d-inline">
-                                        <button type="submit" class="btn btn-danger btn-sm">
-                                            <i class="bi bi-trash"></i> Delete
-                                        </button>
-                                    </form>
+                            <a asp-action="Edit" asp-route-id="@car.CarId"
+                               class="btn btn-warning btn-sm mx-2">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+
+                            <!-- Form for Deleting Car -->
+                            <form id="delete-form-@car.CarId" asp-action="Delete" asp-route-id="@car.CarId" method="post" class="d-inline">
+                            </form>
+
+                            <!-- Delete Button -->
+                            <button type="button" class="btn btn-danger btn-sm" onclick="showConfirmationDialog(@car.CarId)">
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+
+                            <!-- Confirmation Dialog (No CSS) -->
+                            <div id="confirmation-dialog-@car.CarId" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000;">
+                                <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+                                    <p>Are you sure you want to delete this car? This action cannot be undone.</p>
+                                    <button class="btn btn-danger" onclick="confirmDelete(@car.CarId)">Yes, Delete</button>
+                                    <button class="btn btn-secondary" onclick="closeConfirmationDialog(@car.CarId)">Cancel</button>
+                                </div>
+                            </div>
+
+                            <script>
+                                // Show the confirmation dialog for the car
+                                function showConfirmationDialog(carId) {
+                                       document.getElementById('confirmation-dialog-' + carId).style.display = 'flex';
+                                }
+
+                                // Close the confirmation dialog
+                                function closeConfirmationDialog(carId) {
+                                       document.getElementById('confirmation-dialog-' + carId).style.display = 'none';
+                                }
+
+                                // Submit the delete form when confirmed
+                                function confirmDelete(carId) {
+                                       document.getElementById('delete-form-' + carId).submit();
+                                }
+                            </script>
                         }
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
             }
-        </tbody>
-    </table>
+		</tbody>
+	</table>
 </div>
