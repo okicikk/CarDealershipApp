@@ -1,0 +1,56 @@
+﻿using CarDealership.ViewModels.Models.CategoryViewModels;
+using CarDealershipApp.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Nest;
+
+namespace CarDealershipApp.Web.Controllers
+{
+    [Authorize(Roles = "Admin")]
+    public class CategoryController : Controller
+    {
+        private readonly ICategoryService categoryService;
+        public CategoryController(ICategoryService categoryServ)
+        {
+            this.categoryService = categoryServ;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            return View(await categoryService.GetAllCategoriesAsync());
+        }
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Add(CategoryAddViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+            if (await categoryService.DoesCategoryExistAsync(viewModel.Name))
+            {
+                TempData["ErrorMessage"] = "A category with this name already exists. Please choose another name.";
+                return View(viewModel);
+            }
+            await categoryService.AddCategoryAsync(viewModel);
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool IsDeleteSuccesfully = await categoryService.DeleteCategoryByIdAsync(id);
+            if (!IsDeleteSuccesfully)
+            {
+                TempData["ErrorMessage"] = "Category could not be deleted.";
+                return RedirectToAction(nameof(Index));
+            }
+            TempData["SuccessMessage"] = "Category deleted successfully, and cars reassigned to the default category.";
+            return RedirectToAction(nameof(Index));
+        }
+    }
+}
