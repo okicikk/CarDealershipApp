@@ -40,6 +40,36 @@ namespace CarDealershipApp.Web.Controllers
             await categoryService.AddCategoryAsync(viewModel);
             return RedirectToAction(nameof(Index));
         }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (await categoryService.GetCategoryByIdAsync(id) is null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            CategoryEditViewModel viewModel =  new CategoryEditViewModel()
+            {
+                Name = (await categoryService.GetCategoryByIdAsync(id)).Name,
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(CategoryEditViewModel viewModel)
+        {
+            if (await categoryService.GetCategoryByIdAsync(viewModel.Id) is null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+            await categoryService.EditCategoryAsync(viewModel);
+            return RedirectToAction(nameof(Index));
+        }
+
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {

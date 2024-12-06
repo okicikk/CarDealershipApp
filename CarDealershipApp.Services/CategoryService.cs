@@ -56,7 +56,7 @@ namespace CarDealershipApp.Services
             foreach (Car car in carRepository.GetAll())
             {
                 car.Category = defaultCategory;
-                carRepository.Update(car);
+                await carRepository.UpdateAsync(car);
             }
             await categoryRepository.DeleteByIdAsync(id);
             return true;
@@ -71,6 +71,22 @@ namespace CarDealershipApp.Services
             return false;
         }
 
+        public async Task EditCategoryAsync(CategoryEditViewModel viewModel)
+        {
+            Category? category = await categoryRepository.GetByIdAsync(viewModel.Id);
+                
+            if (category == null)
+            {
+                throw new ArgumentNullException("Category is null");
+            }
+            category.Name = viewModel.Name;
+            await categoryRepository.UpdateAsync(category);
+
+        }
+        public async Task<Category> GetCategoryByIdAsync(int id)
+        {
+            return await categoryRepository.GetByIdAsync(id);
+        }
         public async Task<IEnumerable<CategoryIndexViewModel>> GetAllCategoriesAsync()
         {
             List<CategoryIndexViewModel> viewModels = await categoryRepository

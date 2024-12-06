@@ -1,9 +1,5 @@
 ﻿using CarDealership.ViewModels.Models.CategoryViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CarDealershipApp.Data.Models;
 
 namespace CarDealershipApp.Services.Interfaces
 {
@@ -13,5 +9,7 @@ namespace CarDealershipApp.Services.Interfaces
         Task<bool> DeleteCategoryByIdAsync(int id);
         Task AddCategoryAsync(CategoryAddViewModel viewModel);
         Task<bool> DoesCategoryExistAsync(string name);
+        Task EditCategoryAsync(CategoryEditViewModel viewModel);
+        Task<Category> GetCategoryByIdAsync(int id);
     }
 }
