@@ -8,13 +8,12 @@ using CarDealership.ViewModels.Models.Car;
 using CarDealershipApp.Data.Models;
 using Microsoft.Extensions.FileProviders.Physical;
 using System.Security.Claims;
-using Nest;
-using Microsoft.EntityFrameworkCore.Storage.Json;
-using NuGet.Packaging.Signing;
+using System.Reflection;
+using System.Collections.Specialized;
 
 namespace CarDealershipApp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "User, Admin")]
     public class CarController : Controller
     {
         private readonly ICarService carService;
@@ -24,7 +23,7 @@ namespace CarDealershipApp.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction(nameof(Cars));
         }
         [HttpGet]
         public async Task<IActionResult> Add(int brandId)
@@ -121,7 +120,7 @@ namespace CarDealershipApp.Controllers
             var currentUserId = GetCurrentUserId();
             if (!User.IsInRole("Admin") && carOwnerId != currentUserId)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Cars));
             }
             CarEditViewModel viewModel = await carService.InitializeCarEditViewModel(id);
             return View(viewModel);
@@ -133,7 +132,7 @@ namespace CarDealershipApp.Controllers
             var currentUserId = GetCurrentUserId();
             if (!User.IsInRole("Admin") && carOwnerId != currentUserId)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Cars));
             }
             await carService.InitializeCarEditViewModel(viewModel.Id);
             if (viewModel is null)

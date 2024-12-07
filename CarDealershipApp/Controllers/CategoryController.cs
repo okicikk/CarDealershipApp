@@ -2,7 +2,6 @@
 using CarDealershipApp.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Nest;
 
 namespace CarDealershipApp.Web.Controllers
 {

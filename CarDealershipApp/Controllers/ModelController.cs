@@ -9,63 +9,63 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace CarDealershipApp.Web.Controllers
 {
-    [Authorize]
-    public class ModelController : Controller
-    {
-        private readonly IModelService modelService;
-        public ModelController(IModelService modelServ)
-        {
-            this.modelService = modelServ;
-        }
+	[Authorize(Roles = "Admin")]
+	public class ModelController : Controller
+	{
+		private readonly IModelService modelService;
+		public ModelController(IModelService modelServ)
+		{
+			this.modelService = modelServ;
+		}
 
 		public async Task<IActionResult> Index()
 		{
 			return View(await modelService.GetAllModelsAsync());
 		}
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            return View(await modelService.InitializeModelByIdAsync(id));
-        }
-        [HttpPost]
-        public async Task<IActionResult> Edit(ModelEditViewModel viewModel)
-        {
-            await modelService.EditModel(viewModel);
-            return RedirectToAction(nameof(Index));
-        }
-        [HttpPost]
-        public async Task<IActionResult> Delete(int id)
-        {
-            await modelService.SoftDeleteByIdAsync(id);
-            return RedirectToAction(nameof(Index));
-        }
-        [HttpGet]
-        public async Task<IActionResult> Add()
-        {
-            ModelAddViewModel viewModel = new ModelAddViewModel();
-            viewModel.Brands = await modelService.GetAllBrandsAsync();
-            return View(viewModel);
-        }
-        [HttpPost]
-        public async Task<IActionResult> Add(ModelAddViewModel viewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(viewModel);
-            }
-            try
-            {
-                await modelService.AddModelAsync(viewModel);
-            }
-            catch (ArgumentException e)
-            {
-                ModelState.AddModelError(nameof(viewModel.Name),e.Message);
-                return View(viewModel);
-            }
-            
-            return RedirectToAction(nameof(Index));
-        }
-        //public async Task<bool> Delete(Model);
-        
-    }
+		[HttpGet]
+		public async Task<IActionResult> Edit(int id)
+		{
+			return View(await modelService.InitializeModelByIdAsync(id));
+		}
+		[HttpPost]
+		public async Task<IActionResult> Edit(ModelEditViewModel viewModel)
+		{
+			await modelService.EditModel(viewModel);
+			return RedirectToAction(nameof(Index));
+		}
+		[HttpPost]
+		public async Task<IActionResult> Delete(int id)
+		{
+			await modelService.SoftDeleteByIdAsync(id);
+			return RedirectToAction(nameof(Index));
+		}
+		[HttpGet]
+		public async Task<IActionResult> Add()
+		{
+			ModelAddViewModel viewModel = new ModelAddViewModel();
+			viewModel.Brands = await modelService.GetAllBrandsAsync();
+			return View(viewModel);
+		}
+		[HttpPost]
+		public async Task<IActionResult> Add(ModelAddViewModel viewModel)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(viewModel);
+			}
+			try
+			{
+				await modelService.AddModelAsync(viewModel);
+			}
+			catch (ArgumentException e)
+			{
+				ModelState.AddModelError(nameof(viewModel.Name), e.Message);
+				return View(viewModel);
+			}
+
+			return RedirectToAction(nameof(Index));
+		}
+		//public async Task<bool> Delete(Model);
+
+	}
 }

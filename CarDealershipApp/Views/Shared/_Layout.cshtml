@@ -29,7 +29,12 @@
 						<li class="nav-item">
 							<a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Cars">Cars</a>
 						</li>
-
+						@if (User.IsInRole("Admin"))
+						{
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Panel</a>
+							</li>
+						}
 						<!-- Manage Dropdown -->
 						@if (User.Identity.IsAuthenticated)
 						{
