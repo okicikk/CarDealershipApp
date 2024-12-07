@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace CarDealershipApp.Controllers
 {
-	[Authorize(Roles = "User, Admin")]
+	[Authorize]
 	public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

@@ -6,7 +6,7 @@ using CarDealershipApp.Data.Models;
 
 namespace CarDealershipApp.Controllers
 {
-	[Authorize]
+	[Authorize(Roles = "User")]
 	public class BrandController : Controller
 	{
 		private readonly IBrandService brandService;
