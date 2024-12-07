@@ -32,6 +32,8 @@
         public const int CarMinYear = 1930;
         public const int CarMaxYear = 2025;
 
+        public const string DefaultUserEmail = "default@gmail.com";
+
 
 
     }
