@@ -1,0 +1,394 @@
+[
+  {
+    "Id": 1,
+    "Name": "Toyota",
+    "ImageUrl": "https://static.vecteezy.com/system/resources/thumbnails/020/927/378/small_2x/toyota-brand-logo-car-symbol-with-name-black-design-japan-automobile-illustration-free-vector.jpg",
+    "IsDeleted": false,
+    "Models": [
+      {
+        "Id": 1,
+        "Name": "Corolla",
+        "BrandId": 1,
+        "IsDeleted": false
+      },
+      {
+        "Id": 2,
+        "Name": "Camry",
+        "BrandId": 1,
+        "IsDeleted": false
+      },
+      {
+        "Id": 3,
+        "Name": "RAV4",
+        "BrandId": 1,
+        "IsDeleted": false
+      },
+      {
+        "Id": 4,
+        "Name": "Land Cruiser",
+        "BrandId": 1,
+        "IsDeleted": false
+      },
+      {
+        "Id": 5,
+        "Name": "Highlander",
+        "BrandId": 1,
+        "IsDeleted": false
+      },
+      {
+        "Id": 6,
+        "Name": "Tacoma",
+        "BrandId": 1,
+        "IsDeleted": false
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "Name": "Ford",
+    "ImageUrl": "https://e7.pngegg.com/pngimages/113/140/png-clipart-ford-motor-company-car-ford-f-series-ford-mondeo-auto-parts-emblem-logo-thumbnail.png",
+    "IsDeleted": false,
+    "Models": [
+      {
+        "Id": 7,
+        "Name": "Focus",
+        "BrandId": 2,
+        "IsDeleted": false
+      },
+      {
+        "Id": 8,
+        "Name": "Mustang",
+        "BrandId": 2,
+        "IsDeleted": false
+      },
+      {
+        "Id": 9,
+        "Name": "F-150",
+        "BrandId": 2,
+        "IsDeleted": false
+      },
+      {
+        "Id": 10,
+        "Name": "Explorer",
+        "BrandId": 2,
+        "IsDeleted": false
+      },
+      {
+        "Id": 11,
+        "Name": "Fusion",
+        "BrandId": 2,
+        "IsDeleted": false
+      },
+      {
+        "Id": 12,
+        "Name": "Edge",
+        "BrandId": 2,
+        "IsDeleted": false
+      }
+    ]
+  },
+  {
+    "Id": 3,
+    "Name": "Chevrolet",
+    "ImageUrl": "https://i.pinimg.com/736x/d2/59/dc/d259dcd272a3ca9b538e68aedf721fb3.jpg",
+    "IsDeleted": false,
+    "Models": [
+      {
+        "Id": 13,
+        "Name": "Malibu",
+        "BrandId": 3,
+        "IsDeleted": false
+      },
+      {
+        "Id": 14,
+        "Name": "Impala",
+        "BrandId": 3,
+        "IsDeleted": false
+      },
+      {
+        "Id": 15,
+        "Name": "Tahoe",
+        "BrandId": 3,
+        "IsDeleted": false
+      },
+      {
+        "Id": 16,
+        "Name": "Camaro",
+        "BrandId": 3,
+        "IsDeleted": false
+      },
+      {
+        "Id": 17,
+        "Name": "Equinox",
+        "BrandId": 3,
+        "IsDeleted": false
+      },
+      {
+        "Id": 18,
+        "Name": "Suburban",
+        "BrandId": 3,
+        "IsDeleted": false
+      }
+    ]
+  },
+  {
+    "Id": 4,
+    "Name": "BMW",
+    "ImageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQRVqlZCGRqalei2z79Kc3CzWKWkvb9p1U0A&s",
+    "IsDeleted": false,
+    "Models": [
+      {
+        "Id": 20,
+        "Name": "3 Series",
+        "BrandId": 4,
+        "IsDeleted": false
+      },
+      {
+        "Id": 21,
+        "Name": "X5",
+        "BrandId": 4,
+        "IsDeleted": false
+      },
+      {
+        "Id": 22,
+        "Name": "M3",
+        "BrandId": 4,
+        "IsDeleted": false
+      },
+      {
+        "Id": 23,
+        "Name": "5 Series",
+        "BrandId": 4,
+        "IsDeleted": false
+      },
+      {
+        "Id": 24,
+        "Name": "X3",
+        "BrandId": 4,
+        "IsDeleted": false
+      },
+      {
+        "Id": 25,
+        "Name": "7 Series",
+        "BrandId": 4,
+        "IsDeleted": false
+      }
+    ]
+  },
+  {
+    "Id": 5,
+    "Name": "Audi",
+    "ImageUrl": "https://uploads.audi-mediacenter.com/system/production/media/1282/images/bde751ee18fe149036c6b47d7595f6784f8901f8/AL090142_web_2880.jpg?1698171883",
+    "IsDeleted": false,
+    "Models": [
+      {
+        "Id": 26,
+        "Name": "A4",
+        "BrandId": 5,
+        "IsDeleted": false
+      },
+      {
+        "Id": 27,
+        "Name": "Q7",
+        "BrandId": 5,
+        "IsDeleted": false
+      },
+      {
+        "Id": 28,
+        "Name": "A6",
+        "BrandId": 5,
+        "IsDeleted": false
+      },
+      {
+        "Id": 29,
+        "Name": "Q5",
+        "BrandId": 5,
+        "IsDeleted": false
+      },
+      {
+        "Id": 30,
+        "Name": "A3",
+        "BrandId": 5,
+        "IsDeleted": false
+      },
+      {
+        "Id": 31,
+        "Name": "Q3",
+        "BrandId": 5,
+        "IsDeleted": false
+      }
+    ]
+  },
+  {
+    "Id": 6,
+    "Name": "Mercedes-Benz",
+    "ImageUrl": "https://thumbs.dreamstime.com/b/web-136350849.jpg",
+    "IsDeleted": false,
+    "Models": [
+      {
+        "Id": 32,
+        "Name": "C-Class",
+        "BrandId": 6,
+        "IsDeleted": false
+      },
+      {
+        "Id": 33,
+        "Name": "E-Class",
+        "BrandId": 6,
+        "IsDeleted": false
+      },
+      {
+        "Id": 34,
+        "Name": "S-Class",
+        "BrandId": 6,
+        "IsDeleted": false
+      },
+      {
+        "Id": 35,
+        "Name": "GLC",
+        "BrandId": 6,
+        "IsDeleted": false
+      },
+      {
+        "Id": 36,
+        "Name": "A-Class",
+        "BrandId": 6,
+        "IsDeleted": false
+      },
+      {
+        "Id": 37,
+        "Name": "GLA",
+        "BrandId": 6,
+        "IsDeleted": false
+      }
+    ]
+  },
+  {
+    "Id": 7,
+    "Name": "Honda",
+    "ImageUrl": "https://cdn.pixabay.com/photo/2016/08/15/18/18/honda-1596081_640.png",
+    "IsDeleted": false,
+    "Models": [
+      {
+        "Id": 38,
+        "Name": "Civic",
+        "BrandId": 7,
+        "IsDeleted": false
+      },
+      {
+        "Id": 39,
+        "Name": "Accord",
+        "BrandId": 7,
+        "IsDeleted": false
+      },
+      {
+        "Id": 40,
+        "Name": "CR-V",
+        "BrandId": 7,
+        "IsDeleted": false
+      },
+      {
+        "Id": 41,
+        "Name": "Pilot",
+        "BrandId": 7,
+        "IsDeleted": false
+      }
+    ]
+  },
+  {
+    "Id": 8,
+    "Name": "Nissan",
+    "ImageUrl": "https://wieck-nissanao-production.s3.amazonaws.com/photos/87dd7b734e373e65761492bd446b20efd0a56737/thumbnail-364x204.jpg",
+    "IsDeleted": false,
+    "Models": [
+      {
+        "Id": 42,
+        "Name": "Altima",
+        "BrandId": 8,
+        "IsDeleted": false
+      },
+      {
+        "Id": 43,
+        "Name": "Maxima",
+        "BrandId": 8,
+        "IsDeleted": false
+      },
+      {
+        "Id": 44,
+        "Name": "Murano",
+        "BrandId": 8,
+        "IsDeleted": false
+      },
+      {
+        "Id": 45,
+        "Name": "Rogue",
+        "BrandId": 8,
+        "IsDeleted": false
+      }
+    ]
+  },
+  {
+    "Id": 9,
+    "Name": "Hyundai",
+    "ImageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_bLDZ_uRSEueAUuNQjCnwIJKe7Ml71Kq66g&s",
+    "IsDeleted": false,
+    "Models": [
+      {
+        "Id": 46,
+        "Name": "Elantra",
+        "BrandId": 9,
+        "IsDeleted": false
+      },
+      {
+        "Id": 47,
+        "Name": "Sonata",
+        "BrandId": 9,
+        "IsDeleted": false
+      },
+      {
+        "Id": 48,
+        "Name": "Tucson",
+        "BrandId": 9,
+        "IsDeleted": false
+      },
+      {
+        "Id": 49,
+        "Name": "Santa Fe",
+        "BrandId": 9,
+        "IsDeleted": false
+      }
+    ]
+  },
+  {
+    "Id": 10,
+    "Name": "Kia",
+    "ImageUrl": "https://static.vecteezy.com/system/resources/previews/020/500/396/non_2x/kia-logo-brand-symbol-black-design-south-korean-car-automobile-illustration-free-vector.jpg",
+    "IsDeleted": false,
+    "Models": [
+      {
+        "Id": 50,
+        "Name": "Forte",
+        "BrandId": 10,
+        "IsDeleted": false
+      },
+      {
+        "Id": 51,
+        "Name": "Optima",
+        "BrandId": 10,
+        "IsDeleted": false
+      },
+      {
+        "Id": 52,
+        "Name": "Sorento",
+        "BrandId": 10,
+        "IsDeleted": false
+      },
+      {
+        "Id": 53,
+        "Name": "Sportage",
+        "BrandId": 10,
+        "IsDeleted": false
+      }
+    ]
+  }
+]
