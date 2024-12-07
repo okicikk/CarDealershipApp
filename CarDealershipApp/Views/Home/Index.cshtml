@@ -1,7 +1,70 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<body>
+	@{
+		Layout = "_Layout";
+		ViewBag.Title = "Welcome to CarDealershipApp!";
+	}
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to our Car Dealership.</h1>
-</div>
+	<!-- Hero Section -->
+	<div class="container-fluid bg-primary text-white text-center py-5">
+		<h1 class="display-4">@ViewBag.Title</h1>
+		<p class="lead">Find the car that defines you, from luxury to performance, right here.</p>
+		
+	</div>
+
+	<div class="container my-5">
+		<h2 class="text-center mb-4">Why Choose Us?</h2>
+		<div class="row justify-content-center">
+			<div class="col-md-4 mb-4">
+				<div class="card shadow-sm">
+					<img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c8684078684029.5cac4a000c7e1.gif" class="card-img-top" alt="Car Image">
+					<div class="card-body">
+						<h5 class="card-title">Variety of Cars</h5>
+						<p class="card-text">Browse a wide selection of cars from various brands, styles, and price ranges.</p>
+						<a href="@Url.Action("Cars", "Car")" class="btn btn-primary">Explore Cars</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 mb-4">
+				<div class="card shadow-sm">
+					<img src="https://listcarbrands.com/wp-content/uploads/2015/08/American-Car-Brands.png" class="card-img-top" alt="Brand Image">
+					<div class="card-body">
+						<h5 class="card-title">Top Car Brands</h5>
+						<p class="card-text">Discover the top brands in the automotive world, featuring the latest models and innovations.</p>
+						<a href="@Url.Action("Index", "Brand")" class="btn btn-primary">Browse Brands</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container my-5 text-center">
+		<h3>What Our Customers Say</h3>
+		<div class="row">
+			<div class="col-md-4 mb-4">
+				<div class="card p-4 text-center">
+					<p class="card-text">“A great experience, fast service, and I found the perfect car for me!”</p>
+					<p class="card-text"><strong>- John Doe</strong></p>
+				</div>
+			</div>
+			<div class="col-md-4 mb-4">
+				<div class="card p-4 text-center">
+					<p class="card-text">“The best dealership I’ve ever worked with. Highly recommend!”</p>
+					<p class="card-text"><strong>- Jane Smith, Repeat Buyer</strong></p>
+				</div>
+			</div>
+			<div class="col-md-4 mb-4">
+				<div class="card p-4 text-center">
+					<p class="card-text">“Top-notch service, and I got a great deal on my new car.”</p>
+					<p class="card-text"><strong>- Emily Johnson, Satisfied Client</strong></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- Optional: Scripts -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
