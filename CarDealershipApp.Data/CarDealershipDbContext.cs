@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System.Net;
 using System.Reflection.Emit;
 
 namespace CarDealershipApp.Data
@@ -75,17 +76,52 @@ namespace CarDealershipApp.Data
 					IsDeleted = brand.IsDeleted
 				});
 
-				// Seed the Models, providing the BrandId for the relationship
 				foreach (var model in brand.Models)
 				{
 					builder.Entity<Model>().HasData(new Model
 					{
 						Id = model.Id,
 						Name = model.Name,
-						BrandId = brand.Id, // Explicitly set the foreign key
+						BrandId = brand.Id,
 						IsDeleted = model.IsDeleted
 					});
 				}
+
+			}
+
+			var cars = LoadJsonData<Car>("../CarDealershipApp.Data/SeedData/Car.json");
+
+			foreach (var car in cars)
+			{
+				int carId = car.Id;
+				Car carToBeAdded = new Car()
+				{
+					Id = car.Id,
+					BrandId = car.BrandId,
+					ModelId = car.ModelId,
+					SellerId = car.SellerId,
+					CategoryId = car.CategoryId,
+					Price = car.Price,
+					Weight = car.Weight,
+					Description = car.Description,
+					Mileage = car.Mileage,
+					ImageUrls = car.ImageUrls,
+					ReleaseYear = car.ReleaseYear,
+					ListedOn = car.ListedOn,
+					IsDeleted = false,
+				};
+
+				builder.Entity<Car>()
+					.HasData(carToBeAdded);
+
+				builder.Entity<CarFeature>()
+					.HasData(car.CarsFeatures
+						.Select(x => new CarFeature()
+						{
+							CarId = carId,
+							FeatureId = x.FeatureId,
+						})
+					.ToList());
 
 			}
 		}

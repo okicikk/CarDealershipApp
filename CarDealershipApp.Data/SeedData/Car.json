@@ -1,0 +1,350 @@
+[
+  {
+    "Id": 1,
+    "BrandId": 1,
+    "ModelId": 1,
+    "SellerId": "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+    "CategoryId": 2,
+    "Price": 42000.50,
+    "Weight": 1400.5,
+    "Description": "A reliable Toyota Corolla with excellent fuel efficiency.",
+    "Mileage": 45000,
+    "ImageUrls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsKhK18-GZ4VQLvl5XkQ0KfV0tikZCdKAGOA&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGBEBTWe0ZYNqPpTROzVSE0nWAd1tP1xgO8g&s",
+      "https://di-uploads-pod12.dealerinspire.com/beavertoyotaofcumming/uploads/2019/02/Screen-Shot-2019-02-07-at-8.18.09-AM.png"
+    ],
+    "ReleaseYear": 2020,
+    "ListedOn": "2024-12-08",
+    "IsDeleted": false,
+    "CarsFeatures": [
+      { "FeatureId": 1 },
+      { "FeatureId": 2 },
+      { "FeatureId": 5 }
+    ]
+  },
+  {
+    "Id": 2,
+    "BrandId": 2,
+    "ModelId": 8,
+    "SellerId": "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+    "CategoryId": 3,
+    "Price": 65000.75,
+    "Weight": 1500.0,
+    "Description": "A stylish Ford Mustang with impressive performance.",
+    "Mileage": 12000,
+    "ImageUrls": [
+      "https://www.mustangspecs.com/wp-content/uploads/2022/01/Race-Red-2022-Ford-Mustang-1-1400x933.webp",
+      "https://www.prestonford.com/static/dealer-19389/PF-LPI-22Mustang-HERO.jpg"
+    ],
+    "ReleaseYear": 2022,
+    "ListedOn": "2024-12-08",
+    "IsDeleted": false,
+    "CarsFeatures": [
+      { "FeatureId": 3 },
+      { "FeatureId": 10 },
+      { "FeatureId": 15 }
+    ]
+  },
+  {
+    "Id": 3,
+    "BrandId": 3,
+    "ModelId": 14,
+    "SellerId": "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+    "CategoryId": 1,
+    "Price": 48000.00,
+    "Weight": 1600.0,
+    "Description": "Chevrolet Impala with spacious interiors and smooth handling.",
+    "Mileage": 38000,
+    "ImageUrls": [
+      "https://www.bluediamondgm.com/static/brand-chevrolet/vehicle/2019/Chevrolet/Impala/MRP/01.jpg",
+      "https://www.martin-chevy.com/blogs/808/wp-content/uploads/2019/05/2019-Chevy-Impala-Crystal-Lake-IL.jpg",
+      "https://cars.usnews.com/static/images/Auto/izmo/i92367443/2019_chevrolet_impala_dashboard.jpg"
+    ],
+    "ReleaseYear": 2019,
+    "ListedOn": "2024-12-08",
+    "IsDeleted": false,
+    "CarsFeatures": [
+      { "FeatureId": 7 },
+      { "FeatureId": 20 },
+      { "FeatureId": 25 }
+    ]
+  },
+  {
+    "Id": 4,
+    "BrandId": 4,
+    "ModelId": 22,
+    "SellerId": "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+    "CategoryId": 2,
+    "Price": 82000.99,
+    "Weight": 1550.7,
+    "Description": "BMW M3 with dynamic handling and advanced features.",
+    "Mileage": 15000,
+    "ImageUrls": [
+      "https://cdn.motor1.com/images/mgl/o6xgE/s1/2021-bmw-m3-exterior.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUjaHBP8n-W4k4UaMGF7uNuBrKtds8XBMUvQ&s",
+      "https://cimg0.ibsrv.net/ibimg/hgm/1920x1080-1/100/762/2021-bmw-3-series_100762324.jpg",
+      "https://cdn.bmwblog.com/wp-content/uploads/2020/09/2021-bmw-m3-competition-exterior-42.jpg"
+    ],
+    "ReleaseYear": 2021,
+    "ListedOn": "2024-12-08",
+    "IsDeleted": false,
+    "CarsFeatures": [
+      { "FeatureId": 8 },
+      { "FeatureId": 11 },
+      { "FeatureId": 31 }
+    ]
+  },
+  {
+    "Id": 5,
+    "BrandId": 5,
+    "ModelId": 29,
+    "SellerId": "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+    "CategoryId": 4,
+    "Price": 62000.25,
+    "Weight": 1450.3,
+    "Description": "Audi Q5 with a luxurious design and great performance.",
+    "Mileage": 30000,
+    "ImageUrls": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPoPhHOQ__Np_7IECuI1DWHEV-bE8Kym_XtQ&s"
+    ],
+    "ReleaseYear": 2020,
+    "ListedOn": "2024-12-08",
+    "IsDeleted": false,
+    "CarsFeatures": [
+      { "FeatureId": 6 },
+      { "FeatureId": 13 },
+      { "FeatureId": 21 }
+    ]
+  },
+  {
+    "Id": 6,
+    "BrandId": 6,
+    "ModelId": 33,
+    "SellerId": "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+    "CategoryId": 3,
+    "Price": 105000.75,
+    "Weight": 1700.0,
+    "Description": "Mercedes-Benz E-Class with premium comfort and safety.",
+    "Mileage": 18000,
+    "ImageUrls": [
+      "https://s3.envato.com/files/350663522/preview%20image/2.jpg",
+      "https://www.platinumautohaus.com/imagetag/14754/2/l/Used-2022-Mercedes-Benz-E-Class-E-350.jpg"
+    ],
+    "ReleaseYear": 2022,
+    "ListedOn": "2024-12-08",
+    "IsDeleted": false,
+    "CarsFeatures": [
+      { "FeatureId": 9 },
+      { "FeatureId": 12 },
+      { "FeatureId": 13 }
+    ]
+  },
+  {
+    "Id": 7,
+    "BrandId": 7,
+    "ModelId": 38,
+    "SellerId": "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+    "CategoryId": 1,
+    "Price": 40000.00,
+    "Weight": 1400.0,
+    "Description": "Honda Civic, an economical choice with modern features.",
+    "Mileage": 40000,
+    "ImageUrls": [
+      "https://wallpapers.com/images/hd/honda-civic-pictures-1920-x-1080-20gy3dz4i08ofh3c.jpg",
+      "https://di-uploads-pod6.dealerinspire.com/hondauniverse/uploads/2019/05/2019-Honda-Civic-Sedan-Interior-seating.jpg"
+    ],
+    "ReleaseYear": 2019,
+    "ListedOn": "2024-12-08",
+    "IsDeleted": false,
+    "CarsFeatures": [
+      { "FeatureId": 4 },
+      { "FeatureId": 17 },
+      { "FeatureId": 28 }
+    ]
+  },
+  {
+    "Id": 8,
+    "BrandId": 8,
+    "ModelId": 45,
+    "SellerId": "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+    "CategoryId": 4,
+    "Price": 45000.75,
+    "Weight": 1500.0,
+    "Description": "Nissan Rogue with great versatility and fuel economy.",
+    "Mileage": 35000,
+    "ImageUrls": [
+      "https://blog.consumerguide.com/wp-content/uploads/sites/2/2020/02/Screen-Shot-2020-02-13-at-3.16.30-PM.png",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4S1VVSnengNt2tMXz9M0uVRYE5NNMTFdWbg&s"
+    ],
+    "ReleaseYear": 2020,
+    "ListedOn": "2024-12-08",
+    "IsDeleted": false,
+    "CarsFeatures": [
+      { "FeatureId": 5 },
+      { "FeatureId": 19 },
+      { "FeatureId": 26 }
+    ]
+  },
+  {
+    "Id": 9,
+    "BrandId": 9,
+    "ModelId": 49,
+    "SellerId": "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+    "CategoryId": 2,
+    "Price": 48000.99,
+    "Weight": 1480.5,
+    "Description": "Hyundai Santa Fe with a sleek design and excellent durability.",
+    "Mileage": 32000,
+    "ImageUrls": [
+      "https://vicimus-glovebox7.s3.us-east-2.amazonaws.com/photos/FS0mAAjrxQqA/KM8S5DA14MU005124/000ca0b0b8ba8517cc5193473d18eafc.jpg",
+      "https://di-uploads-pod27.dealerinspire.com/greghublerhyundai/uploads/2021/04/cd6Kwe9AvexQyFemXUFILTqq1ED6kIo8iXPSflx6.jpeg",
+      "https://www.hyundaioman.com/content/dam/hyundai/template_en/en/images/find-a-car/pip/santa-fe-2021/interior/interior-color-3-original.png"
+    ],
+    "ReleaseYear": 2021,
+    "ListedOn": "2024-12-08",
+    "IsDeleted": false,
+    "CarsFeatures": [
+      { "FeatureId": 10 },
+      { "FeatureId": 15 },
+      { "FeatureId": 27 }
+    ]
+  },
+  {
+    "Id": 10,
+    "BrandId": 10,
+    "ModelId": 53,
+    "SellerId": "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+    "CategoryId": 3,
+    "Price": 43000.50,
+    "Weight": 1430.8,
+    "Description": "Kia Sportage with efficient performance and spacious interiors.",
+    "Mileage": 29000,
+    "ImageUrls": [
+      "https://hips.hearstapps.com/hmg-prod/images/2021-kia-sportage-mmp-2-1601580481.jpg",
+      "https://media.ed.edmunds-media.com/kia/sportage/2020/oem/2020_kia_sportage_4dr-suv_sx-turbo_fq_oem_1_1600.jpg"
+    ],
+    "ReleaseYear": 2021,
+    "ListedOn": "2024-12-08",
+    "IsDeleted": false,
+    "CarsFeatures": [
+      { "FeatureId": 2 },
+      { "FeatureId": 18 },
+      { "FeatureId": 24 }
+    ]
+  },
+  {
+    "Id": 11,
+    "BrandId": 3,
+    "ModelId": 17,
+    "SellerId": "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+    "CategoryId": 4,
+    "Price": 60000.00,
+    "Weight": 1600.0,
+    "Description": "Chevrolet Equinox with impressive handling and comfort.",
+    "Mileage": 25000,
+    "ImageUrls": [
+      "https://www.carscoops.com/wp-content/uploads/2020/02/2021-Chevrolet-Equinox-1-1.jpg"
+    ],
+    "ReleaseYear": 2021,
+    "ListedOn": "2024-12-08",
+    "IsDeleted": false,
+    "CarsFeatures": [
+      { "FeatureId": 14 },
+      { "FeatureId": 20 },
+      { "FeatureId": 31 }
+    ]
+  },
+  {
+    "Id": 12,
+    "BrandId": 1,
+    "ModelId": 4,
+    "SellerId": "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+    "CategoryId": 2,
+    "Price": 85000.75,
+    "Weight": 1900.0,
+    "Description": "Toyota Land Cruiser with rugged capability and comfort.",
+    "Mileage": 22000,
+    "ImageUrls": [
+      "https://i.pinimg.com/736x/45/84/82/458482adaacfa98fae14b7c1b3d9037d.jpg",
+      "https://www.autopediame.com/storage/images/Toyota/Land%20Cruiser/Toyota-Land_Cruiser-2022-1024-0a.jpg"
+    ],
+    "ReleaseYear": 2022,
+    "ListedOn": "2024-12-08",
+    "IsDeleted": false,
+    "CarsFeatures": [
+      { "FeatureId": 16 },
+      { "FeatureId": 22 },
+      { "FeatureId": 30 }
+    ]
+  },
+  {
+    "Id": 13,
+    "BrandId": 2,
+    "ModelId": 9,
+    "SellerId": "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+    "CategoryId": 3,
+    "Price": 100000.00,
+    "Weight": 2000.0,
+    "Description": "Ford F-150 with outstanding towing and hauling capacity.",
+    "Mileage": 12000,
+    "ImageUrls": [
+      "https://di-sitebuilder-assets.s3.amazonaws.com/Ford/MLP/f150/2023/color-Atlas-Blue.jpg",
+      "https://www.ford.ca/is/image/content/dam/vdm_ford/live/en_ca/ford/nameplate/f-150commercial/2023/collections/dm/22_FRD_F15_49146_pk.tif?croppathe=1_3x2&wid=720&fit=crop&hei=480"
+    ],
+    "ReleaseYear": 2023,
+    "ListedOn": "2024-12-08",
+    "IsDeleted": false,
+    "CarsFeatures": [
+      { "FeatureId": 3 },
+      { "FeatureId": 15 },
+      { "FeatureId": 25 }
+    ]
+  },
+  {
+    "Id": 14,
+    "BrandId": 7,
+    "ModelId": 39,
+    "SellerId": "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+    "CategoryId": 1,
+    "Price": 42000.25,
+    "Weight": 1350.0,
+    "Description": "Honda Accord, perfect balance of luxury and practicality.",
+    "Mileage": 50000,
+    "ImageUrls": [
+      "https://www.accordxclub.com/attachments/b11e2328-e12a-4956-954c-a1ce55166603-jpeg.7159/",
+      "https://dealerinspire-image-library-prod.s3.us-east-1.amazonaws.com/images/I12X3wbNlM3AoiU5oEXJR459Q7fPIRbtZIRxYGe6.jpg"
+    ],
+    "ReleaseYear": 2018,
+    "ListedOn": "2024-12-08",
+    "IsDeleted": false,
+    "CarsFeatures": [
+      { "FeatureId": 4 },
+      { "FeatureId": 14 },
+      { "FeatureId": 23 }
+    ]
+  },
+  {
+    "Id": 15,
+    "BrandId": 9,
+    "ModelId": 47,
+    "SellerId": "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+    "CategoryId": 3,
+    "Price": 46000.50,
+    "Weight": 1400.0,
+    "Description": "Hyundai Sonata with advanced safety features and great mileage.",
+    "Mileage": 36000,
+    "ImageUrls": [
+      "https://www.zimbrickfishhatcheryroad.com/blogs/2133/wp-content/uploads/2019/07/2019-hyundai-sonata-fish-hatchery.jpg",
+      "https://www.formulaimports.com/imagetag/3778/8/l/Used-2019-Hyundai-Sonata-SE-1720454838.jpg"
+    ],
+    "ReleaseYear": 2019,
+    "ListedOn": "2024-12-08",
+    "IsDeleted": false,
+    "CarsFeatures": [
+      { "FeatureId": 7 },
+      { "FeatureId": 17 },
+      { "FeatureId": 29 }
+    ]
+  }
+]
