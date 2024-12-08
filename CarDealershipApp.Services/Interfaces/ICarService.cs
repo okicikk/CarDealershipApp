@@ -9,9 +9,9 @@ namespace CarDealershipApp.Services.Interfaces
 		Task<int> GetCarsCountWithModelId(int modelId);
 		Task<List<CarPreview>> CheckYourCars(string userId);
 
-        Task<string> GetCarOwnerIdAsync(int carId);
+		Task<string> GetCarOwnerIdAsync(int carId);
 
-        Task AddCarAsync(CarAddViewModel model);
+		Task AddCarAsync(CarAddViewModel model);
 		Task SoftDeleteCarsByModelId(int modelId);
 		Task<bool> SoftDeleteAsync(int carId);
 
@@ -19,12 +19,16 @@ namespace CarDealershipApp.Services.Interfaces
 		Task<List<Brand>> GetAllBrandsAsync();
 
 		Task<CarAddViewModel> InitializeCarAddViewModelAsync(int brandId, string userId);
-		Task<List<CarPreview>> CheckAllCarsAsync();
+		Task<List<CarPreview>> CheckAllCarsAsync(string? brandName = null,
+												 string? modelName = null,
+												 string? category = null,
+												 int? minReleaseYear = null,
+												 int? maxReleaseYear = null);
 
 		Task<CarDetailsViewModel> LoadDetailsAsync(int carId);
 		Task EditCarAsync(CarEditViewModel viewModel);
 		Task<CarEditViewModel> InitializeCarEditViewModel(int carId);
 
 
-    }
+	}
 }

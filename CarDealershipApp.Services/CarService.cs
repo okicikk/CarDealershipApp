@@ -46,15 +46,44 @@ namespace CarDealershipApp.Services
             return car.SellerId;
         }
 
-        public async Task<List<CarPreview>> CheckAllCarsAsync()
+        public async Task<List<CarPreview>> CheckAllCarsAsync(string? brandName = null,
+                                                 string? modelName = null,
+                                                 string? category = null,
+                                                 int? minReleaseYear = null,
+                                                 int? maxReleaseYear = null)
         {
-            List<CarPreview> carPreviews = new List<CarPreview>();
-            foreach (var car in await carRepository
+            IQueryable<Car> cars = carRepository
                 .GetAllQueryable()
                 .Include(x => x.Brand)
-                .Include(x => x.Model)
-                .Where(x => x.IsDeleted == false)
-                .ToListAsync())
+                .Include(x => x.Model);
+            if (!string.IsNullOrWhiteSpace(brandName))
+            {
+                brandName = brandName.ToLower().Trim();
+                cars = cars.Where(x => x.Brand.Name == brandName.ToLower());
+            }
+            if (!string.IsNullOrWhiteSpace(modelName))
+            {
+                modelName = modelName.ToLower().Trim();
+                cars = cars.Where(x => x.Model.Name == modelName.ToLower());
+            }
+            if (!string.IsNullOrWhiteSpace(category))
+            {
+                category = category.ToLower().Trim();
+                cars = cars.Where(x => x.Category.Name == category.ToLower());
+            }
+            if (minReleaseYear.HasValue)
+            {
+                cars = cars.Where(x => x.ReleaseYear >= minReleaseYear);
+            }
+            if (maxReleaseYear.HasValue)
+            {
+                cars = cars.Where(x => x.ReleaseYear <= maxReleaseYear);
+            }
+
+            List<CarPreview> carPreviews = new List<CarPreview>();
+
+            foreach (var car in await cars.ToListAsync())
+
             {
                 CarPreview carPreview = new CarPreview()
                 {
