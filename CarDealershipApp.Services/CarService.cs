@@ -7,9 +7,8 @@ using CarDealershipApp.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 using CarDealership.ViewModels.Models.Car;
-using System.Net;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
+using static CarDealershipApp.Constants.Constants;
+//using Nest;
 
 
 
@@ -46,16 +45,23 @@ namespace CarDealershipApp.Services
             return car.SellerId;
         }
 
-        public async Task<List<CarPreview>> CheckAllCarsAsync(string? brandName = null,
+        public async Task<(List<CarPreview> Cars, int TotalPages)> CheckAllCarsAsync(string? brandName = null,
                                                  string? modelName = null,
                                                  string? category = null,
                                                  int? minReleaseYear = null,
-                                                 int? maxReleaseYear = null)
+                                                 int? maxReleaseYear = null,
+                                                 int pageNumber = 1,
+                                                 int pageSize = 5)
         {
+
+
             IQueryable<Car> cars = carRepository
                 .GetAllQueryable()
                 .Include(x => x.Brand)
                 .Include(x => x.Model);
+
+			
+
             if (!string.IsNullOrWhiteSpace(brandName))
             {
                 brandName = brandName.ToLower().Trim();
@@ -79,8 +85,29 @@ namespace CarDealershipApp.Services
             {
                 cars = cars.Where(x => x.ReleaseYear <= maxReleaseYear);
             }
+			if (minReleaseYear < CarMinYear)
+			{
+				//TempData["YearErrorMessage"] = "Enter valid filter years.";
+				minReleaseYear = CarMinYear;
+			}
+			if (maxReleaseYear > CarMaxYear)
+			{
+				maxReleaseYear = CarMaxYear;
+			}
 
-            List<CarPreview> carPreviews = new List<CarPreview>();
+			int totalCars = cars.Count();
+			int totalPages = (int)Math.Ceiling(totalCars / (double)pageSize);
+
+			if (pageNumber > totalPages)
+			{
+				pageNumber = totalPages;
+			}
+			cars = cars
+				.Skip((pageNumber - 1) * pageSize)
+				.Take(pageSize);
+
+
+			List<CarPreview> carPreviews = new List<CarPreview>();
 
             foreach (var car in await cars.ToListAsync())
 
@@ -98,11 +125,11 @@ namespace CarDealershipApp.Services
                 };
                 carPreviews.Add(carPreview);
             }
-            return carPreviews
+            return (carPreviews
                 .OrderBy(x => x.BrandName)
                 .ThenBy(x => x.ModelName)
                 .ThenByDescending(x => x.Price)
-                .ToList();
+                .ToList(), totalPages);
         }
         public async Task<List<CarPreview>> CheckYourCars(string userId)
         {

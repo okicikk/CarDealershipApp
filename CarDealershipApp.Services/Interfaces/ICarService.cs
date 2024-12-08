@@ -19,11 +19,14 @@ namespace CarDealershipApp.Services.Interfaces
 		Task<List<Brand>> GetAllBrandsAsync();
 
 		Task<CarAddViewModel> InitializeCarAddViewModelAsync(int brandId, string userId);
-		Task<List<CarPreview>> CheckAllCarsAsync(string? brandName = null,
-												 string? modelName = null,
-												 string? category = null,
-												 int? minReleaseYear = null,
-												 int? maxReleaseYear = null);
+		Task<(List<CarPreview> Cars ,int TotalPages)> CheckAllCarsAsync(
+													string? brandName = null,
+													string? modelName = null,
+													string? category = null,
+													int? minReleaseYear = null,
+													int? maxReleaseYear = null,
+													int pageNumber = 1,
+													int pageSize = 5);
 
 		Task<CarDetailsViewModel> LoadDetailsAsync(int carId);
 		Task EditCarAsync(CarEditViewModel viewModel);

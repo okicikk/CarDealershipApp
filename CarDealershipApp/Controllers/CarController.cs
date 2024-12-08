@@ -3,13 +3,10 @@ using CarDealershipApp.Services;
 using CarDealershipApp.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.Protocol.Core.Types;
 using CarDealership.ViewModels.Models.Car;
 using CarDealershipApp.Data.Models;
-using Microsoft.Extensions.FileProviders.Physical;
 using System.Security.Claims;
-using System.Reflection;
-using System.Collections.Specialized;
+using static CarDealershipApp.Constants.Constants;
 
 namespace CarDealershipApp.Controllers
 {
@@ -76,20 +73,41 @@ namespace CarDealershipApp.Controllers
 												 string? modelName = null,
 												 string? category = null,
 												 int? minReleaseYear = null,
-												 int? maxReleaseYear = null)
+												 int? maxReleaseYear = null,
+												 int pageNumber = 1,
+												 int pageSize = 5)
 		{
+			
+            (List<CarPreview> Cars, int TotalPages) carsToSee = 
+				await carService.CheckAllCarsAsync(brandName,
+				modelName,
+				category,
+				minReleaseYear,
+				maxReleaseYear,
+				pageNumber,
+				pageSize);
 
-			IEnumerable<CarPreview> carsToSee = await carService.CheckAllCarsAsync(brandName,
-												  modelName,
-												  category,
-												  minReleaseYear,
-												  maxReleaseYear);
+			if (minReleaseYear < CarMinYear)
+			{
+				//TempData["YearErrorMessage"] = "Enter valid filter years.";
+				minReleaseYear = CarMinYear;
+			}
+			if (maxReleaseYear > CarMaxYear)
+			{
+				maxReleaseYear = CarMaxYear;
+			}
+			if (pageNumber > carsToSee.TotalPages)
+			{
+				pageNumber = carsToSee.TotalPages;
+			}
 
 			ViewData["BrandName"] = brandName;
 			ViewData["ModelName"] = modelName;
 			ViewData["Category"] = category;
 			ViewData["MinYear"] = minReleaseYear;
 			ViewData["MaxYear"] = maxReleaseYear;
+			ViewData["CurrentPage"] = pageNumber;
+			ViewData["TotalPages"] = carsToSee.TotalPages;
 
 
 			return View(carsToSee);
