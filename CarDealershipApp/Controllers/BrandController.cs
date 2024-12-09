@@ -3,6 +3,7 @@ using CarDealershipApp.Services.Interfaces;
 using CarDealership.Web.ViewModels.Models.Brand;
 using Microsoft.AspNetCore.Authorization;
 using CarDealershipApp.Data.Models;
+using NuGet.Versioning;
 
 namespace CarDealershipApp.Controllers
 {
@@ -22,7 +23,14 @@ namespace CarDealershipApp.Controllers
 				.GetAllBrandsAsync();
 			return View(brands);
 		}
-		[Authorize(Roles = "Admin")]
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> CarsWithBrand(int id)
+        {
+            string brandName = (await brandService.GetByIdAsync(id)).Name;
+            return Redirect($"/Car/Cars?brandName={brandName}&modelName=&category=&minReleaseYear=&maxReleaseYear=");
+        }
+        [Authorize(Roles = "Admin")]
 		[HttpGet]
 		public IActionResult Add()
 		{

@@ -29,10 +29,7 @@
 		<tr>
 			<th>Name</th>
 			<th>Logo</th>
-			@if (User.IsInRole("Admin"))
-			{
-				<th>Actions</th> <!-- Added actions column for the Delete button -->
-			}
+			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -43,8 +40,9 @@
 				<td>
 					<img src="@brand.ImageUrl" alt="Brand Image" style="max-width: 100px; max-height: 100px;" />
 				</td>
-
+				<!-- Add a button to view cars for the current brand -->
 				<td>
+					<a class="btn btn-info" asp-action="CarsWithBrand" asp-route-id="@brand.Id">View Cars</a>
 					@if (User.IsInRole("Admin"))
 					{
 						<a class="btn btn-warning" asp-action="Edit" asp-route-id="@brand.Id">Edit</a>
@@ -56,7 +54,6 @@
 	</tbody>
 </table>
 
-<!-- Modal for confirmation (appears when clicking delete) -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">

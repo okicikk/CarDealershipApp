@@ -78,7 +78,7 @@ namespace CarDealershipApp.Controllers
 												 int pageSize = 5)
 		{
 			
-            (List<CarPreview> Cars, int TotalPages) carsToSee = 
+				(List<CarPreview> Cars, int TotalPages) carsToSee = 
 				await carService.CheckAllCarsAsync(brandName,
 				modelName,
 				category,

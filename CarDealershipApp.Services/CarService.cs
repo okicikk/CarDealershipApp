@@ -98,10 +98,7 @@ namespace CarDealershipApp.Services
 			int totalCars = cars.Count();
 			int totalPages = (int)Math.Ceiling(totalCars / (double)pageSize);
 
-			if (pageNumber > totalPages)
-			{
-				pageNumber = totalPages;
-			}
+			
 			cars = cars
 				.Skip((pageNumber - 1) * pageSize)
 				.Take(pageSize);
@@ -109,7 +106,7 @@ namespace CarDealershipApp.Services
 
 			List<CarPreview> carPreviews = new List<CarPreview>();
 
-            foreach (var car in await cars.ToListAsync())
+            foreach (var car in await cars.ToListAsync() ?? new List<Car>())
 
             {
                 CarPreview carPreview = new CarPreview()
