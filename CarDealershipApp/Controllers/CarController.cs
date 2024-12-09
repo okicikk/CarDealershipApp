@@ -62,7 +62,7 @@ namespace CarDealershipApp.Controllers
 			var currentUserId = GetCurrentUserId();
 			if (!User.IsInRole("Admin") && carOwnerId != currentUserId)
 			{
-				return RedirectToAction(nameof(Index));
+				return StatusCode(403);
 			}
 			await carService.SoftDeleteAsync(id);
 			return RedirectToAction(nameof(Cars));
@@ -156,9 +156,9 @@ namespace CarDealershipApp.Controllers
 			var currentUserId = GetCurrentUserId();
 			if (!User.IsInRole("Admin") && carOwnerId != currentUserId)
 			{
-				return RedirectToAction(nameof(Cars));
-			}
-			CarEditViewModel viewModel = await carService.InitializeCarEditViewModel(id);
+                return StatusCode(403);
+            }
+            CarEditViewModel viewModel = await carService.InitializeCarEditViewModel(id);
 			return View(viewModel);
 		}
 		[HttpPost]
@@ -168,7 +168,7 @@ namespace CarDealershipApp.Controllers
 			var currentUserId = GetCurrentUserId();
 			if (!User.IsInRole("Admin") && carOwnerId != currentUserId)
 			{
-				return RedirectToAction(nameof(Cars));
+				return StatusCode(403);
 			}
 			await carService.InitializeCarEditViewModel(viewModel.Id);
 			if (viewModel is null)

@@ -7,6 +7,7 @@ using CarDealershipApp.Data.Models;
 using CarDealershipApp.Infrastructure.Repositories.Interfaces;
 using CarDealershipApp.Infrastructure.Repositories;
 using CarDealershipApp.Web.Extensions;
+//using Nest;
 namespace CarDealershipApp
 {
     public class Program
@@ -64,6 +65,12 @@ namespace CarDealershipApp
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
+
+            app.MapControllerRoute(
+               name: "Error",
+               pattern: "{area:exists}/{controller=Home}/{action=Index}/{statusCode?}");
+
             app.MapControllerRoute(
               name: "Admin",
               pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
@@ -74,7 +81,10 @@ namespace CarDealershipApp
 
             app.MapRazorPages();
 
+
             await app.SeedRolesAndUsersAsync();
+
+
 
             app.Run();
         }

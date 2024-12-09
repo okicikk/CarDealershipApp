@@ -1,0 +1,15 @@
+﻿@model CarDealershipApp.Models.ErrorViewModel
+
+<div style="text-align: center; padding: 80px 20px;">
+    <h1 style="font-size: 72px; color: #333; font-weight: bold;">Oops! Something went wrong.</h1>
+    <p style="font-size: 20px; color: #666;">We are experiencing an issue. Our team is working on it!</p>
+
+    @if (!string.IsNullOrEmpty(Model.RequestId))
+    {
+        <p style="font-size: 16px; color: #999;">Request ID: @Model.RequestId</p>
+    }
+
+    <a href="/" style="display: inline-block; font-size: 18px; padding: 10px 20px; margin-top: 30px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">
+        Return to Home
+    </a>
+</div>
