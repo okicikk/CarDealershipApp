@@ -47,5 +47,6 @@ namespace CarDealershipApp.Data.Models
         public DateTime ListedOn { get; set; } = DateTime.Today;
         public bool IsDeleted { get; set; } = false;
         public IList<CarFeature> CarsFeatures { get; set; } = new List<CarFeature>();
+        public IList<UserCar>? UsersCars { get; set; } = new List<UserCar>();
     }
 }

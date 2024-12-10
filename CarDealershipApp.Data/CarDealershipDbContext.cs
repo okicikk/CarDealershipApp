@@ -22,6 +22,8 @@ namespace CarDealershipApp.Data
 		public DbSet<Category> Categories { get; set; }
 		public DbSet<Feature> Features { get; set; }
 		public DbSet<CarFeature> CarsFeatures { get; set; }
+		public DbSet<UserCar> UsersCars { get; set; }
+
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
@@ -48,15 +50,33 @@ namespace CarDealershipApp.Data
 				.HasForeignKey(c => c.ModelId)
 				.OnDelete(DeleteBehavior.Restrict);
 
+			builder.Entity<Car>()
+				.Property(c => c.Price)
+				.HasColumnType("decimal(18, 2)");
+
 			builder.Entity<Model>()
 				.HasOne(m => m.Brand)
 				.WithMany(b => b.Models)
 				.HasForeignKey(m => m.BrandId)
 				.OnDelete(DeleteBehavior.Restrict);
 
-			builder.Entity<Car>()
-				.Property(c => c.Price)
-				.HasColumnType("decimal(18, 2)");
+			builder.Entity<UserCar>()
+				.HasKey(uc => new { uc.CarId, uc.UserId });
+
+
+			builder.Entity<UserCar>()
+				.HasOne(uc => uc.Car)
+				.WithMany(c => c.UsersCars)
+				.HasForeignKey(uc => uc.CarId)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			builder.Entity<UserCar>()
+				.HasOne(uc => uc.User)
+				.WithMany()
+				.HasForeignKey(uc => uc.UserId)
+				.OnDelete(DeleteBehavior.Restrict);
+
+
 
 			var categories = LoadJsonData<Category>("../CarDealershipApp.Data/SeedData/Category.json");
 			builder.Entity<Category>().HasData(categories);
