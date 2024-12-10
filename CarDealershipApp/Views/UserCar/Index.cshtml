@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CarDealership.ViewModels.Models.UserCarViewModels.UserCarIndexViewModel>
+
+@{
+	ViewData["Title"] = "User Car Index";
+}
+@if (TempData["SuccessMessage"] != null)
+{
+	<div class="alert alert-success">
+		@TempData["SuccessMessage"]
+	</div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+	<div class="alert alert-danger">
+		@TempData["ErrorMessage"]
+	</div>
+}
+<h2>User Car Index</h2>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>Image</th>
+			<th>Car Name</th>
+			<th>Car Price</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					<input type="hidden" name="UserId" value="@item.UserId" />
+					<input type="hidden" name="CarId" value="@item.CarId" />
+
+					@if (!string.IsNullOrEmpty(item.ImageUrl))
+					{
+						<img src="@item.ImageUrl" alt="Car Image" style="max-width: 150px; height: auto;" />
+					}
+					else
+					{
+						<span>No Image Available</span>
+					}
+				</td>
+				<td>@item.CarName</td>
+				<td>@item.CarPrice</td>
+				<td>
+					<!-- Delete Button -->
+					<form asp-action="Delete" method="post">
+						@Html.AntiForgeryToken()
+						<input type="hidden" name="UserId" value="@item.UserId" />
+						<input type="hidden" name="CarId" value="@item.CarId" />
+						<button type="submit" class="btn btn-danger btn-sm">
+							<i class="bi bi-trash"></i> Delete
+						</button>
+					</form>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

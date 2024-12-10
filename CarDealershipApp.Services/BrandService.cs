@@ -13,12 +13,14 @@ namespace CarDealershipApp.Services
         private readonly IRepository<Brand> brandRepository;
         private readonly IRepository<Model> modelRepository;
         private readonly IRepository<Car> carRepository;
+        private readonly IRepository<UserCar> usersCarsRepository;
 
-        public BrandService(IRepository<Brand> brandRepository, IRepository<Model>modelRepository, IRepository<Car> carRepository)
+        public BrandService(IRepository<Brand> brandRepository, IRepository<Model>modelRepository, IRepository<Car> carRepository, IRepository<UserCar> usersCarsRepo)
         {
             this.brandRepository = brandRepository;
             this.modelRepository = modelRepository;
             this.carRepository = carRepository;
+            this.usersCarsRepository = usersCarsRepo;
         }
         public async Task AddBrandAsync(BrandAddViewModel model)
         {
@@ -57,6 +59,15 @@ namespace CarDealershipApp.Services
                     .GetAllQueryable()
                     .Where (x=>x.BrandId == id)
                     .ToListAsync();
+                List<UserCar> usersCarsToBeDeleted = await usersCarsRepository
+                    .GetAllQueryable()
+                    .Where(x=>x.Car.BrandId == id)
+                    .ToListAsync();
+
+                foreach (var userCar in usersCarsToBeDeleted)
+                {
+                    await usersCarsRepository.DeleteAsync(userCar);
+                }
 
                 foreach (Model model in modelsToBeDeleted)
                 {
@@ -66,7 +77,6 @@ namespace CarDealershipApp.Services
                 foreach (Car car in carsToBeDeleted)
                 {
                     car.IsDeleted = true;
-                    await carRepository.UpdateAsync(car);
                 }
                 await brandRepository.UpdateAsync(brand);
 

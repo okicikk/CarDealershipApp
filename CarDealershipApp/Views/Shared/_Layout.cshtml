@@ -29,21 +29,19 @@
 						<li class="nav-item">
 							<a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Cars">Cars</a>
 						</li>
-						@if (User.IsInRole("Admin"))
-						{
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Panel</a>
-							</li>
-						}
 						<!-- Manage Dropdown -->
 						@if (User.Identity.IsAuthenticated)
 						{
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="UserCar" asp-action="Index">Saved Cars</a>
+							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle text-dark" href="#" id="manageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 									Manage
 								</a>
 								<ul class="dropdown-menu" aria-labelledby="manageDropdown">
 									<li><a class="dropdown-item" asp-area="" asp-controller="Car" asp-action="YourCars">Your Cars</a></li>
+									<li><a class="dropdown-item" asp-area="" asp-controller="UserCar" asp-action="Index">Saved Cars</a></li>
 									@if (User.IsInRole("Admin"))
 									{
 										<li><a class="dropdown-item" asp-area="" asp-controller="Car" asp-action="Cars">All Cars</a></li>
@@ -55,7 +53,13 @@
 								</ul>
 							</li>
 						}
-						
+						@if (User.IsInRole("Admin"))
+						{
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Panel</a>
+							</li>
+						}
+
 					</ul>
 
 					<ul class="navbar-nav ms-auto">
@@ -71,6 +75,11 @@
 						else
 						{
 							<li class="nav-item">
+							<li class="nav-item">
+								<span class="nav-link text-dark">
+										@User.FindFirst(ClaimTypes.Email)?.Value
+								</span>
+							</li>
 								<form asp-area="Identity" asp-page="/Account/Logout" method="post" class="nav-item">
 									<button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
 								</form>

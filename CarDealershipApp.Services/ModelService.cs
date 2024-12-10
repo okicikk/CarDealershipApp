@@ -28,16 +28,14 @@ namespace CarDealershipApp.Services
         }
         public async Task<IEnumerable<ModelIndexViewModel>> GetAllModelsAsync()
         {
-            // Fetch models and their related Brands
             var models = await modelRepository
                 .GetAllQueryable()
                 .Where(x=>x.IsDeleted == false)
-                .Include(x => x.Brand)  // Eagerly load the Brand
+                .Include(x => x.Brand)  
                 .OrderBy(x => x.Brand.Name)
                 .ThenBy(x => x.Name)
                 .ToListAsync();
 
-            // Now map models to view models with CarsCount
             var viewModel = new List<ModelIndexViewModel>();
 
             foreach (var model in models)
@@ -49,7 +47,7 @@ namespace CarDealershipApp.Services
                     Id = model.Id,
                     Name = model.Name,
                     BrandId = model.BrandId,
-                    BrandName = model.Brand.Name,  // This will no longer be null
+                    BrandName = model.Brand.Name, 
                     CarsCount = carsCount,
                 });
             }

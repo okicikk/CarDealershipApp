@@ -53,7 +53,12 @@ namespace CarDealershipApp.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Details(int id)
 		{
-			return View(await carService.LoadDetailsAsync(id));
+			CarDetailsViewModel details = await carService.LoadDetailsAsync(id);
+			if (details is null)
+			{
+				return RedirectToAction(nameof(Cars));
+			}
+			return View(details);
 		}
 		[HttpPost]
 		public async Task<IActionResult> Delete(int id)
@@ -159,6 +164,10 @@ namespace CarDealershipApp.Controllers
                 return StatusCode(403);
             }
             CarEditViewModel viewModel = await carService.InitializeCarEditViewModel(id);
+			if (viewModel == null)
+			{
+				return RedirectToAction(nameof(Index));
+			}
 			return View(viewModel);
 		}
 		[HttpPost]

@@ -2,6 +2,7 @@
 using CarDealershipApp.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace CarDealershipApp.Infrastructure.Repositories
 {
 	public class Repository<T> : IRepository<T> where T
@@ -24,6 +25,18 @@ namespace CarDealershipApp.Infrastructure.Repositories
 		{
 			await dbSet.AddAsync(item);
 			await context.SaveChangesAsync();
+		}
+
+		public async Task<bool> DeleteAsync(T item)
+		{
+			T? itemToDelete = await dbSet.FirstOrDefaultAsync(x=>x == item);
+			if (item is null || itemToDelete is null)
+			{
+				return false;
+			}
+			dbSet.Remove(itemToDelete);
+			await context.SaveChangesAsync();
+			return true;
 		}
 
 		public bool DeleteById(string id)
