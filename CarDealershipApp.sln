@@ -23,6 +23,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealershipApp.Infrastruc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealership.ViewModels", "CarDealership.Web.ViewModels\CarDealership.ViewModels.csproj", "{C679DA2D-28AC-4DAC-8EBC-E3953BFA14A5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A1E26A2E-FF4E-4312-BB12-9A3F8A72387D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDealership.Tests", "CarDealership.Tests\CarDealership.Tests.csproj", "{9AD40711-EAAD-4A9A-91B1-BC94318FBFF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +61,10 @@ Global
 		{C679DA2D-28AC-4DAC-8EBC-E3953BFA14A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C679DA2D-28AC-4DAC-8EBC-E3953BFA14A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C679DA2D-28AC-4DAC-8EBC-E3953BFA14A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AD40711-EAAD-4A9A-91B1-BC94318FBFF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AD40711-EAAD-4A9A-91B1-BC94318FBFF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AD40711-EAAD-4A9A-91B1-BC94318FBFF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AD40711-EAAD-4A9A-91B1-BC94318FBFF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +76,7 @@ Global
 		{4494304B-650A-438E-8F55-48998A104121} = {E1093DF0-E05D-4D1C-96A9-E3AB3F8293EC}
 		{94AB0A14-CF51-49C4-BB59-BD0F7CE746AA} = {E1093DF0-E05D-4D1C-96A9-E3AB3F8293EC}
 		{C679DA2D-28AC-4DAC-8EBC-E3953BFA14A5} = {DF985FD8-0A00-4635-A6A1-F999C47F279F}
+		{9AD40711-EAAD-4A9A-91B1-BC94318FBFF2} = {A1E26A2E-FF4E-4312-BB12-9A3F8A72387D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5D7A6DAB-53BE-444B-A763-FE7EF05E9C3D}

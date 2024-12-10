@@ -120,8 +120,12 @@ namespace CarDealershipApp.Services
                 await carRepository.UpdateAsync(car);
             }
 
-            var isSuccess = await userManager.DeleteAsync(user);
-            return isSuccess.Succeeded;
+			var isSuccess = await userManager.DeleteAsync(user);
+			if (isSuccess?.Succeeded != true) 
+			{
+				return false;
+			}
+			return isSuccess.Succeeded;
 
         }
     }

@@ -118,6 +118,10 @@ namespace CarDealershipApp.Services
 			foreach (var car in await cars.ToListAsync() ?? new List<Car>())
 
 			{
+				if (car.ImageUrls.Count() == 0)
+				{
+					car.ImageUrls = new List<string>() { "" };
+				}
 				CarPreview carPreview = new CarPreview()
 				{
 					SellerId = car.SellerId,
@@ -294,34 +298,34 @@ namespace CarDealershipApp.Services
 			return viewModel;
 		}
 
-		public async Task EditCarAsync(CarEditViewModel viewModel)
-		{
-			Car carToBeEdited = await carRepository.GetByIdAsync(viewModel.Id);
-			if (carToBeEdited == null || (carToBeEdited.IsDeleted == true))
+			public async Task EditCarAsync(CarEditViewModel viewModel)
 			{
-				throw new ArgumentException("There is no such car.");
-			}
-
-			List<CarFeature> carFeatures = viewModel.SelectedFeaturesIds
-				.Select(featureId => new CarFeature
+				Car carToBeEdited = await carRepository.GetByIdAsync(viewModel.Id);
+				if (carToBeEdited == null || (carToBeEdited.IsDeleted == true))
 				{
-					CarId = carToBeEdited.Id,
-					FeatureId = featureId
-				})
-				.ToList();
+					throw new ArgumentException("There is no such car.");
+				}
 
-			carToBeEdited.ImageUrls.Clear();
+				List<CarFeature> carFeatures = viewModel.SelectedFeaturesIds
+					.Select(featureId => new CarFeature
+					{
+						CarId = carToBeEdited.Id,
+						FeatureId = featureId
+					})
+					.ToList();
 
-			carToBeEdited.CategoryId = viewModel.CategoryId;
-			carToBeEdited.CarsFeatures = carFeatures;
-			carToBeEdited.Weight = viewModel.Weight;
-			carToBeEdited.Description = viewModel.Description;
-			carToBeEdited.Mileage = viewModel.Mileage;
-			carToBeEdited.ImageUrls = viewModel.ImageUrls;
+				carToBeEdited.ImageUrls.Clear();
 
-			await carRepository.UpdateAsync(carToBeEdited);
+				carToBeEdited.CategoryId = viewModel.CategoryId;
+				carToBeEdited.CarsFeatures = carFeatures;
+				carToBeEdited.Weight = viewModel.Weight;
+				carToBeEdited.Description = viewModel.Description;
+				carToBeEdited.Mileage = viewModel.Mileage;
+				carToBeEdited.ImageUrls = viewModel.ImageUrls;
 
-		}
+				await carRepository.UpdateAsync(carToBeEdited);
+
+			}
 		public async Task<bool> SoftDeleteAsync(int carId)
 		{
 			Car? car = await carRepository

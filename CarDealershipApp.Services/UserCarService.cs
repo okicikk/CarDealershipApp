@@ -20,17 +20,20 @@ namespace CarDealershipApp.Services
 
 		public async Task AddAsync(int carId, string userId)
 		{
-			Car car = await carRepository.GetByIdAsync(carId); 
+			Car car = await carRepository.GetByIdAsync(carId);
+			UserCar userCar = new UserCar()
+			{
+				CarId = carId,
+				UserId = userId
+			};
 			if (car.IsDeleted)
 			{
 				throw new InvalidOperationException("Invalid car!");
 			}
-
-			await userCarRepository.AddAsync(new UserCar()
+			if (!userCarRepository.GetAllQueryable().Any(x => x == userCar))
 			{
-				CarId = carId,
-				UserId = userId
-			});
+				await userCarRepository.AddAsync(userCar);
+			}
 		}
 
 		public async Task<bool> DeleteAsync(int carId, string userId)
@@ -93,9 +96,9 @@ namespace CarDealershipApp.Services
 				.GetAllQueryable()
 				.Where(uc => uc.UserId == userId)
 				.Include(uc => uc.Car)
-				.ThenInclude(c=>c.Brand)
+				.ThenInclude(c => c.Brand)
 				.Include(b => b.Car)
-				.ThenInclude(c=>c.Model)
+				.ThenInclude(c => c.Model)
 				.ToListAsync();
 
 			List<UserCarIndexViewModel> userCarIndexViewModels = usersCars.Select(x => new UserCarIndexViewModel()
