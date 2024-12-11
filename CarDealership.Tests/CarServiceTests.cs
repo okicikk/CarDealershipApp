@@ -132,19 +132,19 @@ namespace CarDealershipApp.Tests
 				new Brand { Id = 2, Name = "Ford" }
 			};
 
-			// Mock the GetAllQueryable method to return the list of brands
+
 			mockBrandRepo
 				.Setup(repo => repo.GetAllQueryable())
-				.Returns(brandsData.BuildMock());  // Use MockQueryable to simulate IQueryable
+				.Returns(brandsData.BuildMock());  
 
 			// Act
 			var result = await carService.GetAllBrandsAsync();
 
 			// Assert
-			Assert.IsNotNull(result);  // Ensure the result is not null
-			Assert.That(result.Count, Is.EqualTo(2));  // Ensure the result contains two brands
-			Assert.That(result.First().Name, Is.EqualTo("Toyota"));  // Check if the first brand is "Toyota"
-			Assert.That(result.Last().Name, Is.EqualTo("Ford"));  // Check if the last brand is "Ford"
+			Assert.IsNotNull(result);  
+			Assert.That(result.Count, Is.EqualTo(2));  
+			Assert.That(result.First().Name, Is.EqualTo("Toyota"));  
+			Assert.That(result.Last().Name, Is.EqualTo("Ford"));  
 		}
 		[Test]
 		public async Task EditCarAsync_ShouldEditCar_WhenCarExists()
@@ -185,13 +185,13 @@ namespace CarDealershipApp.Tests
 			await carService.EditCarAsync(viewModel);
 
 			// Assert
-			Assert.AreEqual(viewModel.CategoryId, carToBeEdited.CategoryId);
-			Assert.AreEqual(viewModel.Weight, carToBeEdited.Weight);
-			Assert.AreEqual(viewModel.Description, carToBeEdited.Description);
-			Assert.AreEqual(viewModel.Mileage, carToBeEdited.Mileage);
+			Assert.That(carToBeEdited.CategoryId, Is.EqualTo(viewModel.CategoryId));
+			Assert.That(carToBeEdited.Weight, Is.EqualTo(viewModel.Weight));
+			Assert.That(carToBeEdited.Description, Is.EqualTo(viewModel.Description));
+			Assert.That(carToBeEdited.Mileage, Is.EqualTo(viewModel.Mileage));
 			CollectionAssert.AreEqual(viewModel.ImageUrls, carToBeEdited.ImageUrls);
 
-			Assert.AreEqual(viewModel.SelectedFeaturesIds.Count, carToBeEdited.CarsFeatures.Count);
+			Assert.That(carToBeEdited.CarsFeatures.Count, Is.EqualTo(viewModel.SelectedFeaturesIds.Count));
 			Assert.IsTrue(carToBeEdited.CarsFeatures.All(cf =>
 				viewModel.SelectedFeaturesIds.Contains(cf.FeatureId)));
 

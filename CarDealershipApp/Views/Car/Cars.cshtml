@@ -96,7 +96,7 @@
 						   class="btn btn-primary btn-sm">
 							<i class="bi bi-info-circle"></i> Details
 						</a>
-						@if (User.FindFirst(ClaimTypes.NameIdentifier)?.Value != car.SellerId)
+						@if (User.FindFirst(ClaimTypes.NameIdentifier)?.Value != car.SellerId && User.Identity.IsAuthenticated)
 						{
 							<form asp-controller="UserCar" asp-action="Add" asp-route-id="@car.CarId" method="post" class="d-inline">
 								<button type="submit" class="btn btn-success btn-sm">
