@@ -60,7 +60,7 @@ namespace CarDealershipApp.Web.Extensions
                     var createResult = await userManager.CreateAsync(defaultUser, defaultPass);
                     if (createResult.Succeeded)
                     {
-                        await userManager.AddToRoleAsync(adminUser, "User");
+                        await userManager.AddToRoleAsync(defaultUser, "User");
                     }
                 }
             }
