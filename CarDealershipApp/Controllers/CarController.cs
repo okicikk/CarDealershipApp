@@ -175,6 +175,10 @@ namespace CarDealershipApp.Controllers
 		{
 			var carOwnerId = await carService.GetCarOwnerIdAsync(viewModel.Id);
 			var currentUserId = GetCurrentUserId();
+			if (!ModelState.IsValid)
+			{
+				return View(viewModel);
+			}
 			if (!User.IsInRole("Admin") && carOwnerId != currentUserId)
 			{
 				return StatusCode(403);
