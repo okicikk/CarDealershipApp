@@ -12,7 +12,7 @@ namespace CarDealership.ViewModels.Models.Car
         [Required]
         public IEnumerable<Feature> AvailableFeatures { get; set; } = new List<Feature>();
         public List<int> SelectedFeaturesIds { get; set; } = new();
-        [Required]
+        [Required(ErrorMessage ="Select Category")]
         public int CategoryId { get; set; }
         [Required]
         public double Weight { get; set; }
