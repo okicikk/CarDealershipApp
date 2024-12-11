@@ -8,9 +8,7 @@ namespace CarDealership.Web.ViewModels.Models.Brand
 	{
 		[Required]
 		[MinLength(BrandNameMinLength)]
-
-
-		[MaxLength(BrandNameMinLength)]
+		[MaxLength(BrandNameMaxLength)]
 
 		public string Name { get; set; }
 		[MinLength(ModelNameMinLength)]
