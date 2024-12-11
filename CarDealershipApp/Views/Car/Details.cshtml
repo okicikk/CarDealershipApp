@@ -1,5 +1,7 @@
 ﻿@model CarDealership.ViewModels.Models.Car.CarDetailsViewModel
-
+@{
+	int counter = 0;
+}
 @{
 	ViewData["Title"] = "Car Details";
 }
@@ -22,6 +24,7 @@
 						{
 							if (!string.IsNullOrEmpty(imageUrl))
 							{
+								counter++;
 								<div class="carousel-item @(index == 0 ? "active" : "")">
 									<img src="@imageUrl" class="carousel-image d-block w-50" alt="Car Image">
 								</div>
@@ -36,7 +39,7 @@
 									<span class="visually-hidden">Next</span>
 								</button>
 							}
-							else
+							else if(counter == 0)
 							{
 								<p>No images available for this car.</p>
 								break;
