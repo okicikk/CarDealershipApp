@@ -18,11 +18,18 @@ namespace CarDealershipApp.Web.Controllers
 			this.modelService = modelServ;
 		}
 
-		public async Task<IActionResult> Index()
-		{
-			return View(await modelService.GetAllModelsAsync());
-		}
-		[HttpGet]
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 10)
+        {
+            (List<ModelIndexViewModel> models, int totalPages) = await modelService.GetAllModelsAsync(pageNumber, pageSize);
+
+            ViewData["CurrentPage"] = pageNumber;
+            ViewData["TotalPages"] = totalPages;
+
+            return View((models, totalPages));
+        }
+
+
+        [HttpGet]
 		public async Task<IActionResult> Edit(int id)
 		{
 			return View(await modelService.InitializeModelByIdAsync(id));

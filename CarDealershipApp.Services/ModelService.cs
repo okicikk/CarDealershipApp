@@ -26,35 +26,43 @@ namespace CarDealershipApp.Services
             this.brandRepository = brandrep;
             this.carService = carService;
         }
-        public async Task<IEnumerable<ModelIndexViewModel>> GetAllModelsAsync()
-        {
-            var models = await modelRepository
-                .GetAllQueryable()
-                .Where(x=>x.IsDeleted == false)
-                .Include(x => x.Brand)  
-                .OrderBy(x => x.Brand.Name)
-                .ThenBy(x => x.Name)
-                .ToListAsync();
+		public async Task<(List<ModelIndexViewModel> Models, int TotalPages)> GetAllModelsAsync(int pageNumber = 1, int pageSize = 10)
+		{
+			var modelsQuery = modelRepository
+				.GetAllQueryable()
+				.Where(x => x.IsDeleted == false)
+				.Include(x => x.Brand)
+				.OrderBy(x => x.Brand.Name)
+				.ThenBy(x => x.Name);
 
-            var viewModel = new List<ModelIndexViewModel>();
+			int totalModels = await modelsQuery.CountAsync();
+			int totalPages = (int)Math.Ceiling(totalModels / (double)pageSize);
 
-            foreach (var model in models)
-            {
-                var carsCount = await carService.GetCarsCountWithModelId(model.Id);
+			var models = await modelsQuery
+				.Skip((pageNumber - 1) * pageSize)
+				.Take(pageSize)
+				.ToListAsync();
 
-                viewModel.Add(new ModelIndexViewModel()
-                {
-                    Id = model.Id,
-                    Name = model.Name,
-                    BrandId = model.BrandId,
-                    BrandName = model.Brand.Name, 
-                    CarsCount = carsCount,
-                });
-            }
+			var viewModel = new List<ModelIndexViewModel>();
 
-            return viewModel;
-        }
-        public async Task EditModel(ModelEditViewModel viewModel)
+			foreach (var model in models)
+			{
+				var carsCount = await carService.GetCarsCountWithModelId(model.Id);
+
+				viewModel.Add(new ModelIndexViewModel()
+				{
+					Id = model.Id,
+					Name = model.Name,
+					BrandId = model.BrandId,
+					BrandName = model.Brand.Name,
+					CarsCount = carsCount,
+				});
+			}
+
+			return (viewModel, totalPages);
+		}
+
+		public async Task EditModel(ModelEditViewModel viewModel)
         {
             int id = viewModel.Id;
             Model model = await modelRepository.GetByIdAsync(id);

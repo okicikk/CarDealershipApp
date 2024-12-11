@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CarDealership.ViewModels.Models.Model.ModelIndexViewModel>
+﻿@model (List<CarDealership.ViewModels.Models.Model.ModelIndexViewModel> Models, int TotalPages)
 
 @{
     ViewData["Title"] = "Models";
@@ -18,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var m in Model)
+        @foreach (var m in Model.Models)
         {
             <tr>
                 <td>@m.Id</td>
@@ -36,3 +36,33 @@
     </tbody>
 </table>
 
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        @if ((int)ViewData["CurrentPage"] > 1)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index" asp-route-pageNumber="@( (int)ViewData["CurrentPage"] - 1 )">
+                    Previous
+                </a>
+            </li>
+        }
+
+        @for (int i = 1; i <= (int)ViewData["TotalPages"]; i++)
+        {
+            <li class="page-item @(i == (int)ViewData["CurrentPage"] ? "active" : "")">
+                <a class="page-link" asp-action="Index" asp-route-pageNumber="@i">
+                    @i
+                </a>
+            </li>
+        }
+
+        @if ((int)ViewData["CurrentPage"] < (int)ViewData["TotalPages"])
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index" asp-route-pageNumber="@( (int)ViewData["CurrentPage"] + 1 )">
+                    Next
+                </a>
+            </li>
+        }
+    </ul>
+</nav>

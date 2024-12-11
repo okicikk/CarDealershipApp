@@ -7,7 +7,7 @@ namespace CarDealershipApp.Services.Interfaces
     {
         Task<bool> SoftDeleteByIdAsync(int id);
         Task EditModel(ModelEditViewModel viewModel);
-        Task<IEnumerable<ModelIndexViewModel>> GetAllModelsAsync();
+		Task<(List<ModelIndexViewModel> Models, int TotalPages)> GetAllModelsAsync(int pageNumber = 1, int pageSize = 10);
         Task<ModelEditViewModel> InitializeModelByIdAsync(int id);
 
         Task AddModelAsync(ModelAddViewModel viewModel);
