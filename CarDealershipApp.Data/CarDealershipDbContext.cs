@@ -1,7 +1,9 @@
 ﻿using CarDealershipApp.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using static CarDealershipApp.Constants.Constants;
 using System.Net;
 using System.Reflection.Emit;
 
@@ -28,6 +30,24 @@ namespace CarDealershipApp.Data
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);
+			var defaultUserId = "4e32b02a-046c-40be-bfeb-327c900e6bb9";
+			var defaultUserEmail = DefaultUserEmail;
+
+			var hasher = new PasswordHasher<IdentityUser>();
+			var defaultUser = new IdentityUser
+			{
+				Id = defaultUserId,
+				UserName = defaultUserEmail,
+				NormalizedUserName = defaultUserEmail.ToUpper(),
+				Email = defaultUserEmail,
+				NormalizedEmail = defaultUserEmail.ToUpper(),
+				EmailConfirmed = true,
+				PasswordHash = hasher.HashPassword(null, "DefaultPass"),
+				SecurityStamp = Guid.NewGuid().ToString("D")
+			};
+
+			builder.Entity<IdentityUser>()
+				.HasData(defaultUser);
 
 			builder.Entity<CarFeature>()
 				.HasKey(cf => new { cf.CarId, cf.FeatureId });

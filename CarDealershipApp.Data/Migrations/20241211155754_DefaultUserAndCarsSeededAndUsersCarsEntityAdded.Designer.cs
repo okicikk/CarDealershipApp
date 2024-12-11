@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarDealershipApp.Data.Migrations
 {
     [DbContext(typeof(CarDealershipDbContext))]
-    [Migration("20241210142431_UsersCarsAdded")]
-    partial class UsersCarsAdded
+    [Migration("20241211155754_DefaultUserAndCarsSeededAndUsersCarsEntityAdded")]
+    partial class DefaultUserAndCarsSeededAndUsersCarsEntityAdded
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1422,6 +1422,24 @@ namespace CarDealershipApp.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c34a3505-9260-45d1-9b2c-d5e74c47798c",
+                            Email = "default@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "DEFAULT@GMAIL.COM",
+                            NormalizedUserName = "DEFAULT@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKoEod11N5fVkdAS/xuTLtLSDzVoDNmFsWYp1rLDGTwTS1aXNuQMt0WccWKcgSjpig==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "4c903c26-5a86-4e75-9948-2e9905318ddb",
+                            TwoFactorEnabled = false,
+                            UserName = "default@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

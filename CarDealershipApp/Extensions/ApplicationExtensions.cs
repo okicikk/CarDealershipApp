@@ -49,7 +49,11 @@ namespace CarDealershipApp.Web.Extensions
                         await userManager.AddToRoleAsync(adminUser, "User");
                     }
                 }
-                if (defaultUser is null)
+				else if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
+				{
+					await userManager.AddToRoleAsync(adminUser, "Admin");
+				}
+				if (defaultUser is null)
                 {
                     defaultUser = new IdentityUser()
                     {
@@ -63,7 +67,11 @@ namespace CarDealershipApp.Web.Extensions
                         await userManager.AddToRoleAsync(defaultUser, "User");
                     }
                 }
-            }
+                else if (!await userManager.IsInRoleAsync(defaultUser, "User"))
+                {
+                        await userManager.AddToRoleAsync(defaultUser, "User");
+				}
+			}
         }
     }
 }

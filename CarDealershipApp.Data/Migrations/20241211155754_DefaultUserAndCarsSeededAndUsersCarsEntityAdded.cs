@@ -8,11 +8,40 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CarDealershipApp.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class CarsSeeded : Migration
+    public partial class DefaultUserAndCarsSeededAndUsersCarsEntityAdded : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "UsersCars",
+                columns: table => new
+                {
+                    CarId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersCars", x => new { x.CarId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_UsersCars_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UsersCars_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "4e32b02a-046c-40be-bfeb-327c900e6bb9", 0, "c34a3505-9260-45d1-9b2c-d5e74c47798c", "default@gmail.com", true, false, null, "DEFAULT@GMAIL.COM", "DEFAULT@GMAIL.COM", "AQAAAAIAAYagAAAAEKoEod11N5fVkdAS/xuTLtLSDzVoDNmFsWYp1rLDGTwTS1aXNuQMt0WccWKcgSjpig==", null, false, "4c903c26-5a86-4e75-9948-2e9905318ddb", false, "default@gmail.com" });
+
             migrationBuilder.InsertData(
                 table: "Cars",
                 columns: new[] { "Id", "BrandId", "CategoryId", "Description", "ImageUrls", "IsDeleted", "ListedOn", "Mileage", "ModelId", "Price", "ReleaseYear", "SellerId", "Weight" },
@@ -86,11 +115,19 @@ namespace CarDealershipApp.Data.Migrations
                     { 15, 17 },
                     { 15, 29 }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersCars_UserId",
+                table: "UsersCars",
+                column: "UserId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "UsersCars");
+
             migrationBuilder.DeleteData(
                 table: "CarsFeatures",
                 keyColumns: new[] { "CarId", "FeatureId" },
@@ -390,6 +427,11 @@ namespace CarDealershipApp.Data.Migrations
                 table: "Cars",
                 keyColumn: "Id",
                 keyValue: 15);
+
+            migrationBuilder.DeleteData(
+                table: "AspNetUsers",
+                keyColumn: "Id",
+                keyValue: "4e32b02a-046c-40be-bfeb-327c900e6bb9");
         }
     }
 }
