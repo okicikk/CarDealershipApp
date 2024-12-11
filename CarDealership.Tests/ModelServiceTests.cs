@@ -44,28 +44,41 @@ namespace CarDealership.Tests
 			_modelService = new ModelService(mockModelRepository.Object, mockBrandRepository.Object, mockCarService.Object);
 		}
 
-		[Test]
-		public async Task GetAllModelsAsync_ShouldReturnAllModels()
-		{
-			// Arrange
-			mockModelRepository
-				.Setup(repo => repo.GetAllQueryable())
-				.Returns(modelsData.BuildMock());
+        [Test]
+        public async Task GetAllModelsAsync_ShouldReturnPaginatedModels()
+        {
+            // Arrange
+            var modelsData = new List<Model>
+			{
+			    new Model { Id = 1, Name = "Civic", BrandId = 1, Brand = new Brand { Name = "Honda" }, IsDeleted = false },
+			    new Model { Id = 2, Name = "Accord", BrandId = 1, Brand = new Brand { Name = "Honda" }, IsDeleted = false },
+			    new Model { Id = 3, Name = "Corolla", BrandId = 2, Brand = new Brand { Name = "Toyota" }, IsDeleted = false }
+			};
 
-			mockCarService
-				.Setup(service => service.GetCarsCountWithModelId(It.IsAny<int>()))
-				.ReturnsAsync(10); 
+            // Mock the repository
+            mockModelRepository
+                .Setup(repo => repo.GetAllQueryable())
+                .Returns(modelsData.BuildMock());
 
-			// Act
-			var result = await _modelService.GetAllModelsAsync();
+            mockCarService
+                .Setup(service => service.GetCarsCountWithModelId(It.IsAny<int>()))
+                .ReturnsAsync(10);
 
-			// Assert
-			Assert.That(result.Count(), Is.EqualTo(3));
-			Assert.That(result.First().BrandName, Is.EqualTo("Honda"));
-			Assert.That(result.First().CarsCount, Is.EqualTo(10));
-		}
+            var pageNumber = 1;
+            var pageSize = 2;
 
-		[Test]
+            // Act
+            var result = await _modelService.GetAllModelsAsync(pageNumber, pageSize);
+
+            // Assert
+            Assert.That(result.Item1.Count, Is.EqualTo(2)); 
+            Assert.That(result.Item1.First().BrandName, Is.EqualTo("Honda"));
+            Assert.That(result.Item1.First().CarsCount, Is.EqualTo(10));
+            Assert.That(result.Item2, Is.EqualTo(2));
+        }
+
+
+        [Test]
 		public async Task EditModel_ShouldUpdateModel_WhenModelExists()
 		{
 			// Arrange
