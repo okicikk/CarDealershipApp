@@ -144,10 +144,8 @@ namespace CarDealershipApp.Controllers
 				ModelState.AddModelError(nameof(viewModel.SelectedBrandId), "Select the brand of the car you want to add!");
 			}
 
-			// Check if there are any validation errors
 			if (!ModelState.IsValid)
 			{
-				// Repopulate the Brands list before returning to the view
 				viewModel.Brands = await carService.GetAllBrandsAsync();
 				return View(viewModel);
 			}

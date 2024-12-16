@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CarDealershipApp.Services;
+using MockQueryable;
 
 namespace CarDealershipApp.Tests.Services
 {
@@ -43,13 +44,13 @@ namespace CarDealershipApp.Tests.Services
 				.Returns(new List<Brand>
 				{
 					new Brand { Name = "Existing Brand" }
-				}.AsQueryable());
+				}.BuildMock());
 
 			// Act & Assert
 			var exception = Assert.ThrowsAsync<ArgumentException>(async () =>
 				await _brandService.AddBrandAsync(model));
 
-			Assert.AreEqual("Brand with that name already exists!", exception.Message);
+            Assert.That(exception.Message, Is.EqualTo("Brand with that name already exists!"));
 		}
 
 		[Test]
@@ -59,7 +60,7 @@ namespace CarDealershipApp.Tests.Services
 			var model = new BrandAddViewModel { Name = "New Brand", ImageUrl = "image.jpg" };
 
 			mockBrandRepository.Setup(repo => repo.GetAllQueryable())
-				.Returns(new List<Brand>().AsQueryable());
+				.Returns(new List<Brand>().BuildMock());
 
 			mockBrandRepository.Setup(repo => repo.AddAsync(It.IsAny<Brand>())).Returns(Task.CompletedTask);
 

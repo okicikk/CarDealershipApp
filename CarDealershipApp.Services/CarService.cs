@@ -74,17 +74,17 @@ namespace CarDealershipApp.Services
 			if (!string.IsNullOrWhiteSpace(brandName))
 			{
 				brandName = brandName.ToLower().Trim();
-				cars = cars.Where(x => x.Brand.Name == brandName.ToLower());
+				cars = cars.Where(x => x.Brand.Name.ToLower() == brandName.ToLower());
 			}
 			if (!string.IsNullOrWhiteSpace(modelName))
 			{
 				modelName = modelName.ToLower().Trim();
-				cars = cars.Where(x => x.Model.Name == modelName.ToLower());
+				cars = cars.Where(x => x.Model.Name.ToLower() == modelName.ToLower());
 			}
 			if (!string.IsNullOrWhiteSpace(category))
 			{
 				category = category.ToLower().Trim();
-				cars = cars.Where(x => x.Category.Name == category.ToLower());
+				cars = cars.Where(x => x.Category.Name.ToLower() == category.ToLower());
 			}
 			if (minReleaseYear.HasValue)
 			{
