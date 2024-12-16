@@ -1,6 +1,8 @@
 ﻿using CarDealershipApp.Data;
 using CarDealershipApp.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+//using Nest;
+using System.Linq.Expressions;
 
 
 namespace CarDealershipApp.Infrastructure.Repositories
@@ -39,7 +41,20 @@ namespace CarDealershipApp.Infrastructure.Repositories
 			return true;
 		}
 
-		public bool DeleteById(string id)
+        public async Task<bool> DeleteByConditionAsync(Expression<Func<T, bool>> predicate)
+        {
+            var entity = await dbSet.FirstOrDefaultAsync(predicate);
+			if (entity is null)
+			{
+				return false;
+			}
+
+			dbSet.Remove(entity);
+			await context.SaveChangesAsync();
+			return true;
+        }
+
+        public bool DeleteById(string id)
 		{
 			T? item = dbSet.Find(id);
 			if (item is null)
