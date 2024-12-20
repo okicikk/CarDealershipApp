@@ -5,6 +5,7 @@ using CarDealershipApp.Services;
 using CarDealership.ViewModels.Models.FeatureViewModels;
 using MockQueryable.Moq;
 using MockQueryable;
+using Microsoft.AspNetCore.Authentication;
 
 namespace CarDealership.Tests
 {
@@ -12,7 +13,8 @@ namespace CarDealership.Tests
 	public class FeatureServiceTests
 	{
 		private Mock<IRepository<Feature>> mockFeatureRepository;
-		private FeatureService _featureService;
+        private Mock<IRepository<CarFeature>> mockCarFeatureRepository;
+        private FeatureService _featureService;
 
 		private readonly List<Feature> featuresData = new List<Feature>
 		{
@@ -25,7 +27,7 @@ namespace CarDealership.Tests
 		public void Setup()
 		{
 			mockFeatureRepository = new Mock<IRepository<Feature>>();
-			_featureService = new FeatureService(mockFeatureRepository.Object);
+			_featureService = new FeatureService(mockFeatureRepository.Object, mockCarFeatureRepository.Object);
 		}
 
 		[Test]
