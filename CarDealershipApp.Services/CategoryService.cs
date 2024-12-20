@@ -53,7 +53,7 @@ namespace CarDealershipApp.Services
                 .GetAllQueryable()
                 .Where(x=>x.CategoryId == id)
                 .ToListAsync();
-            foreach (Car car in carRepository.GetAll())
+            foreach (Car car in carsWithCategory)
             {
                 car.Category = defaultCategory;
                 await carRepository.UpdateAsync(car);
