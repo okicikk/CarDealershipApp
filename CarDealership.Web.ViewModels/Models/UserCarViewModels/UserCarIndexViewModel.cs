@@ -1,4 +1,6 @@
 ﻿
+using CarDealershipApp.Data.Models;
+
 namespace CarDealership.ViewModels.Models.UserCarViewModels
 {
 	public class UserCarIndexViewModel
@@ -9,6 +11,6 @@ namespace CarDealership.ViewModels.Models.UserCarViewModels
         public string CarName { get; set; }
         public string CarPrice { get; set; }
 
-        public string? ImageUrl { get; set; }
+        public CarImage? Image { get; set; }
     }
 }
