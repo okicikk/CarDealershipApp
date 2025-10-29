@@ -35,9 +35,11 @@
 					<input type="hidden" name="UserId" value="@item.UserId" />
 					<input type="hidden" name="CarId" value="@item.CarId" />
 
-					@if (!string.IsNullOrEmpty(item.ImageUrl))
+					@if (item.Image != null && !string.IsNullOrWhiteSpace(item.Image.FilePath))
 					{
-						<img src="@item.ImageUrl" alt="Car Image" style="max-width: 150px; height: auto;" />
+						<img src="@Url.Content(item.Image.FilePath)"
+							 alt="Car Image"
+							 style="max-width: 150px; height: auto;" />
 					}
 					else
 					{
