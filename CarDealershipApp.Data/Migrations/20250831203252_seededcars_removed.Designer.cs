@@ -4,6 +4,7 @@ using CarDealershipApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarDealershipApp.Data.Migrations
 {
     [DbContext(typeof(CarDealershipDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250831203252_seededcars_removed")]
+    partial class seededcars_removed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +46,7 @@ namespace CarDealershipApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands", (string)null);
+                    b.ToTable("Brands");
 
                     b.HasData(
                         new
@@ -172,7 +175,7 @@ namespace CarDealershipApp.Data.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("Cars", (string)null);
+                    b.ToTable("Cars");
                 });
 
             modelBuilder.Entity("CarDealershipApp.Data.Models.CarFeature", b =>
@@ -187,7 +190,7 @@ namespace CarDealershipApp.Data.Migrations
 
                     b.HasIndex("FeatureId");
 
-                    b.ToTable("CarsFeatures", (string)null);
+                    b.ToTable("CarsFeatures");
                 });
 
             modelBuilder.Entity("CarDealershipApp.Data.Models.CarImage", b =>
@@ -209,7 +212,7 @@ namespace CarDealershipApp.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("CarsImages", (string)null);
+                    b.ToTable("CarsImages");
                 });
 
             modelBuilder.Entity("CarDealershipApp.Data.Models.Category", b =>
@@ -227,7 +230,7 @@ namespace CarDealershipApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -287,7 +290,7 @@ namespace CarDealershipApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Features", (string)null);
+                    b.ToTable("Features");
 
                     b.HasData(
                         new
@@ -470,7 +473,7 @@ namespace CarDealershipApp.Data.Migrations
 
                     b.HasIndex("BrandId");
 
-                    b.ToTable("Models", (string)null);
+                    b.ToTable("Models");
 
                     b.HasData(
                         new
@@ -851,7 +854,7 @@ namespace CarDealershipApp.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UsersCars", (string)null);
+                    b.ToTable("UsersCars");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

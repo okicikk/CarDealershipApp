@@ -4,6 +4,7 @@ using CarDealershipApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarDealershipApp.Data.Migrations
 {
     [DbContext(typeof(CarDealershipDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250831160641_carsImagesDb_added")]
+    partial class carsImagesDb_added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +46,7 @@ namespace CarDealershipApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands", (string)null);
+                    b.ToTable("Brands");
 
                     b.HasData(
                         new
@@ -172,7 +175,234 @@ namespace CarDealershipApp.Data.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("Cars", (string)null);
+                    b.ToTable("Cars");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            Description = "A reliable Toyota Corolla with excellent fuel efficiency.",
+                            IsDeleted = false,
+                            ListedOn = new DateTime(2024, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mileage = 45000,
+                            ModelId = 1,
+                            Price = 42000.50m,
+                            ReleaseYear = 2020,
+                            SellerId = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+                            Weight = 1400.5
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BrandId = 2,
+                            CategoryId = 8,
+                            Description = "A stylish Ford Mustang with impressive performance.",
+                            IsDeleted = false,
+                            ListedOn = new DateTime(2024, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mileage = 12000,
+                            ModelId = 8,
+                            Price = 65000.75m,
+                            ReleaseYear = 2022,
+                            SellerId = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+                            Weight = 1500.0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BrandId = 3,
+                            CategoryId = 1,
+                            Description = "Chevrolet Impala with spacious interiors and smooth handling.",
+                            IsDeleted = false,
+                            ListedOn = new DateTime(2024, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mileage = 38000,
+                            ModelId = 14,
+                            Price = 48000.00m,
+                            ReleaseYear = 2019,
+                            SellerId = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+                            Weight = 1600.0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BrandId = 4,
+                            CategoryId = 1,
+                            Description = "BMW M3 with dynamic handling and advanced features.",
+                            IsDeleted = false,
+                            ListedOn = new DateTime(2024, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mileage = 15000,
+                            ModelId = 22,
+                            Price = 82000.99m,
+                            ReleaseYear = 2021,
+                            SellerId = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+                            Weight = 1550.7
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BrandId = 5,
+                            CategoryId = 2,
+                            Description = "Audi Q5 with a luxurious design and great performance.",
+                            IsDeleted = false,
+                            ListedOn = new DateTime(2024, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mileage = 30000,
+                            ModelId = 29,
+                            Price = 62000.25m,
+                            ReleaseYear = 2020,
+                            SellerId = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+                            Weight = 1450.3
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BrandId = 6,
+                            CategoryId = 1,
+                            Description = "Mercedes-Benz E-Class with premium comfort and safety.",
+                            IsDeleted = false,
+                            ListedOn = new DateTime(2024, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mileage = 18000,
+                            ModelId = 33,
+                            Price = 105000.75m,
+                            ReleaseYear = 2022,
+                            SellerId = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+                            Weight = 1700.0
+                        },
+                        new
+                        {
+                            Id = 7,
+                            BrandId = 7,
+                            CategoryId = 1,
+                            Description = "Honda Civic, an economical choice with modern features.",
+                            IsDeleted = false,
+                            ListedOn = new DateTime(2024, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mileage = 40000,
+                            ModelId = 38,
+                            Price = 40000.00m,
+                            ReleaseYear = 2019,
+                            SellerId = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+                            Weight = 1400.0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            BrandId = 8,
+                            CategoryId = 2,
+                            Description = "Nissan Rogue with great versatility and fuel economy.",
+                            IsDeleted = false,
+                            ListedOn = new DateTime(2024, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mileage = 35000,
+                            ModelId = 45,
+                            Price = 45000.75m,
+                            ReleaseYear = 2020,
+                            SellerId = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+                            Weight = 1500.0
+                        },
+                        new
+                        {
+                            Id = 9,
+                            BrandId = 9,
+                            CategoryId = 2,
+                            Description = "Hyundai Santa Fe with a sleek design and excellent durability.",
+                            IsDeleted = false,
+                            ListedOn = new DateTime(2024, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mileage = 32000,
+                            ModelId = 49,
+                            Price = 48000.99m,
+                            ReleaseYear = 2021,
+                            SellerId = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+                            Weight = 1480.5
+                        },
+                        new
+                        {
+                            Id = 10,
+                            BrandId = 10,
+                            CategoryId = 2,
+                            Description = "Kia Sportage with efficient performance and spacious interiors.",
+                            IsDeleted = false,
+                            ListedOn = new DateTime(2024, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mileage = 29000,
+                            ModelId = 53,
+                            Price = 43000.50m,
+                            ReleaseYear = 2021,
+                            SellerId = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+                            Weight = 1430.8
+                        },
+                        new
+                        {
+                            Id = 11,
+                            BrandId = 3,
+                            CategoryId = 2,
+                            Description = "Chevrolet Equinox with impressive handling and comfort.",
+                            IsDeleted = false,
+                            ListedOn = new DateTime(2024, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mileage = 25000,
+                            ModelId = 17,
+                            Price = 60000.00m,
+                            ReleaseYear = 2021,
+                            SellerId = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+                            Weight = 1600.0
+                        },
+                        new
+                        {
+                            Id = 12,
+                            BrandId = 1,
+                            CategoryId = 2,
+                            Description = "Toyota Land Cruiser with rugged capability and comfort.",
+                            IsDeleted = false,
+                            ListedOn = new DateTime(2024, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mileage = 22000,
+                            ModelId = 4,
+                            Price = 85000.75m,
+                            ReleaseYear = 2022,
+                            SellerId = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+                            Weight = 1900.0
+                        },
+                        new
+                        {
+                            Id = 13,
+                            BrandId = 2,
+                            CategoryId = 3,
+                            Description = "Ford F-150 with outstanding towing and hauling capacity.",
+                            IsDeleted = false,
+                            ListedOn = new DateTime(2024, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mileage = 12000,
+                            ModelId = 9,
+                            Price = 100000.00m,
+                            ReleaseYear = 2023,
+                            SellerId = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+                            Weight = 2000.0
+                        },
+                        new
+                        {
+                            Id = 14,
+                            BrandId = 7,
+                            CategoryId = 1,
+                            Description = "Honda Accord, perfect balance of luxury and practicality.",
+                            IsDeleted = false,
+                            ListedOn = new DateTime(2024, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mileage = 50000,
+                            ModelId = 39,
+                            Price = 42000.25m,
+                            ReleaseYear = 2018,
+                            SellerId = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+                            Weight = 1350.0
+                        },
+                        new
+                        {
+                            Id = 15,
+                            BrandId = 9,
+                            CategoryId = 1,
+                            Description = "Hyundai Sonata with advanced safety features and great mileage.",
+                            IsDeleted = false,
+                            ListedOn = new DateTime(2024, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mileage = 36000,
+                            ModelId = 47,
+                            Price = 46000.50m,
+                            ReleaseYear = 2019,
+                            SellerId = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
+                            Weight = 1400.0
+                        });
                 });
 
             modelBuilder.Entity("CarDealershipApp.Data.Models.CarFeature", b =>
@@ -187,7 +417,234 @@ namespace CarDealershipApp.Data.Migrations
 
                     b.HasIndex("FeatureId");
 
-                    b.ToTable("CarsFeatures", (string)null);
+                    b.ToTable("CarsFeatures");
+
+                    b.HasData(
+                        new
+                        {
+                            CarId = 1,
+                            FeatureId = 1
+                        },
+                        new
+                        {
+                            CarId = 1,
+                            FeatureId = 2
+                        },
+                        new
+                        {
+                            CarId = 1,
+                            FeatureId = 5
+                        },
+                        new
+                        {
+                            CarId = 2,
+                            FeatureId = 3
+                        },
+                        new
+                        {
+                            CarId = 2,
+                            FeatureId = 10
+                        },
+                        new
+                        {
+                            CarId = 2,
+                            FeatureId = 15
+                        },
+                        new
+                        {
+                            CarId = 3,
+                            FeatureId = 7
+                        },
+                        new
+                        {
+                            CarId = 3,
+                            FeatureId = 20
+                        },
+                        new
+                        {
+                            CarId = 3,
+                            FeatureId = 25
+                        },
+                        new
+                        {
+                            CarId = 4,
+                            FeatureId = 8
+                        },
+                        new
+                        {
+                            CarId = 4,
+                            FeatureId = 11
+                        },
+                        new
+                        {
+                            CarId = 4,
+                            FeatureId = 31
+                        },
+                        new
+                        {
+                            CarId = 5,
+                            FeatureId = 6
+                        },
+                        new
+                        {
+                            CarId = 5,
+                            FeatureId = 13
+                        },
+                        new
+                        {
+                            CarId = 5,
+                            FeatureId = 21
+                        },
+                        new
+                        {
+                            CarId = 6,
+                            FeatureId = 9
+                        },
+                        new
+                        {
+                            CarId = 6,
+                            FeatureId = 12
+                        },
+                        new
+                        {
+                            CarId = 6,
+                            FeatureId = 13
+                        },
+                        new
+                        {
+                            CarId = 7,
+                            FeatureId = 4
+                        },
+                        new
+                        {
+                            CarId = 7,
+                            FeatureId = 17
+                        },
+                        new
+                        {
+                            CarId = 7,
+                            FeatureId = 28
+                        },
+                        new
+                        {
+                            CarId = 8,
+                            FeatureId = 5
+                        },
+                        new
+                        {
+                            CarId = 8,
+                            FeatureId = 19
+                        },
+                        new
+                        {
+                            CarId = 8,
+                            FeatureId = 26
+                        },
+                        new
+                        {
+                            CarId = 9,
+                            FeatureId = 10
+                        },
+                        new
+                        {
+                            CarId = 9,
+                            FeatureId = 15
+                        },
+                        new
+                        {
+                            CarId = 9,
+                            FeatureId = 27
+                        },
+                        new
+                        {
+                            CarId = 10,
+                            FeatureId = 2
+                        },
+                        new
+                        {
+                            CarId = 10,
+                            FeatureId = 18
+                        },
+                        new
+                        {
+                            CarId = 10,
+                            FeatureId = 24
+                        },
+                        new
+                        {
+                            CarId = 11,
+                            FeatureId = 14
+                        },
+                        new
+                        {
+                            CarId = 11,
+                            FeatureId = 20
+                        },
+                        new
+                        {
+                            CarId = 11,
+                            FeatureId = 31
+                        },
+                        new
+                        {
+                            CarId = 12,
+                            FeatureId = 16
+                        },
+                        new
+                        {
+                            CarId = 12,
+                            FeatureId = 22
+                        },
+                        new
+                        {
+                            CarId = 12,
+                            FeatureId = 30
+                        },
+                        new
+                        {
+                            CarId = 13,
+                            FeatureId = 3
+                        },
+                        new
+                        {
+                            CarId = 13,
+                            FeatureId = 15
+                        },
+                        new
+                        {
+                            CarId = 13,
+                            FeatureId = 25
+                        },
+                        new
+                        {
+                            CarId = 14,
+                            FeatureId = 4
+                        },
+                        new
+                        {
+                            CarId = 14,
+                            FeatureId = 14
+                        },
+                        new
+                        {
+                            CarId = 14,
+                            FeatureId = 23
+                        },
+                        new
+                        {
+                            CarId = 15,
+                            FeatureId = 7
+                        },
+                        new
+                        {
+                            CarId = 15,
+                            FeatureId = 17
+                        },
+                        new
+                        {
+                            CarId = 15,
+                            FeatureId = 29
+                        });
                 });
 
             modelBuilder.Entity("CarDealershipApp.Data.Models.CarImage", b =>
@@ -209,7 +666,7 @@ namespace CarDealershipApp.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("CarsImages", (string)null);
+                    b.ToTable("CarsImages");
                 });
 
             modelBuilder.Entity("CarDealershipApp.Data.Models.Category", b =>
@@ -227,7 +684,7 @@ namespace CarDealershipApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -287,7 +744,7 @@ namespace CarDealershipApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Features", (string)null);
+                    b.ToTable("Features");
 
                     b.HasData(
                         new
@@ -470,7 +927,7 @@ namespace CarDealershipApp.Data.Migrations
 
                     b.HasIndex("BrandId");
 
-                    b.ToTable("Models", (string)null);
+                    b.ToTable("Models");
 
                     b.HasData(
                         new
@@ -851,7 +1308,7 @@ namespace CarDealershipApp.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UsersCars", (string)null);
+                    b.ToTable("UsersCars");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -975,15 +1432,15 @@ namespace CarDealershipApp.Data.Migrations
                         {
                             Id = "4e32b02a-046c-40be-bfeb-327c900e6bb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "919527f5-26a4-4b4b-98bf-3a11a2bc3a6e",
+                            ConcurrencyStamp = "26e78cb9-1fea-4478-8b7d-589c8bf7c935",
                             Email = "default@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "DEFAULT@GMAIL.COM",
                             NormalizedUserName = "DEFAULT@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHHk7fyRDOFglYPSgeoyzDlZJpWEHq/73YYKwNJBpNODlvz0RG9bw1P3TUQKtBZrxg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEgbzzUyLrUOS9KxyBCYQkoxZCMrHnw/9NJbCCBw81nPX7Tj4QnouuSYk5OETsuy7g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "27f06256-ac71-4ff2-a99f-5364d5c67238",
+                            SecurityStamp = "2330d0aa-2559-497b-a67b-6d0bb86e8ee8",
                             TwoFactorEnabled = false,
                             UserName = "default@gmail.com"
                         });
