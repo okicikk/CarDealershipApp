@@ -40,7 +40,7 @@ namespace CarDealershipApp.Data.Models
         [Required]
         [Range(CarMileageMinValue, CarMileageMaxValue)]
         public int Mileage { get; set; }
-        public List<string>? ImageUrls { get; set; } = new List<string>();
+        public List<CarImage> Images { get; set; } = new List<CarImage>();
         [Required]
         public int ReleaseYear { get; set; }
         [Required]
