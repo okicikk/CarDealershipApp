@@ -35,6 +35,7 @@
         public const string DefaultUserEmail = "default@gmail.com";
 
 
+        public const int CarImagesMaxCount = 4;
 
     }
 }
