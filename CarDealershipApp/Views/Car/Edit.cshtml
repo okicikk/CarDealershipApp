@@ -6,7 +6,8 @@
 
 <h2>Edit Car</h2>
 
-<form asp-action="Edit" method="post">
+<form asp-action="Edit" asp-controller="Car" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
     <input type="hidden" asp-for="Id" />
 
     <!-- Category Selection -->
@@ -46,12 +47,12 @@
             @foreach (var feature in Model.AvailableFeatures)
             {
                 <div>
-                    <!-- Check if the feature ID is in the SelectedFeaturesIds list to mark it as checked -->
                     <input type="checkbox" name="SelectedFeaturesIds" value="@feature.Id"
-                    @if (Model.SelectedFeaturesIds.Contains(feature.Id))
-                    {
+                           @if (Model.SelectedFeaturesIds.Contains(feature.Id))
+                           {
                         <text>checked</text>
-                    } />
+                    }
+     />
                     <label>@feature.Name</label>
                 </div>
             }
@@ -59,15 +60,45 @@
         <span asp-validation-for="SelectedFeaturesIds" class="text-danger"></span>
     </div>
 
-    <!-- Image URLs -->
+    <!-- Image section -->
     <div class="form-group">
-        <label class="control-label">Image URLs</label>
-        @for (int i = 0; i < 4; i++) // Always render 4 fields
+        <label class="control-label">Car Images</label>
+
+        @if (Model.ExistingImages != null && Model.ExistingImages.Any())
         {
-            <div class="mb-2">
-                <input asp-for="ImageUrls[i]" class="form-control" placeholder="Enter image URL @(i + 1)" />
-                <span asp-validation-for="ImageUrls[i]" class="text-danger"></span>
+            <div class="mb-2 d-flex flex-wrap">
+                @foreach (var img in Model.ExistingImages)
+                {
+                    <div class="me-2 mb-2 text-center" style="max-width:150px;">
+                        <img src="@Url.Content(img.FilePath)" alt="Car image" style="max-width:150px; display:block; margin-bottom:4px;" />
+                        <div>
+                            <!-- Checkbox posts multiple values into ImageIdsToRemove list -->
+                            <input type="checkbox" name="ImageIdsToRemove" value="@img.Id" id="rem_@img.Id" />
+                            <label for="rem_@img.Id">Remove</label>
+                        </div>
+                    </div>
+                }
             </div>
+        }
+        else
+        {
+            <p>No images.</p>
+        }
+
+        @{
+            var remainingSlots = 4 - (Model.ExistingImages?.Count() ?? 0);
+            if (remainingSlots < 0) remainingSlots = 0;
+        }
+
+        @if (remainingSlots > 0)
+        {
+            <label>Upload up to @remainingSlots more image(s)</label>
+            <input type="file" name="Images" id="ImagesInput" multiple accept="image/*" class="form-control" />
+            <small class="form-text text-muted">You can upload up to @remainingSlots more image(s).</small>
+        }
+        else
+        {
+            <p class="text-muted">Maximum of 4 images reached. Remove existing images to upload new ones.</p>
         }
     </div>
 
@@ -77,8 +108,31 @@
     </div>
 </form>
 
-<!-- Validation -->
+@{
+    // calculate it here so it's available below
+    var remainingSlots = 4 - (Model.ExistingImages?.Count() ?? 0);
+    if (remainingSlots < 0) remainingSlots = 0;
+}
+
 @section Scripts {
+    <script>
+        (function() {
+            var remaining = @remainingSlots;
+
+            if (remaining > 0) {
+                var input = document.getElementById('ImagesInput');
+                if (input) {
+                    input.addEventListener('change', function (e) {
+                        if (this.files && this.files.length > remaining) {
+                            alert('You may only upload ' + remaining + ' more image(s).');
+                            this.value = ''; // clear selection
+                        }
+                    });
+                }
+            }
+        })();
+    </script>
+
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }

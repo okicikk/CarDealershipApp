@@ -77,9 +77,10 @@
 					<td class="fw-bold">@car.BrandName</td>
 					<td>@car.ModelName</td>
 					<td>
-						@if (!string.IsNullOrEmpty(car.MainImage))
+						@if (car.MainImage != null && !string.IsNullOrEmpty(car.MainImage.FilePath))
 						{
-							<img src="@car.MainImage" alt="@car.BrandName @car.ModelName"
+							<img src="@car.MainImage.FilePath"
+								 alt="@car.BrandName @car.ModelName"
 								 class="img-fluid rounded shadow-sm"
 								 style="max-width: 150px; max-height: 100px;" />
 						}
@@ -96,7 +97,15 @@
 						   class="btn btn-primary btn-sm">
 							<i class="bi bi-info-circle"></i> Details
 						</a>
-						@if (User.FindFirst(ClaimTypes.NameIdentifier)?.Value != car.SellerId && User.Identity.IsAuthenticated)
+						@using System.Security.Claims
+
+						@{
+							var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+						}
+
+						@if (User.Identity.IsAuthenticated
+											&& userId != car.SellerId
+											&& !car.IsSavedByCurrentUser)
 						{
 							<form asp-controller="UserCar" asp-action="Add" asp-route-id="@car.CarId" method="post" class="d-inline">
 								<button type="submit" class="btn btn-success btn-sm">

@@ -5,14 +5,18 @@
 }
 
 <h1>Add a New Car</h1>
-<form asp-action="Add" method="post">
-    <!-- Hidden field to pass brandId -->
-    <input type="hidden" name="BrandId" value="@Model.BrandId" />
-    <input type="hidden" asp-for="SellerId" />
+
+<form asp-action="Add" method="post" enctype="multipart/form-data" id="addCarForm">
+    @Html.AntiForgeryToken()
+
+    <input asp-for="BrandId" type="hidden" />
+    <input asp-for="SellerId" type="hidden" />
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="form-group">
         <label asp-for="ModelId">Model</label>
-        <select asp-for="ModelId" asp-items="@(new SelectList(Model.Models, "Id", "Name"))" class="form-control">
+        <select asp-for="ModelId" asp-items="@(new SelectList(Model.Models ?? Enumerable.Empty<CarDealershipApp.Data.Models.Model>(), "Id", "Name"))" class="form-control">
             <option value="">-- Select a Model --</option>
         </select>
         <span asp-validation-for="ModelId" class="text-danger"></span>
@@ -20,7 +24,7 @@
 
     <div class="form-group">
         <label asp-for="CategoryId">Category</label>
-        <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-control">
+        <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories ?? Enumerable.Empty<CarDealershipApp.Data.Models.Category>(), "Id", "Name"))" class="form-control">
             <option value="">-- Select a Category --</option>
         </select>
         <span asp-validation-for="CategoryId" class="text-danger"></span>
@@ -56,18 +60,17 @@
         <span asp-validation-for="ReleaseYear" class="text-danger"></span>
     </div>
 
+    <!-- File uploads only -->
     <div class="form-group">
-        <label asp-for="ImageUrls">Image URLs (up to 4)</label>
-        @for (int i = 0; i < 4; i++)
-        {
-            <input type="text" name="ImageUrls[@i]" class="form-control mb-2" placeholder="Image URL @(i + 1)"
-                   value="@(Model.ImageUrls != null && Model.ImageUrls.Count > i ? Model.ImageUrls[i] : string.Empty)" />
-        }
+        <label asp-for="Images">Upload Images (up to 4)</label>
+        <input asp-for="Images" type="file" name="Images" multiple accept=".jpg,.jpeg,.png,.webp" class="form-control" />
+        <small class="form-text text-muted">Accepted file types: .jpg, .jpeg, .png, .webp. Max size enforced on server.</small>
+        <div id="images-error" class="text-danger mt-1" style="display:none;"></div>
     </div>
 
     <div class="form-group">
-        <label asp-for="AvailableFeatures">Features</label>
-        @foreach (var feature in Model.AvailableFeatures)
+        <label>Features</label>
+        @foreach (var feature in Model.AvailableFeatures ?? Enumerable.Empty<CarDealershipApp.Data.Models.Feature>())
         {
             <div class="form-check">
                 <input type="checkbox"
@@ -75,7 +78,7 @@
                        id="Feature_@feature.Id"
                        name="SelectedFeaturesIds"
                        value="@feature.Id"
-                @(Model.SelectedFeaturesIds.Contains(feature.Id) ? "checked" : "") />
+                       @(Model.SelectedFeaturesIds != null && Model.SelectedFeaturesIds.Contains(feature.Id) ? "checked" : "") />
                 <label class="form-check-label" for="Feature_@feature.Id">@feature.Name</label>
             </div>
         }
@@ -86,4 +89,47 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        (function () {
+            const input = document.getElementById('Images');
+            const err = document.getElementById('images-error');
+            const form = document.getElementById('addCarForm');
+            const allowedExt = ['jpg','jpeg','png','webp'];
+
+            function validateFiles() {
+                err.style.display = 'none';
+                err.textContent = '';
+
+                if (!input.files) return true;
+
+                if (input.files.length > 4) {
+                    err.style.display = 'block';
+                    err.textContent = 'You can upload a maximum of 4 images.';
+                    return false;
+                }
+
+                for (let i = 0; i < input.files.length; i++) {
+                    const f = input.files[i];
+                    const name = f.name.toLowerCase();
+                    const ext = name.substring(name.lastIndexOf('.') + 1);
+                    if (!allowedExt.includes(ext)) {
+                        err.style.display = 'block';
+                        err.textContent = 'One or more files have an invalid type.';
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            input.addEventListener('change', validateFiles);
+            form.addEventListener('submit', function (e) {
+                if (!validateFiles()) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        })();
+    </script>
 }

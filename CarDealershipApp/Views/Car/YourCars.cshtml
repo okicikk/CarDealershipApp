@@ -36,9 +36,9 @@
                         <td class="fw-bold">@car.BrandName</td>
                         <td>@car.ModelName</td>
                         <td>
-                            @if (!string.IsNullOrEmpty(car.MainImage))
+                            @if (car.MainImage != null && !string.IsNullOrEmpty(car.MainImage.FilePath))
                             {
-                                <img src="@car.MainImage" alt="@car.BrandName @car.ModelName"
+                                <img src="@car.MainImage.FilePath" alt="@car.BrandName @car.ModelName"
                                      class="img-fluid rounded shadow-sm"
                                      style="max-width: 150px; max-height: 100px;" />
                             }

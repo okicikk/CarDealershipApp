@@ -1,119 +1,149 @@
-﻿@model CarDealership.ViewModels.Models.Car.CarDetailsViewModel
+﻿@using System.Security.Claims
+@model CarDealership.ViewModels.Models.Car.CarDetailsViewModel
+
 @{
-	int counter = 0;
-}
-@{
-	ViewData["Title"] = "Car Details";
+    ViewData["Title"] = "Car Details";
 }
 
 <h1>Car Details</h1>
 
 <div class="card mb-4">
-	<div class="card-header">
-		<h2>@Model.BrandName - @Model.ModelName</h2>
-	</div>
-	<div class="card-body">
-		<!-- Images Section -->
-		<div class="mb-4">
-			<h4>Images</h4>
-			@if (Model.ImageUrls.Any() && !Model.ImageUrls.Contains("No Image"))
-			{
-				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-					<div class="carousel-inner">
-						@foreach (var (imageUrl, index) in Model.ImageUrls.Select((url, idx) => (url, idx)))
-						{
-							if (!string.IsNullOrEmpty(imageUrl))
-							{
-								counter++;
-								<div class="carousel-item @(index == 0 ? "active" : "")">
-									<img src="@imageUrl" class="carousel-image d-block w-50" alt="Car Image">
-								</div>
+    <div class="card-header">
+        <h2>@(Model?.BrandName ?? "Unknown Brand") - @(Model?.ModelName ?? "Unknown Model")</h2>
+    </div>
 
-								<!-- Carousel Controls -->
-								<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-									<span class="visually-hidden">Previous</span>
-								</button>
-								<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-									<span class="carousel-control-next-icon" aria-hidden="true"></span>
-									<span class="visually-hidden">Next</span>
-								</button>
-							}
-							else if(counter == 0)
-							{
-								<p>No images available for this car.</p>
-								break;
-							}
-						}
-					</div>
-				</div>
-			}
-			else
-			{
-				<p>No images available.</p>
-			}
-		</div>
+    <div class="card-body">
+        <!-- Images Section -->
+        <div class="mb-4">
+            <h4>Images</h4>
 
+            @{
+                var images = new List<(string Path, string Alt)>();
 
+                if (Model?.Images != null)
+                {
+                    images = Model.Images
+                    .Where(i => !string.IsNullOrWhiteSpace(i.FilePath))
+                    .Select((i, idx) => (Path: i.FilePath!, Alt: $"Car image {idx + 1}"))
+                    .ToList();
+                }
+            }
 
+            @if (images.Any())
+            {
+                <div id="carImagesCarousel" class="carousel slide" data-bs-ride="carousel">
+                    @* Indicators (only for multiple images) *@
+                    @if (images.Count > 1)
+                    {
+                        <div class="carousel-indicators">
+                            @for (int j = 0; j < images.Count; j++)
+                            {
+                                <button type="button"
+                                        data-bs-target="#carImagesCarousel"
+                                        data-bs-slide-to="@j"
+                                        class="@(j == 0 ? "active" : "")"
+                                        aria-current="@(j == 0 ? "true" : "false")"
+                                        aria-label="Slide @(j + 1)"></button>
+                            }
+                        </div>
+                    }
 
-		<!-- General Details Section -->
-		<h4>General Details</h4>
-		<table class="table table-bordered">
-			<tr>
-				<th>Category</th>
-				<td>@Model.CategoryName</td>
-			</tr>
-			<tr>
-				<th>Price</th>
-				<td>@Model.Price BGN</td>
-			</tr>
-			<tr>
-				<th>Weight</th>
-				<td>@Model.Weight kg</td>
-			</tr>
-			<tr>
-				<th>Mileage</th>
-				<td>@Model.Mileage km</td>
-			</tr>
-			<tr>
-				<th>Release Year</th>
-				<td>@Model.ReleaseYear</td>
-			</tr>
-			<tr>
-				<th>Listed On</th>
-				<td>@Model.ListedOn</td>
-			</tr>
-			<tr>
-				<th>Seller Email</th>
-				<td>@Model.SellerEmail</td>
-			</tr>
-		</table>
+                    <div class="carousel-inner">
+                        @for (int i = 0; i < images.Count; i++)
+                        {
+                            var img = images[i];
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                <img src="@Url.Content(img.Path)"
+                                     class="d-block w-100"
+                                     alt="@(img.Alt) @(i + 1)"
+                                     style="max-height:500px; object-fit:contain;"
+                                     loading="lazy" />
+                            </div>
+                        }
+                    </div>
 
-		<!-- Description Section -->
-		<div class="mb-4">
-			<h4>Description</h4>
-			<p>@Model.Description</p>
-		</div>
+                    @* Controls only when there's more than one image *@
+                    @if (images.Count > 1)
+                    {
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carImagesCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carImagesCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>No images available for this car.</p>
+            }
+        </div>
 
-		<!-- Features Section -->
-		<div class="mb-4">
-			<h4>Features</h4>
-			@if (Model.CarFeatures.Any())
-			{
-				<ul>
-					@foreach (var feature in Model.CarFeatures)
-					{
-						<li>@feature</li>
-					}
-				</ul>
-			}
-			else
-			{
-				<p>No features listed.</p>
-			}
-		</div>
-	</div>
+        <!-- General Details Section -->
+        <h4>General Details</h4>
+        <table class="table table-bordered">
+            <tr>
+                <th>Category</th>
+                <td>@(Model?.CategoryName ?? "-")</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>@(Model != null ? Model.Price.ToString("N2") + " BGN" : "-")</td>
+            </tr>
+            <tr>
+                <th>Weight</th>
+                <td>@(Model != null ? Model.Weight + " kg" : "-")</td>
+            </tr>
+            <tr>
+                <th>Mileage</th>
+                <td>@(Model != null ? Model.Mileage + " km" : "-")</td>
+            </tr>
+            <tr>
+                <th>Release Year</th>
+                <td>@(Model?.ReleaseYear.ToString() ?? "-")</td>
+            </tr>
+            <tr>
+                <th>Listed On</th>
+                <td>@(Model != null ? Model.ListedOn : "-")</td>
+            </tr>
+            <tr>
+                <th>Seller Email</th>
+                <td>@(string.IsNullOrWhiteSpace(Model?.SellerEmail) ? "-" : Model.SellerEmail)</td>
+            </tr>
+        </table>
+
+        <!-- Description Section -->
+        <div class="mb-4">
+            <h4>Description</h4>
+            <p>@(string.IsNullOrWhiteSpace(Model?.Description) ? "No description provided." : Model.Description)</p>
+        </div>
+
+        <!-- Features Section -->
+        <div class="mb-4">
+            <h4>Features</h4>
+            @if (Model?.CarFeatures != null && Model.CarFeatures.Any())
+            {
+                <ul>
+                    @foreach (var feature in Model.CarFeatures)
+                    {
+                        <li>@feature</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>No features listed.</p>
+            }
+        </div>
+    </div>
 </div>
 
 <a asp-action="Cars" class="btn btn-secondary">Back to Listings</a>
+@if (User.IsInRole("Admin") || User.FindFirst(ClaimTypes.NameIdentifier)?.Value == Model?.SellerId)
+{
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+}
+
