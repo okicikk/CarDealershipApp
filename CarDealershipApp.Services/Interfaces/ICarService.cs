@@ -26,12 +26,16 @@ namespace CarDealershipApp.Services.Interfaces
 													int? minReleaseYear = null,
 													int? maxReleaseYear = null,
 													int pageNumber = 1,
-													int pageSize = 5);
+													int pageSize = 5,
+													string? userId = null);
 
 		Task<CarDetailsViewModel> LoadDetailsAsync(int carId);
 		Task EditCarAsync(CarEditViewModel viewModel);
 		Task<CarEditViewModel> InitializeCarEditViewModel(int carId);
+		Task<bool> IsCarSavedByUserAsync(int carId, string userId);
 
 
-	}
+
+
+    }
 }
