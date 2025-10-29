@@ -25,9 +25,11 @@ namespace CarDealershipApp.Data
 		public DbSet<Feature> Features { get; set; }
 		public DbSet<CarFeature> CarsFeatures { get; set; }
 		public DbSet<UserCar> UsersCars { get; set; }
+        public DbSet<CarImage> CarsImages { get; set; }
 
 
-		protected override void OnModelCreating(ModelBuilder builder)
+
+        protected override void OnModelCreating(ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);
 			var defaultUserId = "4e32b02a-046c-40be-bfeb-327c900e6bb9";
@@ -96,9 +98,15 @@ namespace CarDealershipApp.Data
 				.HasForeignKey(uc => uc.UserId)
 				.OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<CarImage>()
+				.HasOne(ci => ci.Car)
+				.WithMany(c => c.Images)
+				.HasForeignKey(ci => ci.CarId)
+				.OnDelete(DeleteBehavior.Cascade);
 
 
-			var categories = LoadJsonData<Category>("../CarDealershipApp.Data/SeedData/Category.json");
+
+            var categories = LoadJsonData<Category>("../CarDealershipApp.Data/SeedData/Category.json");
 			builder.Entity<Category>().HasData(categories);
 
 			var features = LoadJsonData<Feature>("../CarDealershipApp.Data/SeedData/Feature.json");
@@ -129,41 +137,41 @@ namespace CarDealershipApp.Data
 
 			}
 
-			var cars = LoadJsonData<Car>("../CarDealershipApp.Data/SeedData/Car.json");
+			//var cars = LoadJsonData<Car>("../CarDealershipApp.Data/SeedData/Car.json");
 
-			foreach (var car in cars)
-			{
-				int carId = car.Id;
-				Car carToBeAdded = new Car()
-				{
-					Id = car.Id,
-					BrandId = car.BrandId,
-					ModelId = car.ModelId,
-					SellerId = car.SellerId,
-					CategoryId = car.CategoryId,
-					Price = car.Price,
-					Weight = car.Weight,
-					Description = car.Description,
-					Mileage = car.Mileage,
-					ImageUrls = car.ImageUrls,
-					ReleaseYear = car.ReleaseYear,
-					ListedOn = car.ListedOn,
-					IsDeleted = false,
-				};
+			//foreach (var car in cars)
+			//{
+			//	int carId = car.Id;
+			//	Car carToBeAdded = new Car()
+			//	{
+			//		Id = car.Id,
+			//		BrandId = car.BrandId,
+			//		ModelId = car.ModelId,
+			//		SellerId = car.SellerId,
+			//		CategoryId = car.CategoryId,
+			//		Price = car.Price,
+			//		Weight = car.Weight,
+			//		Description = car.Description,
+			//		Mileage = car.Mileage,
+			//		Images = car.Images,
+			//		ReleaseYear = car.ReleaseYear,
+			//		ListedOn = car.ListedOn,
+			//		IsDeleted = false,
+			//	};
 
-				builder.Entity<Car>()
-					.HasData(carToBeAdded);
+			//	builder.Entity<Car>()
+			//		.HasData(carToBeAdded);
 
-				builder.Entity<CarFeature>()
-					.HasData(car.CarsFeatures
-						.Select(x => new CarFeature()
-						{
-							CarId = carId,
-							FeatureId = x.FeatureId,
-						})
-					.ToList());
+			//	builder.Entity<CarFeature>()
+			//		.HasData(car.CarsFeatures
+			//			.Select(x => new CarFeature()
+			//			{
+			//				CarId = carId,
+			//				FeatureId = x.FeatureId,
+			//			})
+			//		.ToList());
 
-			}
+			//}
 		}
 
 		private List<T> LoadJsonData<T>(string filePath)
