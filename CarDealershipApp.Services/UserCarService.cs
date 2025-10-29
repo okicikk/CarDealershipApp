@@ -97,8 +97,10 @@ namespace CarDealershipApp.Services
 				.Where(uc => uc.UserId == userId)
 				.Include(uc => uc.Car)
 				.ThenInclude(c => c.Brand)
-				.Include(b => b.Car)
+				.Include(uc => uc.Car)
 				.ThenInclude(c => c.Model)
+				.Include(uc => uc.Car)
+				.ThenInclude(c=>c.Images)
 				.ToListAsync();
 
 			List<UserCarIndexViewModel> userCarIndexViewModels = usersCars.Select(x => new UserCarIndexViewModel()
@@ -107,7 +109,7 @@ namespace CarDealershipApp.Services
 				CarId = x.CarId,
 				CarName = $"{x.Car.Brand.Name} {x.Car.Model.Name}",
 				CarPrice = x.Car.Price.ToString(),
-				ImageUrl = x.Car.ImageUrls?[0] ?? ""
+				Image = x.Car.Images.FirstOrDefault()
 			}).ToList();
 			return userCarIndexViewModels;
 		}
