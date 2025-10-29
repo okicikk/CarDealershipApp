@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using static CarDealershipApp.Constants.Constants;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Http;
 
 namespace CarDealershipApp.ViewModels.CarViewModels
 {
@@ -40,8 +41,8 @@ namespace CarDealershipApp.ViewModels.CarViewModels
 		[Required]
 		[Range(CarMileageMinValue, CarMileageMaxValue)]
 		public int Mileage { get; set; }
-		public List<string>? ImageUrls { get; set; } = new List<string>(4);
-		[Required]
+        public List<IFormFile>? Images { get; set; } = new List<IFormFile> ();
+        [Required]
 		[Range(CarMinYear, CarMaxYear,ErrorMessage = "Enter a year between 1930 and 2025")]
 		public int ReleaseYear { get; set; }
 		//[Required]
