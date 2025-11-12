@@ -1,34 +1,43 @@
-name: Build and deploy ASP.NET Core to Azure Web App
+name: Build and deploy ASP.NET Core app to Azure Web App
 
 on:
   push:
-    branches:
-      - master    
+    branches: [ master ]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Setup .NET
+      - name: Repo layout (debug)
+        run: |
+          echo "=== repo root ==="
+          ls -la
+          echo "=== CarDealershipApp folder ==="
+          ls -la CarDealershipApp || true
+          echo "=== deeper folders ==="
+          ls -la CarDealershipApp/CarDealershipApp || true
+
+      - name: Set up .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore dependencies
-        run: dotnet restore
+      - name: Restore
+        run: dotnet restore CarDealershipApp.sln
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build CarDealershipApp.sln -c Release --no-restore
 
       - name: Publish
-        run: dotnet publish CarDealershipApp.Web/CarDealershipApp.Web.csproj -c Release -o publish --no-build
+        run: dotnet publish CarDealershipApp/CarDealershipApp.Web.csproj -c Release -o publish --no-build
 
       - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
-          app-name: 'okaycars'
+          app-name: okaycars
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: ./publish
