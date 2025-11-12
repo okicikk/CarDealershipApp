@@ -106,13 +106,10 @@ namespace CarDealershipApp.Data
 
 
 
-            var categories = LoadJsonData<Category>("../CarDealershipApp.Data/SeedData/Category.json");
-			builder.Entity<Category>().HasData(categories);
-
-			var features = LoadJsonData<Feature>("../CarDealershipApp.Data/SeedData/Feature.json");
-			builder.Entity<Feature>().HasData(features);
-
-			var brandAndModels = LoadJsonData<Brand>("../CarDealershipApp.Data/SeedData/BrandAndModels.json");
+            var env = AppContext.BaseDirectory; // points to the output directory (bin\Release\net8.0\publish)
+			var categories = LoadJsonData<Category>(Path.Combine(env, "SeedData", "Category.json"));
+			var features = LoadJsonData<Feature>(Path.Combine(env, "SeedData", "Feature.json"));
+			var brandAndModels = LoadJsonData<Brand>(Path.Combine(env, "SeedData", "BrandAndModels.json"));
 
 			foreach (var brand in brandAndModels)
 			{
